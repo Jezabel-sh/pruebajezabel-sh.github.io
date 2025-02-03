@@ -12,53 +12,54 @@
             padding: 0;
             background-color: white; /* Fondo blanco */
             color: black; /* Texto negro */
-            display: flex;
-            flex-direction: row; /* Para que la barra lateral y el contenido estén uno al lado del otro */
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px; /* Ancho reducido */
-            height: 100vh;
-            background-color: #f4f4f4; /* Color de fondo de la barra lateral */
+        /* Header (barra superior) */
+        header {
+            background-color: #1b3652; /* Color de fondo de la barra superior */
+            color: white;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
             position: fixed;
+            width: 100%;
             top: 0;
             left: 0;
+            z-index: 1000;
         }
 
-        .sidebar h2 {
-            color: #1b3652; /* Color de los títulos */
+        header h1 {
+            margin: 0;
+            font-size: 2em;
         }
 
-        .sidebar ul {
-            padding: 0;
-            list-style-type: none;
+        nav {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            z-index: 999;
         }
 
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
+        nav a {
             text-decoration: none;
-            color: black;
+            color: #1b3652; /* Color de los enlaces */
+            margin: 0 20px;
             font-size: 18px;
         }
 
-        .sidebar ul li a:hover {
-            color: #f5b31d; /* Color de resaltar elementos */
+        nav a:hover {
+            color: #f5b31d; /* Color para resaltar al pasar el ratón */
         }
 
         /* Main content */
         .main-content {
-            margin-left: 260px; /* Deja espacio para la barra lateral */
-            padding: 20px;
-            width: calc(100% - 260px); /* Asegura que el contenido ocupe el espacio restante */
+            padding: 80px 20px 20px 20px; /* Espacio para la barra superior */
         }
 
-        h1, h2, h3 {
+        h2, h3 {
             color: #1b3652; /* Títulos en #1b3652 */
         }
 
@@ -83,24 +84,21 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Welcome</h2>
-        <p>Jezabel's Portfolio</p>
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#career">Career</a></li>
-            <li><a href="#projects">Projects</a></li>
-        </ul>
-    </div>
+    <!-- Barra de navegación (ahora en la parte superior) -->
+    <header>
+        <h1>Jezabel's Portfolio</h1>
+        <p>Explore my work and professional experience</p>
+    </header>
 
-    <!-- Main Content -->
+    <!-- Barra de menú de navegación -->
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#career">Career</a>
+        <a href="#projects">Projects</a>
+    </nav>
+
+    <!-- Contenido principal -->
     <div class="main-content">
-        <header>
-            <h1>Welcome to my Portfolio!</h1>
-            <p>This is a showcase of my work and professional experience.</p>
-        </header>
-
         <section id="about">
             <h2>About Me</h2>
             <p>I am a passionate Data Scientist and AI enthusiast...</p>
