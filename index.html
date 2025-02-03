@@ -10,26 +10,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white; /* Fondo blanco */
-            color: black; /* Texto negro */
+            background-color: white;
+            color: black;
         }
 
-        /* Header (barra superior) */
+        /* Header & Menu */
         header {
-            background-color: #1b3652; /* Color de fondo de la barra superior */
+            background-color: #1b3652;
             color: white;
             padding: 20px;
             text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2em;
         }
 
         nav {
@@ -37,15 +27,14 @@
             display: flex;
             justify-content: center;
             padding: 10px;
-            position: fixed;
-            top: 60px;
-            width: 100%;
+            position: sticky;
+            top: 0;
             z-index: 999;
         }
 
         nav a {
             text-decoration: none;
-            color: #1b3652; /* Color de los enlaces */
+            color: #1b3652;
             margin: 0 20px;
             font-size: 18px;
         }
@@ -54,17 +43,15 @@
             color: #f5b31d; /* Color para resaltar al pasar el ratón */
         }
 
-        /* Main content */
-        .main-content {
-            padding: 80px 20px 20px 20px; /* Espacio para la barra superior */
+        /* Sections */
+        .section {
+            display: none; /* Todas las secciones están ocultas inicialmente */
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        h2, h3 {
-            color: #1b3652; /* Títulos en #1b3652 */
-        }
-
-        .highlight {
-            color: #f5b31d; /* Color para resaltar elementos */
+        .active {
+            display: block; /* Solo la sección activa se mostrará */
         }
 
         /* Button Styles */
@@ -84,108 +71,51 @@
     </style>
 </head>
 <body>
-    <!-- Barra de navegación (ahora en la parte superior) -->
+    <!-- Header & Menu -->
     <header>
-        <h1>Jezabel's Portfolio</h1>
-        <p>Explore my work and professional experience</p>
+        <h1>Welcome to my Portfolio!</h1>
+        <p>Explore my work, experience, and projects.</p>
     </header>
 
-    <!-- Barra de menú de navegación -->
     <nav>
-        <a href="#about">About Me</a>
-        <a href="#career">Career</a>
-        <a href="#projects">Projects</a>
+        <a href="javascript:void(0)" onclick="showSection('about')">About Me</a>
+        <a href="javascript:void(0)" onclick="showSection('experience')">Experience</a>
+        <a href="javascript:void(0)" onclick="showSection('projects')">Projects</a>
     </nav>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <!-- Sección Acerca de mí -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-                I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-                a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-                financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-                experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-            </p>
-        </section>
-
-        <!-- Sección Trayectoria laboral -->
-        <section id="career">
-            <h2>Relevant Experience</h2>
-            
-            <p>
-                Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
-                As an **analyst** in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
-                that helped guide strategic business decisions. My expertise in **accounting and financial control** has provided me with a deep 
-                understanding of financial statements, balance sheets, cash flows, and break-even analysis.
-            </p>
-            
-            <p>
-                As an **analytical accountant**, I worked extensively with **financial data management**, overseeing tasks such as cash flow 
-                analysis, financial forecasting, and tax preparation. My role required me to collaborate with internal teams to ensure that all 
-                financial reports were accurate and up-to-date, allowing for better financial planning and resource allocation. I also played a key 
-                role in managing accounts payable and receivable, billing, and dealing with suppliers and external auditors. Through these tasks, 
-                I honed my ability to handle large sets of financial data, analyze trends, and make data-driven recommendations for improving business 
-                operations and financial efficiency.
-            </p>
-        
-            <p>
-                Working in **financial analysis**, I was able to apply critical thinking and **problem-solving skills** to assess financial risks, 
-                identify cost-saving opportunities, and ensure compliance with regulatory standards. While my experience was primarily in the 
-                accounting sector, I was exposed to data tools like Excel, SQL, and various accounting software, which sparked my interest in 
-                leveraging **data analytics** to enhance financial decision-making and optimize business strategies.
-            </p>
-        
-            <p>
-                This year, I made the decision to pivot my career towards **Data Science** and **AI**. I completed a bootcamp in **Data Analytics 
-                and AI**, where I developed a solid understanding of **data manipulation, machine learning, deep learning**, and **data visualization**. 
-                During the bootcamp, I gained hands-on experience with programming languages like **Python** and libraries such as **Pandas, 
-                NumPy, Matplotlib, TensorFlow, and Scikit-learn**, which helped me build models for prediction, classification, and regression tasks.
-            </p>
-            
-            <p>
-                The bootcamp taught me how to approach **real-world business problems** with data. I applied machine learning algorithms to 
-                projects such as **credit risk prediction** and **waste classification using deep learning**. These experiences allowed me to 
-                understand the end-to-end process of **data collection, cleaning, exploration**, and **model deployment**. I also learned how 
-                to improve model accuracy through techniques like **feature engineering** and **fine-tuning**.
-            </p>
-        
-            <p>
-                Additionally, the bootcamp provided me with a deep dive into **business intelligence tools** like **Google Looker** and **Power BI**, 
-                which helped me visualize data insights and present them effectively. Combining my **financial background** with the skills learned 
-                in the bootcamp, I am now equipped to analyze large datasets, build predictive models, and provide actionable insights to improve 
-                business decision-making processes.
-            </p>
-        
-            <p>
-                I am excited to bring my **analytical mindset** and **technical expertise** to new challenges in the field of **Data Science** and **AI**.
-            </p>
-        </section>
-
-
-
-        <!-- Sección Proyectos -->
-        <section id="projects">
-            <h2>My Projects</h2>
-            <div class="project">
-                <h3>Waste Classification with Deep Learning</h3>
-                <p>A deep learning model for classifying waste types using EfficientNet.</p>
-                <a href="https://github.com/Jezabel-sh/waste-classification" class="button">View on GitHub</a>
-                <a href="https://www.kaggle.com/jezabelsh/waste-classification" class="button">View on Kaggle</a>
-            </div>
-            <div class="project">
-                <h3>Credit Risk Prediction</h3>
-                <p>Developed a machine learning model in Python to analyze and predict credit risk, improving decision-making processes by evaluating client and transaction data.</p>
-                <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
-            </div>
-            <div class="project">
-                <h3>Logistics Optimization</h3>
-                <p>Developed a genetic algorithm in Python to optimize the allocation of orders to trucks, considering mass and volume constraints. Used SQL databases for efficient integration between orders, trucks, and routes.</p>
-                <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
-            </div>
-        </section>
+    <!-- Sections -->
+    <div id="about" class="section active">
+        <h2>About Me</h2>
+        <p>I am a passionate Data Scientist and AI enthusiast...</p>
     </div>
+
+    <div id="experience" class="section">
+        <h2>Relevant Experience</h2>
+        <p>I have over 15 years of experience in financial analysis and management...</p>
+    </div>
+
+    <div id="projects" class="section">
+        <h2>My Projects</h2>
+        <div>
+            <h3>Waste Classification</h3>
+            <p>A deep learning model for classifying waste types using EfficientNet.</p>
+            <a href="https://github.com/Jezabel-sh/waste-classification" class="button">View on GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to show and hide sections
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+    </script>
 </body>
 </html>
