@@ -1,12 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jezabel Sánchez H. | Data Science & AI Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jezabel's Portfolio</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white; /* Fondo blanco */
+            color: black; /* Texto negro */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #f4f4f4; /* Color de fondo de la barra lateral */
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #1b3652; /* Color de los títulos */
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 260px; /* Deja espacio para la barra lateral */
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #1b3652; /* Títulos en #1b3652 */
+        }
+
+        .highlight {
+            color: #f5b31d; /* Color para resaltar elementos */
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to my portfolio!</h1>
-  <p>Currently under construction. Stay tuned for updates!</p>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Welcome</h2>
+        <p>Jezabel's Portfolio</p>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#career">Career</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Welcome to my Portfolio!</h1>
+            <p>This is a showcase of my work and professional experience.</p>
+        </header>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a passionate Data Scientist and AI enthusiast...</p>
+        </section>
+
+        <section id="career">
+            <h2>My Career</h2>
+            <ul>
+                <li>Data Scientist at XYZ</li>
+                <li>Data Analyst at ABC</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="project">
+                <h3>Waste Classification</h3>
+                <p>A deep learning model for classifying waste types.</p>
+                <a href="https://github.com/Jezabel-sh/waste-classification" class="button">View on GitHub</a>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
