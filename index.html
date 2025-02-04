@@ -32,6 +32,21 @@
         }
 
 
+        /* Header & Menu */
+        header {
+            background: linear-gradient(135deg, #1b3652 0%, #f5b31d 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            animation: gradientShift 6s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #13273c, #4fa1f7); }
+            50% { background: linear-gradient(135deg, #4fa1f7, #13273c); }
+            100% { background: linear-gradient(135deg, #13273c, #4fa1f7); }
+        }
+
         header h1 {
             animation: fadeIn 1s ease-in-out;
         }
@@ -40,6 +55,7 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
 
 
         nav {
