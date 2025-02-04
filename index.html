@@ -287,14 +287,30 @@
        /* Contenedor principal centrado */
        .about-container {
            display: flex; /* Alinear imagen y texto en fila */
-           align-items: center; /* Alineación vertical */
-           gap: 30px; /* Espacio entre imagen y texto */
+           flex-direction: column;
+           align-items: flex-start; /* Alineación vertical */ 
+           gap: 20px; /* Espacio entre imagen y texto */
            background: #f9f9f9; /* Fondo sutil */
            padding: 30px;
            border-radius: 10px; /* Bordes redondeados */
            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
            max-width: 900px; /* Limitar ancho */
            margin: 0 auto; /* Centrar en la web */
+       }
+
+
+      /* Alinear el título a la izquierda dentro del contenedor */
+       .about-container h2 {
+           text-align: left; /* Alinear a la izquierda */
+           width: 100%; /* Ocupar todo el ancho del contenedor */
+           margin-bottom: 10px; /* Espacio entre el título y la imagen/texto */
+       }
+      
+      /* Mantiene la imagen y texto alineados */
+       .about-content {
+           display: flex;
+           align-items: center;
+           gap: 30px;
        }
       
        /* Imagen de perfil con fondo elegante */
@@ -312,7 +328,7 @@
       .about-section {
            display: flex;
            flex-direction: column; /* Asegura que el título esté arriba y el contenido debajo */
-           align-items: flex-start; /* Centra horizontalmente */
+           align-items: center; /* Centra horizontalmente */
            justify-content: center; /* Centra verticalmente */
            padding: 40px 20px; /* Espaciado */
        }
@@ -327,6 +343,7 @@
       
        /* Texto dentro del contenedor */
        .about-text {
+           flex: 1;
            text-align: justify;
            font-size: 16px;
            color: #333;
