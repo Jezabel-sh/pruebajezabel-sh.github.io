@@ -123,36 +123,42 @@
             color: #1b3652;
         }
 
-        /* Contact Form Styles */
-        .contact-form {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .contact-form button {
-            background-color: #007bff;
+        /* Accordion Styles (Removed for Relevant Experience) */
+        .accordion {
+            background-color: #1b3652;
             color: white;
-            padding: 12px 20px;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
+            outline: none;
+            font-size: 18px;
         }
 
-        .contact-form button:hover {
-            background-color: #0056b3;
+        .panel {
+            padding: 10px;
+            display: block;
+            background-color: #f4f4f4;
+            margin-top: 10px;
+        }
+
+        /* Work in progress section */
+        .work-in-progress {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #f5b31d;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+        .upcoming-projects ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .upcoming-projects li {
+            font-size: 1.1rem;
+            color: #555;
         }
     </style>
 </head>
@@ -175,7 +181,7 @@
         <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
         <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
         <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
-        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a> <!-- Contact Button -->
+        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
     </nav>
 
     <!-- Sections -->
@@ -239,7 +245,22 @@
         </div>
     </div>
 
-    <!-- Contact Section -->
+    <!-- Work in Progress Section -->
+    <div class="work-in-progress">
+        🚧 Work in progress! New projects coming soon. 🚧
+    </div>
+
+    <!-- Upcoming Projects Section -->
+    <div class="upcoming-projects section">
+        <h2 class="highlight">Upcoming Projects</h2>
+        <ul>
+            <li>Predictive Modeling for Financial Data</li>
+            <li>AI-powered Marketing Optimization</li>
+            <li>Advanced Image Recognition System</li>
+        </ul>
+        <p>Stay tuned for these exciting additions!</p>
+    </div>
+
     <div id="contact" class="section">
         <h2 class="highlight">Contact Me</h2>
         <form class="contact-form">
@@ -266,25 +287,12 @@
             document.getElementById('loader').style.display = 'none';
         }
 
-        // Initialize particles.js background
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80 },
-                size: { value: 5 },
-                move: { speed: 1 },
-            },
-            interactivity: {
-                events: {
-                    onhover: { enable: true, mode: "repulse" }
-                }
-            }
-        });
-
         // Initialize AOS (Animate on Scroll)
         AOS.init({
             duration: 1000,
             offset: 200,
         });
     </script>
+
 </body>
 </html>
