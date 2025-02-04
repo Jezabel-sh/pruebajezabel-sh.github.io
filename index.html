@@ -70,23 +70,22 @@
            color: white;
            transform: scale(1.05);
        }
-      /* Ocultar los iconos por defecto */
+
+
+       /* Ocultar los iconos por defecto */
        nav a i {
            display: none;
-       }
-      
-       /* Mostrar los iconos al pasar el ratón */
-       nav a:hover i {
-           display: inline; 
-           margin-right: 5px; /* Espacio entre el icono y el texto */
+           opacity: 0;
            transition: opacity 0.3s ease-in-out;
+       }
+      
+       /* Mostrar iconos solo cuando el usuario pase el ratón */
+       nav a:hover i {
+           display: inline-block;
            opacity: 1;
+           margin-right: 5px;
        }
 
-
-
-
-      
 
        /* Main Container */
        .container {
