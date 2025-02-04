@@ -6,20 +6,32 @@
     <title>Jezabel's Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* Global Styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%); /* Gradiente sutil */
+            background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
             color: black;
             transition: background-color 0.3s ease;
         }
 
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         /* Header & Menu */
         header {
-            background-color: #1b3652; /* Mantenemos el color #1b3652 para el fondo */
+            background-color: #1b3652;
             color: white;
             padding: 20px;
             text-align: center;
@@ -33,7 +45,6 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            transition: background-color 0.3s ease;
         }
 
         nav a {
@@ -47,20 +58,20 @@
         }
 
         nav a:hover {
-            background-color: #f5b31d; /* Detalle con el color #f5b31d */
+            background-color: #f5b31d; /* Color para resaltar */
             color: white;
-            transform: scale(1.1); /* Efecto de animación en el hover */
+            transform: scale(1.1);
         }
 
         /* Sections */
         .section {
-            display: none; /* Todas las secciones están ocultas inicialmente */
+            display: none;
             padding: 20px;
             margin-top: 20px;
         }
 
         .active {
-            display: block; /* Solo la sección activa se mostrará */
+            display: block;
         }
 
         /* Button Styles */
@@ -103,41 +114,28 @@
             color: #555;
         }
 
-        .project-card .button {
-            margin-top: 10px;
-        }
-
         /* Adding #f5b31d color */
         .highlight {
-            color: #1b3652; /* Títulos como antes */
+            color: #1b3652; /* Títulos */
         }
 
-        /* Loader */
-        #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
+        /* Accordion Styles (Removed for Relevant Experience) */
+        .accordion {
+            background-color: #1b3652;
+            color: white;
+            padding: 10px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 18px;
         }
 
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #1b3652;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .panel {
+            padding: 10px;
+            display: block;
+            background-color: #f4f4f4;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -146,6 +144,9 @@
     <div id="loader">
         <div class="loader"></div>
     </div>
+
+    <!-- Particles background -->
+    <div id="particles-js"></div>
 
     <!-- Header & Menu -->
     <header>
@@ -162,42 +163,12 @@
     <!-- Sections -->
     <div id="about" class="section active">
         <h2 class="highlight">About Me</h2>
-        <p>
-            I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-            I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-            a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-            financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-            experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-        </p>
-        <p>
-            I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
-            in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
-            training in data science has given me the technical skills to approach problems from a data-driven perspective.
-        </p>
+        <p>I have over 15 years of experience in administration, accounting, and financial management...</p>
     </div>
 
     <div id="experience" class="section">
         <h2 class="highlight">Relevant Experience</h2>
-        <p>
-            Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
-            As an **analyst** in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
-            that helped guide strategic business decisions. My expertise in **accounting and financial control** has provided me with a deep 
-            understanding of financial statements, balance sheets, cash flows, and break-even analysis.
-        </p>
-        <p>
-            As an **analytical accountant**, I worked extensively with **financial data management**, overseeing tasks such as cash flow 
-            analysis, financial forecasting, and tax preparation. My role required me to collaborate with internal teams to ensure that all 
-            financial reports were accurate and up-to-date, allowing for better financial planning and resource allocation. I also played a key 
-            role in managing accounts payable and receivable, billing, and dealing with suppliers and external auditors. Through these tasks, 
-            I honed my ability to handle large sets of financial data, analyze trends, and make data-driven recommendations for improving business 
-            operations and financial efficiency.
-        </p>
-        <p>
-            This year, I made the decision to pivot my career towards **Data Science** and **AI**. I completed a bootcamp in **Data Analytics 
-            and AI**, where I developed a solid understanding of **data manipulation, machine learning, deep learning**, and **data visualization**. 
-            During the bootcamp, I gained hands-on experience with programming languages like **Python** and libraries such as **Pandas, 
-            NumPy, Matplotlib, TensorFlow, and Scikit-learn**, which helped me build models for prediction, classification, and regression tasks.
-        </p>
+        <p>Over the years, I have built a strong foundation in financial analysis and management...</p>
     </div>
 
     <div id="projects" class="section">
@@ -235,6 +206,20 @@
         function removeLoader() {
             document.getElementById('loader').style.display = 'none';
         }
+
+        // Initialize particles.js background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                size: { value: 5 },
+                move: { speed: 1 },
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                }
+            }
+        });
     </script>
 </body>
 </html>
