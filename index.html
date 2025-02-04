@@ -357,6 +357,61 @@
 
 
 
+        /* Contenedor principal centrado (como About Me) */
+       .experience-container {
+           display: flex;
+           flex-direction: column;
+           align-items: flex-start;
+           gap: 20px;
+           background: #f9f9f9; /* Fondo sutil */
+           padding: 30px;
+           border-radius: 10px;
+           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+           max-width: 900px;
+           margin: 0 auto; /* Centrar en la web */
+       }
+      
+       /* Alinear el título de "Experience" */
+       .experience-container h2 {
+           text-align: left;
+           width: 100%;
+           margin-bottom: 10px;
+           margin-left: 20px;
+       }
+      
+       /* Contenedor de contenido (imagen + texto) */
+       .experience-content {
+           display: flex;
+           align-items: center;
+           gap: 30px;
+       }
+       
+       /* Imágenes dentro de Experience */
+       .experience-img {
+           width: 150px;
+           height: auto;
+           border-radius: 5px; /* Bordes sutilmente redondeados */
+           border: 3px solid #f5b31d; /* Borde dorado */
+           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra sutil */
+           background: white;
+           padding: 5px;
+       }
+      
+       /* Texto dentro de Experience */
+       .experience-text {
+           flex: 1;
+           text-align: justify;
+           font-size: 16px;
+           color: #333;
+           line-height: 1.6;
+       }
+
+
+
+
+
+      
+
 
 
 
@@ -421,29 +476,54 @@
 
 
 
-       <div id="experience" class="section">
-           <h2 class="highlight">Relevant Experience</h2>
-           <p>
-               Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
-               As an <strong>analyst</strong> in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
-               that helped guide strategic business decisions. My expertise in <strong>accounting and financial control</strong> has provided me with a deep 
-               understanding of financial statements, balance sheets, cash flows, and break-even analysis.
-           </p>
-           <p>
-               As an <strong>analytical accountant</strong>, I worked extensively with <strong>financial data management</strong>, overseeing tasks such as cash flow 
-               analysis, financial forecasting, and tax preparation. My role required me to collaborate with internal teams to ensure that all 
-               financial reports were accurate and up-to-date, allowing for better financial planning and resource allocation. I also played a key 
-               role in managing accounts payable and receivable, billing, and dealing with suppliers and external auditors. Through these tasks, 
-               I honed my ability to handle large sets of financial data, analyze trends, and make data-driven recommendations for improving business 
-               operations and financial efficiency.
-           </p>
-           <p>
-               This year, I made the decision to pivot my career towards <strong>Data Science</strong> and <strong>AI</strong>. I completed a bootcamp in <strong>Data Analytics 
-               and AI</strong>, where I developed a solid understanding of <strong>data manipulation, machine learning, deep learning</strong>, and <strong>data visualization</strong>. 
-               During the bootcamp, I gained hands-on experience with programming languages like <strong>Python</strong> and libraries such as <strong>Pandas, 
-               NumPy, Matplotlib, TensorFlow, and Scikit-learn</strong>, which helped me build models for prediction, classification, and regression tasks.
-           </p>
-       </div>
+      <div id="experience" class="section">
+          <div class="experience-container">
+              <h2 class="highlight">Relevant Experience</h2>
+      
+              <div class="experience-content">
+                  <!-- Imagen 1 -->
+                  <img src="URL_DE_TU_IMAGEN_1" alt="Finance Analysis" class="experience-img">
+      
+                  <!-- Texto -->
+                  <div class="experience-text">
+                      <p>
+                          Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
+                          As an <strong>analyst</strong> in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
+                          that helped guide strategic business decisions.
+                      </p>
+                  </div>
+              </div>
+      
+              <div class="experience-content">
+                  <!-- Imagen 2 -->
+                  <img src="URL_DE_TU_IMAGEN_2" alt="Data Science Work" class="experience-img">
+      
+                  <!-- Texto -->
+                  <div class="experience-text">
+                      <p>
+                          This year, I made the decision to pivot my career towards <strong>Data Science</strong> and <strong>AI</strong>. 
+                          I completed a bootcamp in <strong>Data Analytics and AI</strong>, where I developed a solid understanding of 
+                          <strong>data manipulation, machine learning, and deep learning</strong>.
+                      </p>
+                  </div>
+              </div>
+      
+              <div class="experience-content">
+                  <!-- Imagen 3 -->
+                  <img src="URL_DE_TU_IMAGEN_3" alt="Machine Learning Model" class="experience-img">
+      
+                  <!-- Texto -->
+                  <div class="experience-text">
+                      <p>
+                          During the bootcamp, I gained hands-on experience with programming languages like <strong>Python</strong> 
+                          and libraries such as <strong>Pandas, NumPy, Matplotlib, TensorFlow, and Scikit-learn</strong>, which helped 
+                          me build models for prediction, classification, and regression tasks.
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
 
        <div id="projects" class="section">
            <h2 class="highlight">My Projects</h2>
