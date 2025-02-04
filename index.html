@@ -306,6 +306,20 @@
             document.getElementById('loader').style.display = 'none';
         }
 
+        // Initialize particles.js background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                size: { value: 5 },
+                move: { speed: 1 },
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                }
+            }
+        });
+
         // Initialize AOS (Animate on Scroll)
         AOS.init({
             duration: 1000,
