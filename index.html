@@ -33,10 +33,8 @@
         header {
             background: linear-gradient(135deg, #1b3652 0%, #3d6d8b 100%);
             color: white;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
-            width: 100%;
-            margin: 0;
         }
 
         nav {
@@ -47,8 +45,6 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            width: 100%;
-            margin: 0;
         }
 
         nav a {
@@ -64,7 +60,7 @@
         nav a:hover {
             background-color: #f5b31d;
             color: white;
-            transform: scale(1.05);
+            transform: scale(1.05); /* Efecto más suave */
         }
 
         /* Main Container */
@@ -72,6 +68,7 @@
             max-width: 1000px; /* Ajustamos el tamaño */
             margin: 0 auto;
             padding: 20px;
+            margin-bottom: 40px; /* Añadido margen para separar del footer */
         }
 
         /* Sections */
@@ -197,18 +194,20 @@
             padding: 20px;
             background-color: #1b3652;
             color: white;
+            font-size: 14px;
         }
 
         footer a {
-            color: #f5b31d;
+            color: white;
             text-decoration: none;
             margin: 0 10px;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         footer a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
 <body onload="removeLoader()">
@@ -220,7 +219,7 @@
     <!-- Particles background -->
     <div id="particles-js"></div>
 
-    <!-- Header & Menu (Full Width) -->
+    <!-- Header & Menu -->
     <header>
         <h1>Welcome to my Portfolio!</h1>
         <p>Explore my work, experience, and projects.</p>
@@ -328,6 +327,7 @@
         <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
         <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
         <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <p>© 2025 Jezabel Sánchez</p>
     </footer>
 
     <script>
