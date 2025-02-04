@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* Global Styles */
         body {
@@ -18,15 +17,6 @@
             background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
             color: black;
             transition: background-color 0.3s ease;
-        }
-
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         /* Header & Menu */
@@ -224,9 +214,6 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Particles background -->
-    <div id="particles-js"></div>
-
     <!-- Header & Menu -->
     <header>
         <h1>Welcome to my Portfolio!</h1>
@@ -354,19 +341,6 @@
             document.getElementById('loader').style.display = 'none';
         }
 
-        // Initialize particles.js background
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80 },
-                size: { value: 5 },
-                move: { speed: 1 },
-            },
-            interactivity: {
-                events: {
-                    onhover: { enable: true, mode: "repulse" }
-                }
-            }
-        });
 
         // Initialize AOS (Animate on Scroll)
         AOS.init({
