@@ -345,13 +345,30 @@
     </div>
 
     <!-- Footer with Social Media Links -->
-    <footer>
-        <p>Connect with me:</p>
-        <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
-        <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <p>© 2025 Jezabel Sánchez Hernández</p>
-    </footer>
+    /* 🔹 1️⃣ Iconos dorados en el footer al pasar el ratón */
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 16px;
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+    
+    footer a:hover {
+        color: #f5b31d; /* Se vuelven dorados al pasar el cursor */
+        transform: scale(1.1); /* Pequeño efecto de zoom */
+    }
+    
+    /* 🔹 2️⃣ Fondos dorados con esquinas redondeadas en los títulos */
+    h2 {
+        display: inline-block;
+        background-color: #f5b31d; /* Color dorado */
+        color: #223140; /* Color oscuro para el texto */
+        padding: 8px 20px; /* Espaciado interno */
+        border-radius: 10px; /* Esquinas redondeadas */
+        font-weight: bold;
+    }
+
 
     <script>
         // JavaScript to show and hide sections
