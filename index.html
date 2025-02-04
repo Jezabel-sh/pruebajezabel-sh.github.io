@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jezabel's Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -15,11 +15,12 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
-            color: black;
-            transition: background-color 0.3s ease;
+            background: #121212;
+            color: white;
+            overflow-x: hidden;
         }
 
+        /* Particles background */
         #particles-js {
             position: fixed;
             top: 0;
@@ -31,17 +32,46 @@
 
         /* Header & Menu */
         header {
-            background-color: #1b3652;
+            background: linear-gradient(45deg, #1b3652 0%, #00b5ff 100%);
             color: white;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        header h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* Adding the diagonal lines & triangles */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/asfalt.png') repeat;
+            z-index: -2;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        /* Navigation */
         nav {
-            background-color: #f4f4f4;
+            background-color: #222;
             display: flex;
             justify-content: center;
-            padding: 10px;
+            padding: 15px;
             position: sticky;
             top: 0;
             z-index: 999;
@@ -49,105 +79,84 @@
 
         nav a {
             text-decoration: none;
-            color: #1b3652;
+            color: #00b5ff;
             margin: 0 20px;
             font-size: 18px;
-            padding: 10px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.2s;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav a:hover {
             background-color: #f5b31d;
             color: white;
-            transform: scale(1.05); /* Efecto más suave */
+            transform: scale(1.1);
         }
 
         /* Sections */
         .section {
             display: none;
-            padding: 20px;
+            padding: 40px 20px;
             margin-top: 20px;
+            text-align: center;
         }
 
         .active {
             display: block;
         }
 
-        /* Button Styles */
+        .highlight {
+            color: #00b5ff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Buttons */
         .button {
             display: inline-block;
-            background-color: #007bff;
+            background-color: #00b5ff;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            margin: 10px 0;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05); /* Efecto de escalado suave */
+            background-color: #f5b31d;
+            transform: scale(1.05);
         }
 
         /* Project Cards */
         .project-card {
-            background-color: #f4f4f4;
+            background-color: #222;
             padding: 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .project-card h3 {
-            color: #1b3652;
+            color: #00b5ff;
         }
 
         .project-card p {
-            color: #555;
+            color: #ccc;
         }
 
-        .project-card .button {
-            margin-top: 10px;
-        }
-
-        /* Highlight color for important elements */
+        /* Highlight Color */
         .highlight {
-            color: #1b3652;
-        }
-
-        /* Accordion Styles (Removed for Relevant Experience) */
-        .accordion {
-            background-color: #1b3652;
-            color: white;
-            padding: 10px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            font-size: 18px;
-        }
-
-        .panel {
-            padding: 10px;
-            display: block;
-            background-color: #f4f4f4;
-            margin-top: 10px;
+            color: #f5b31d;
         }
     </style>
 </head>
-<body onload="removeLoader()">
-    <!-- Loader Animation -->
-    <div id="loader">
-        <div class="loader"></div>
-    </div>
+<body>
 
     <!-- Particles background -->
     <div id="particles-js"></div>
