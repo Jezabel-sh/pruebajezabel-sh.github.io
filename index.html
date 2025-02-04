@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jezabel's Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* Global Styles */
         body {
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
             color: black;
+            transition: background-color 0.3s ease;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         /* Header & Menu */
         header {
-            background: #1b3652;
+            background: linear-gradient(135deg, #1b3652 0%, #3d6d8b 100%);
             color: white;
             padding: 20px;
             text-align: center;
@@ -41,18 +54,57 @@
             font-size: 18px;
             padding: 10px;
             border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav a:hover {
             background-color: #f5b31d;
             color: white;
+            transform: scale(1.05); /* Efecto más suave */
         }
 
         /* Main Container */
         .container {
-            max-width: 1000px;
+            max-width: 1000px; /* Ajustamos el tamaño */
             margin: 0 auto;
             padding: 20px;
+            margin-bottom: 40px; /* Añadido margen para separar del footer */
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Adjusting the padding and margins of sections */
+        .section p {
+            line-height: 1.6; /* Mejoramos la legibilidad */
+            margin-left: 20px;
+            text-align: justify; /* Alinea el texto para que se distribuya uniformemente */
+        }
+
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Efecto de escalado suave */
         }
 
         /* Project Cards */
@@ -62,18 +114,86 @@
             margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .project-card h3 {
             color: #1b3652;
         }
 
+        .project-card p {
+            color: #555;
+        }
+
         .project-card .button {
-            background-color: #f5b31d;
-            color: white;
-            padding: 10px 20px;
+            margin-top: 10px;
+        }
+
+        /* Highlight color for important elements */
+        .highlight {
+            color: #1b3652;
+        }
+
+        /* Work in Progress Section */
+        .work-in-progress {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #f5b31d;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+        /* Upcoming Projects Section */
+        .upcoming-projects {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .upcoming-projects ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .upcoming-projects li {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .contact-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
         }
 
         /* Footer */
@@ -84,9 +204,29 @@
             color: white;
             font-size: 14px;
         }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
-<body>
+<body onload="removeLoader()">
+    <!-- Loader Animation -->
+    <div id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Particles background -->
+    <div id="particles-js"></div>
+
     <!-- Header & Menu -->
     <header>
         <h1>Welcome to my Portfolio!</h1>
@@ -94,24 +234,146 @@
     </header>
 
     <nav>
-        <a href="#about"><i class="fas fa-user"></i> About Me</a>
-        <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
-        <a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a>
-        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+        <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
     </nav>
 
+    <!-- Sections -->
     <div class="container">
-        <div id="projects">
+        <div id="about" class="section active">
+            <h2 class="highlight">About Me</h2>
+            <p>
+                I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
+                I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
+                a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
+                financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
+                experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
+            </p>
+            <p>
+                I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
+                in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
+                training in data science has given me the technical skills to approach problems from a data-driven perspective.
+            </p>
+        </div>
+
+        <div id="experience" class="section">
+            <h2 class="highlight">Relevant Experience</h2>
+            <p>
+                Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
+                As an **analyst** in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
+                that helped guide strategic business decisions. My expertise in **accounting and financial control** has provided me with a deep 
+                understanding of financial statements, balance sheets, cash flows, and break-even analysis.
+            </p>
+            <p>
+                As an **analytical accountant**, I worked extensively with **financial data management**, overseeing tasks such as cash flow 
+                analysis, financial forecasting, and tax preparation. My role required me to collaborate with internal teams to ensure that all 
+                financial reports were accurate and up-to-date, allowing for better financial planning and resource allocation. I also played a key 
+                role in managing accounts payable and receivable, billing, and dealing with suppliers and external auditors. Through these tasks, 
+                I honed my ability to handle large sets of financial data, analyze trends, and make data-driven recommendations for improving business 
+                operations and financial efficiency.
+            </p>
+            <p>
+                This year, I made the decision to pivot my career towards **Data Science** and **AI**. I completed a bootcamp in **Data Analytics 
+                and AI**, where I developed a solid understanding of **data manipulation, machine learning, deep learning**, and **data visualization**. 
+                During the bootcamp, I gained hands-on experience with programming languages like **Python** and libraries such as **Pandas, 
+                NumPy, Matplotlib, TensorFlow, and Scikit-learn**, which helped me build models for prediction, classification, and regression tasks.
+            </p>
+        </div>
+
+        <div id="projects" class="section">
             <h2 class="highlight">My Projects</h2>
             <div class="project-card">
                 <h3>Waste Classification with Deep Learning</h3>
-                <a href="#" class="button">View on GitHub</a>
+                <p>A deep learning model for classifying waste types using EfficientNet.</p>
+                <a href="https://github.com/Jezabel-sh/waste-classification" class="button">View on GitHub</a>
+                <a href="https://www.kaggle.com/jezabelsh/waste-classification" class="button">View on Kaggle</a>
             </div>
+            <div class="project-card">
+                <h3>Credit Risk Prediction</h3>
+                <p>Developed a machine learning model in Python to analyze and predict credit risk...</p>
+                <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
+            </div>
+            <div class="project-card">
+                <h3>Logistics Optimization</h3>
+                <p>Developed a genetic algorithm to optimize the allocation of orders to trucks...</p>
+                <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
+            </div>
+
+            <!-- Work in Progress Section -->
+            <div class="work-in-progress">
+                🚧 Work in progress! New projects coming soon. 🚧
+            </div>
+
+            <!-- Upcoming Projects Section -->
+            <div class="upcoming-projects">
+                <h2 class="highlight">Upcoming Projects</h2>
+                <ul>
+                    <li>Predictive Modeling for Financial Data</li>
+                    <li>AI-powered Marketing Optimization</li>
+                    <li>Advanced Image Recognition System</li>
+                </ul>
+                <p>Stay tuned for these exciting additions!</p>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2 class="highlight">Contact Me</h2>
+            <form class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
     </div>
 
+    <!-- Footer with Social Media Links -->
     <footer>
+        <p>Connect with me:</p>
+        <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
+        <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         <p>© 2025 Jezabel Sánchez Hernández</p>
     </footer>
+
+    <script>
+        // JavaScript to show and hide sections
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+
+        // Remove Loader
+        function removeLoader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+
+        // Initialize particles.js background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                size: { value: 5 },
+                move: { speed: 1 },
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                }
+            }
+        });
+
+        // Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 1000,
+            offset: 200,
+        });
+    </script>
+
 </body>
 </html>
