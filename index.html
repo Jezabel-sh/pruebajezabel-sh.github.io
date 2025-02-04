@@ -284,36 +284,45 @@
 
 
 
-       /* Contenedor mejor integrado para la imagen y el texto */
+       /* Contenedor principal centrado */
        .about-container {
-           display: flex; /* Alinea la imagen y el texto en fila */
+           display: flex; /* Alinear imagen y texto en fila */
            align-items: center; /* Alineación vertical */
-           gap: 30px; /* Espaciado entre imagen y texto */
-           background: #f9f9f9; /* Fondo sutil para integración */
-           padding: 20px;
+           gap: 30px; /* Espacio entre imagen y texto */
+           background: #f9f9f9; /* Fondo sutil */
+           padding: 30px;
            border-radius: 10px; /* Bordes redondeados */
            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+           max-width: 900px; /* Limitar ancho */
+           margin: 0 auto; /* Centrar en la web */
        }
       
-       /* Imagen de perfil con fondo más elegante */
+       /* Imagen de perfil con fondo elegante */
        .profile-pic {
-           width: 140px; /* Tamaño de imagen */
+           width: 140px;
            height: 140px;
            border-radius: 50%; /* Imagen redonda */
            border: 4px solid #f5b31d; /* Borde dorado */
            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra sutil */
-           background: white; /* Fondo blanco para mejor integración */
+           background: white; /* Fondo blanco */
            padding: 5px; /* Espacio entre imagen y borde */
        }
       
-       /* Ajustes para el texto */
+       /* Contenedor para centrar todo el About Me */
+       .about-section {
+           display: flex;
+           justify-content: center; /* Centrar el contenido */
+           padding: 40px 20px; /* Espaciado */
+       }
+      
+       /* Texto dentro del contenedor */
        .about-text {
-           flex: 1; /* El texto ocupa el espacio sobrante */
-           text-align: justify; /* Justificación para un aspecto más elegante */
+           text-align: justify;
            font-size: 16px;
-           color: #333; /* Color más profesional */
+           color: #333;
            line-height: 1.6;
        }
+
 
 
 
@@ -345,27 +354,31 @@
 <!-- Sections -->
       <div id="about" class="section active">
           <h2 class="highlight">About Me</h2>
-          <div class="about-container">
-              <!-- Imagen con fondo integrado -->
-              <div class="profile-pic-container">
-                  <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/fotocurriculum.jpg" 
-                       alt="Jezabel Sánchez Hernández" class="profile-pic">
-              </div>
-              
-              <!-- Texto -->
-              <div class="about-text">
-                  <p>
-                      I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-                      I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-                      a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-                      financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-                      experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-                  </p>
-                  <p>
-                      I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
-                      in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
-                      training in data science has given me the technical skills to approach problems from a data-driven perspective.
-                  </p>
+          
+          <!-- Contenedor que centra todo -->
+          <div class="about-section">
+              <div class="about-container">
+                  <!-- Imagen -->
+                  <div class="profile-pic-container">
+                      <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/fotocurriculum.jpg" 
+                           alt="Jezabel Sánchez Hernández" class="profile-pic">
+                  </div>
+      
+                  <!-- Texto -->
+                  <div class="about-text">
+                      <p>
+                          I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
+                          I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
+                          a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
+                          financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
+                          experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
+                      </p>
+                      <p>
+                          I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
+                          in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
+                          training in data science has given me the technical skills to approach problems from a data-driven perspective.
+                      </p>
+                  </div>
               </div>
           </div>
       </div>
