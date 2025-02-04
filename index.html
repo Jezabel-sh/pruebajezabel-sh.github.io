@@ -28,22 +28,22 @@
             animation: gradientShift 6s infinite alternate;
         }
 
-         /* Efecto de brillo más visible */
-         @keyframes glowEffect {
-             0% { box-shadow: 0 0 20px #f5b31d; text-shadow: 0 0 5px #f5b31d; }
-             50% { box-shadow: 0 0 40px #f5b31d, 0 0 80px rgba(245, 179, 29, 1); text-shadow: 0 0 10px #f5b31d; }
-             100% { box-shadow: 0 0 20px #f5b31d; text-shadow: 0 0 5px #f5b31d; }
-         }
-         
-         header {
-             background: linear-gradient(135deg, #223140, #527191, #75b6ca);
-             color: white;
-             padding: 20px;
-             text-align: center;
-             animation: glowEffect 2s infinite alternate ease-in-out;
-             border-bottom: 4px solid #f5b31d;
-             box-shadow: 0 0 20px rgba(245, 179, 29, 0.7);
-         }
+        /* Efecto de brillo en el fondo del header en tonos azules */
+        @keyframes glowBlue {
+            0% { box-shadow: 0 0 10px rgba(82, 113, 145, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(82, 113, 145, 0.6), 0 0 50px rgba(117, 182, 202, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(82, 113, 145, 0.4); }
+        }
+        
+        header {
+            background: linear-gradient(135deg, #223140, #527191, #75b6ca);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            animation: glowBlue 2s infinite alternate ease-in-out;
+            border-bottom: 4px solid #527191; /* Azul medio en vez de dorado */
+        }
+
 
 
         @keyframes fadeIn {
