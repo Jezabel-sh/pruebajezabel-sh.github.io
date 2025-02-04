@@ -308,12 +308,22 @@
            padding: 5px; /* Espacio entre imagen y borde */
        }
       
-       /* Contenedor para centrar todo el About Me */
-       .about-section {
+       /* Contenedor para centrar todo el About Me, incluyendo el título */
+      .about-section {
            display: flex;
-           justify-content: center; /* Centrar el contenido */
+           flex-direction: column; /* Asegura que el título esté arriba y el contenido debajo */
+           align-items: center; /* Centra horizontalmente */
+           justify-content: center; /* Centra verticalmente */
            padding: 40px 20px; /* Espaciado */
        }
+      
+       /* Centrar el título dentro del contenedor */
+       .about-section h2 {
+           text-align: center; /* Centra el texto */
+           width: 100%; /* Ocupar todo el ancho disponible */
+           margin-bottom: 20px; /* Espacio entre el título y el contenido */
+       }
+
       
        /* Texto dentro del contenedor */
        .about-text {
@@ -353,10 +363,10 @@
 
 <!-- Sections -->
       <div id="about" class="section active">
-          <h2 class="highlight">About Me</h2>
-          
           <!-- Contenedor que centra todo -->
           <div class="about-section">
+              <h2 class="highlight">About Me</h2> <!-- Ahora está dentro del contenedor centrado -->
+      
               <div class="about-container">
                   <!-- Imagen -->
                   <div class="profile-pic-container">
@@ -382,6 +392,7 @@
               </div>
           </div>
       </div>
+
 
 
 
