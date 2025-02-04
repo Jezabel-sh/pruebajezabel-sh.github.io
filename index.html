@@ -28,21 +28,33 @@
             animation: gradientShift 6s infinite alternate;
         }
 
-        /* Efecto de brillo en el encabezado */
-        @keyframes glowEffect {
-            0% { box-shadow: 0 0 10px #f5b31d; }
-            50% { box-shadow: 0 0 30px #f5b31d, 0 0 50px rgba(245, 179, 29, 0.8); }
-            100% { box-shadow: 0 0 10px #f5b31d; }
+         /* Efecto de brillo más visible */
+         @keyframes glowEffect {
+             0% { box-shadow: 0 0 20px #f5b31d; text-shadow: 0 0 5px #f5b31d; }
+             50% { box-shadow: 0 0 40px #f5b31d, 0 0 80px rgba(245, 179, 29, 1); text-shadow: 0 0 10px #f5b31d; }
+             100% { box-shadow: 0 0 20px #f5b31d; text-shadow: 0 0 5px #f5b31d; }
+         }
+         
+         header {
+             background: linear-gradient(135deg, #223140, #527191, #75b6ca);
+             color: white;
+             padding: 20px;
+             text-align: center;
+             animation: glowEffect 2s infinite alternate ease-in-out;
+             border-bottom: 4px solid #f5b31d;
+             box-shadow: 0 0 20px rgba(245, 179, 29, 0.7);
+         }
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        header {
-            background: linear-gradient(135deg, #223140, #527191, #75b6ca);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            animation: glowEffect 2s infinite alternate ease-in-out;
-            border-bottom: 4px solid #f5b31d; /* Para reforzar el brillo */
+        header h1 {
+            animation: fadeIn 1.5s ease-in-out forwards;
         }
+
 
 
         @keyframes fadeIn {
