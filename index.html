@@ -14,11 +14,12 @@
             padding: 0;
             background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%); /* Gradiente sutil */
             color: black;
+            transition: background-color 0.3s ease;
         }
 
         /* Header & Menu */
         header {
-            background-color: #1b3652;
+            background-color: #1b3652; /* Mantenemos el color #1b3652 para el fondo */
             color: white;
             padding: 20px;
             text-align: center;
@@ -32,6 +33,7 @@
             position: sticky;
             top: 0;
             z-index: 999;
+            transition: background-color 0.3s ease;
         }
 
         nav a {
@@ -39,10 +41,15 @@
             color: #1b3652;
             margin: 0 20px;
             font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         nav a:hover {
-            color: #f5b31d; /* Resaltar al pasar el ratón */
+            background-color: #f5b31d; /* Detalle con el color #f5b31d */
+            color: white;
+            transform: scale(1.1); /* Efecto de animación en el hover */
         }
 
         /* Sections */
@@ -53,7 +60,7 @@
         }
 
         .active {
-            display: block;
+            display: block; /* Solo la sección activa se mostrará */
         }
 
         /* Button Styles */
@@ -102,7 +109,7 @@
 
         /* Adding #f5b31d color */
         .highlight {
-            color: #f5b31d;
+            color: #1b3652; /* Títulos como antes */
         }
 
         /* Loader */
