@@ -21,18 +21,16 @@
 
         /* Header & Menu */
         header {
-            background: linear-gradient(135deg, #1b3652 0%, #f5b31d 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
+            background: linear-gradient(135deg, #c3a2f5 0%, #ff7f7f 50%, #a8d5e2 100%);
             animation: gradientShift 6s infinite alternate;
         }
-
+        
         @keyframes gradientShift {
-            0% { background: linear-gradient(135deg, #1b3652, #f5b31d); }
-            50% { background: linear-gradient(135deg, #f5b31d, #1b3652); }
-            100% { background: linear-gradient(135deg, #1b3652, #f5b31d); }
+            0% { background: linear-gradient(135deg, #c3a2f5, #ff7f7f, #a8d5e2); }
+            50% { background: linear-gradient(135deg, #a8d5e2, #ff7f7f, #c3a2f5); }
+            100% { background: linear-gradient(135deg, #c3a2f5, #ff7f7f, #a8d5e2); }
         }
+
 
         header h1 {
             animation: fadeIn 1s ease-in-out;
