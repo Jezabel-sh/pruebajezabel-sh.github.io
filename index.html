@@ -1,249 +1,88 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jezabel's Portfolio</title>
+    
+    <!-- Tus links a CSS y AOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f4f4f4 100%);
-            color: black;
-            transition: background-color 0.3s ease;
+        /* Mantén aquí tus estilos actuales */
+        
+        /* --- NUEVOS ESTILOS (Añádelos aquí) --- */
+        @keyframes matrixFlow {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(100%); opacity: 1; }
         }
 
-        /* Header & Menu */
-        header {
-            background: linear-gradient(135deg, #223140 0%, #527191 50%, #75b6ca 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            animation: gradientShift 6s infinite alternate;
+        .matrix {
+            position: absolute;
+            top: -50px;
+            left: calc(10% + 5vw);
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.2);
+            animation: matrixFlow 3s linear infinite;
         }
 
-        @keyframes gradientShift {
-            0% { background: linear-gradient(135deg, #223140, #527191, #75b6ca); }
-            50% { background: linear-gradient(135deg, #75b6ca, #527191, #223140); }
-            100% { background: linear-gradient(135deg, #223140, #527191, #75b6ca); }
-        }
-
-        header h1 {
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        nav {
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #223140;
-            margin: 0 20px;
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        nav a:hover {
-            background-color: #75b6ca;
-            color: white;
-            transform: scale(1.05); /* Efecto más suave */
-        }
-
-
-
-        /* Main Container */
-        .container {
-            max-width: 1000px; /* Ajustamos el tamaño */
-            margin: 0 auto;
-            padding: 20px;
-            margin-bottom: 40px; /* Añadido margen para separar del footer */
-        }
-
-        /* Sections */
-        .section {
-            display: none;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .active {
-            display: block;
-        }
-
-        /* Adjusting the padding and margins of sections */
-        .section p {
-            line-height: 1.6; /* Mejoramos la legibilidad */
-            margin-left: 20px;
-            text-align: justify; /* Alinea el texto para que se distribuya uniformemente */
-        }
-
-
-        /* Button Styles */
-        .button {
-            display: inline-block;
-            background-color: #527191;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 10px 0;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .button:hover {
-            background-color: #527191;
-            transform: scale(1.05); /* Efecto de escalado suave */
-        }
-
-        /* Project Cards */
-        .project-card {
-            background-color: #f4f4f4;
-            padding: 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .project-card h3 {
-            color: #223140;
-        }
-
-        .project-card p {
-            color: #555;
-        }
-
-        .project-card .button {
-            margin-top: 10px;
-        }
-
-        /* Highlight color for important elements */
-        .highlight {
-            color: #223140;
-        }
-
-        /* Work in Progress Section */
-        .work-in-progress {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #f5b31d;
-            margin-top: 40px;
+        .number-counter {
+            font-size: 24px;
             font-weight: bold;
+            color: #f5b31d;
         }
 
-        /* Upcoming Projects Section */
-        .upcoming-projects {
-            text-align: center;
-            margin-top: 40px;
+        .data-bar {
+            width: 10px;
+            height: 50px;
+            background-color: #f5b31d;
+            margin: 0 5px;
+            display: inline-block;
+            animation: growingBars 1.5s ease-in-out infinite alternate;
         }
 
-        .upcoming-projects ul {
-            list-style-type: none;
-            padding: 0;
+        .cursor-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: #f5b31d;
+            border-radius: 50%;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fadeDot 0.5s ease-out forwards;
         }
 
-        .upcoming-projects li {
-            font-size: 1.1rem;
-            color: #555;
+        @keyframes fadeDot {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(2); opacity: 0; }
         }
-
-        /* Contact Form */
-        .contact-form {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .contact-form button {
-            background-color: #527191;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .contact-form button:hover {
-            background-color: #223140;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #223140;
-            color: white;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
     </style>
 </head>
-<body onload="removeLoader()">
-    <!-- Loader Animation -->
-    <div id="loader">
-        <div class="loader"></div>
-    </div>
 
-    <!-- Header & Menu -->
+<body>
+
+    <!-- NUEVO HEADER -->
     <header>
         <h1>Welcome to my Portfolio!</h1>
-        <p>Explore my work, experience, and projects.</p>
+        <p>Analyzing <span class="number-counter" id="counter">0</span> data points...</p>
+        <div class="matrix">101010 110011 011100</div>
+        <div class="data-animation">
+            <div class="data-bar"></div>
+            <div class="data-bar"></div>
+            <div class="data-bar"></div>
+        </div>
     </header>
 
+    <!-- TU NAVEGACIÓN EXISTENTE -->
     <nav>
         <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
         <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
         <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
         <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
     </nav>
+
 
     <!-- Sections -->
     <div class="container">
@@ -343,27 +182,31 @@
         <p>© 2025 Jezabel Sánchez Hernández</p>
     </footer>
 
+ <!-- NUEVOS SCRIPTS -->
     <script>
-        // JavaScript to show and hide sections
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            const selectedSection = document.getElementById(sectionId);
-            selectedSection.classList.add('active');
+        function animateCounter(id, start, end, duration) {
+            let obj = document.getElementById(id);
+            let range = end - start;
+            let step = Math.abs(Math.floor(duration / range));
+            let current = start;
+            let timer = setInterval(() => {
+                current += 1;
+                obj.textContent = current;
+                if (current >= end) clearInterval(timer);
+            }, step);
         }
 
-        // Remove Loader
-        function removeLoader() {
-            document.getElementById('loader').style.display = 'none';
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            animateCounter("counter", 0, 50000, 3000);
+        });
 
-
-        // Initialize AOS (Animate on Scroll)
-        AOS.init({
-            duration: 1000,
-            offset: 200,
+        document.addEventListener("mousemove", function (e) {
+            let dot = document.createElement("div");
+            dot.classList.add("cursor-dot");
+            document.body.appendChild(dot);
+            dot.style.left = `${e.clientX}px`;
+            dot.style.top = `${e.clientY}px`;
+            setTimeout(() => { dot.remove(); }, 500);
         });
     </script>
 
