@@ -31,38 +31,9 @@
 
         /* Main Container */
         .container {
-            max-width: 1100px;
+            max-width: 1000px; /* Ajustamos el tamaño */
             margin: 0 auto;
             padding: 20px;
-            position: relative;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #1b3652;
-            color: white;
-            padding: 20px;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            margin: 10px 0;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            background-color: #f5b31d;
         }
 
         /* Header & Menu */
@@ -71,7 +42,6 @@
             color: white;
             padding: 40px 20px;
             text-align: center;
-            margin-left: 270px; /* Avoid overlap with sidebar */
         }
 
         nav {
@@ -82,7 +52,6 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            margin-left: 270px; /* Avoid overlap with sidebar */
         }
 
         nav a {
@@ -110,6 +79,55 @@
 
         .active {
             display: block;
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Efecto de escalado suave */
+        }
+
+        /* Project Cards */
+        .project-card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            color: #1b3652;
+        }
+
+        .project-card p {
+            color: #555;
+        }
+
+        .project-card .button {
+            margin-top: 10px;
+        }
+
+        /* Highlight color for important elements */
+        .highlight {
+            color: #1b3652;
         }
 
         /* Work in Progress Section */
@@ -168,6 +186,25 @@
         .contact-form button:hover {
             background-color: #0056b3;
         }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1b3652;
+            color: white;
+        }
+
+        footer a {
+            color: #f5b31d;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body onload="removeLoader()">
@@ -179,21 +216,19 @@
     <!-- Particles background -->
     <div id="particles-js"></div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Jezabel Sánchez</h2>
-        <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
-        <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
-        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
-        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
-    </div>
-
-    <!-- Main Content -->
+    <!-- Header & Menu -->
     <div class="container">
         <header>
             <h1>Welcome to my Portfolio!</h1>
             <p>Explore my work, experience, and projects.</p>
         </header>
+
+        <nav>
+            <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+            <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
 
         <!-- Sections -->
         <div id="about" class="section active">
@@ -283,6 +318,14 @@
         </div>
     </div>
 
+    <!-- Footer with Social Media Links -->
+    <footer>
+        <p>Connect with me:</p>
+        <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
+        <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </footer>
+
     <script>
         // JavaScript to show and hide sections
         function showSection(sectionId) {
@@ -298,6 +341,20 @@
         function removeLoader() {
             document.getElementById('loader').style.display = 'none';
         }
+
+        // Initialize particles.js background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                size: { value: 5 },
+                move: { speed: 1 },
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                }
+            }
+        });
 
         // Initialize AOS (Animate on Scroll)
         AOS.init({
