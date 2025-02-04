@@ -29,19 +29,14 @@
             z-index: -1;
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1000px; /* Ajustamos el tamaño */
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         /* Header & Menu */
         header {
             background: linear-gradient(135deg, #1b3652 0%, #3d6d8b 100%);
             color: white;
             padding: 40px 20px;
             text-align: center;
+            width: 100%;
+            margin: 0;
         }
 
         nav {
@@ -52,6 +47,8 @@
             position: sticky;
             top: 0;
             z-index: 999;
+            width: 100%;
+            margin: 0;
         }
 
         nav a {
@@ -68,6 +65,13 @@
             background-color: #f5b31d;
             color: white;
             transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px; /* Ajustamos el tamaño */
+            margin: 0 auto;
+            padding: 20px;
         }
 
         /* Sections */
@@ -216,21 +220,21 @@
     <!-- Particles background -->
     <div id="particles-js"></div>
 
-    <!-- Header & Menu -->
+    <!-- Header & Menu (Full Width) -->
+    <header>
+        <h1>Welcome to my Portfolio!</h1>
+        <p>Explore my work, experience, and projects.</p>
+    </header>
+
+    <nav>
+        <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+        <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+
+    <!-- Sections -->
     <div class="container">
-        <header>
-            <h1>Welcome to my Portfolio!</h1>
-            <p>Explore my work, experience, and projects.</p>
-        </header>
-
-        <nav>
-            <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
-            <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
-            <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
-            <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
-        </nav>
-
-        <!-- Sections -->
         <div id="about" class="section active">
             <h2 class="highlight">About Me</h2>
             <p>
