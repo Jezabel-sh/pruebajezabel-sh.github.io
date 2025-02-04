@@ -283,6 +283,30 @@
 
 
 
+
+             /* Contenedor para la imagen y el texto */
+       .about-container {
+           display: flex; /* Activa el diseño en fila */
+           align-items: center; /* Alinea verticalmente la imagen y el texto */
+           gap: 20px; /* Espacio entre la imagen y el texto */
+       }
+      
+       /* Ajustes para la imagen */
+       .profile-pic {
+           width: 130px; /* Ajusta el tamaño sin distorsión */
+           height: auto; /* Mantiene la proporción original */
+           border-radius: 50%; /* Mantiene la imagen redonda */
+           border: 3px solid #f5b31d; /* Borde dorado */
+           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Sombra suave */
+       }
+      
+       /* Ajustes para el texto */
+       .about-text {
+           flex: 1; /* Ocupa el espacio restante al lado de la imagen */
+           text-align: justify; /* Justifica el texto para un estilo más limpio */
+       }
+
+
       
    </style>
 </head>
@@ -310,23 +334,31 @@
        <div id="about" class="section active">
            <h2 class="highlight">About Me</h2>
 
-           <!-- Aquí añadimos la imagen -->
-           <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/fotocurriculum.jpg" 
-                alt="Jezabel Sánchez Hernández" class="profile-pic">
+           <!-- Nuevo contenedor para la imagen y el texto -->
+           <div class="about-container">
+               <!-- Imagen -->
+               <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/fotocurriculum.jpg" 
+                    alt="Jezabel Sánchez Hernández" class="profile-pic">
 
-           <p>
-               I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-               I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-               a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-               financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-               experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-           </p>
-           <p>
-               I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
-               in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
-               training in data science has given me the technical skills to approach problems from a data-driven perspective.
-           </p>
+               <!-- Texto -->
+               <div class="about-text">
+                   <p>
+                       I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
+                       I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
+                       a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
+                       financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
+                       experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
+                   </p>
+                   <p>
+                       I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
+                       in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
+                       training in data science has given me the technical skills to approach problems from a data-driven perspective.
+                   </p>
+               </div>
+           </div>
        </div>
+   </div>
+
 
 
        <div id="experience" class="section">
