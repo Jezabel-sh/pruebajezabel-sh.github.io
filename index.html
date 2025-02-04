@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jezabel's Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Global Styles */
         body {
@@ -68,6 +69,51 @@
         .button:hover {
             background-color: #0056b3;
         }
+
+        /* Project Cards */
+        .project-card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card h3 {
+            color: #1b3652;
+        }
+
+        .project-card p {
+            color: #555;
+        }
+
+        .project-card .button {
+            margin-top: 10px;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            background-color: #1b3652;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 18px;
+        }
+
+        .panel {
+            padding: 10px;
+            display: none;
+            background-color: #f4f4f4;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -78,96 +124,75 @@
     </header>
 
     <nav>
-        <a href="javascript:void(0)" onclick="showSection('about')">About Me</a>
-        <a href="javascript:void(0)" onclick="showSection('experience')">Experience</a>
-        <a href="javascript:void(0)" onclick="showSection('projects')">Projects</a>
+        <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+        <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
     </nav>
 
     <!-- Sections -->
     <div id="about" class="section active">
         <h2>About Me</h2>
         <p>
-            I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-            I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-            a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-            financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-            experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-        </p>
-        <p>
-            I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
-            in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
-            training in data science has given me the technical skills to approach problems from a data-driven perspective.
+            I have over 15 years of experience in administration, accounting, and financial management...
         </p>
     </div>
-
 
     <div id="experience" class="section">
         <h2>Relevant Experience</h2>
-        <p>
-            Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
-            As an **analyst** in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
-            that helped guide strategic business decisions. My expertise in **accounting and financial control** has provided me with a deep 
-            understanding of financial statements, balance sheets, cash flows, and break-even analysis.
-        </p>
-        <p>
-            As an **analytical accountant**, I worked extensively with **financial data management**, overseeing tasks such as cash flow 
-            analysis, financial forecasting, and tax preparation. My role required me to collaborate with internal teams to ensure that all 
-            financial reports were accurate and up-to-date, allowing for better financial planning and resource allocation. I also played a key 
-            role in managing accounts payable and receivable, billing, and dealing with suppliers and external auditors. Through these tasks, 
-            I honed my ability to handle large sets of financial data, analyze trends, and make data-driven recommendations for improving business 
-            operations and financial efficiency.
-        </p>
-        <p>
-            This year, I made the decision to pivot my career towards **Data Science** and **AI**. I completed a bootcamp in **Data Analytics 
-            and AI**, where I developed a solid understanding of **data manipulation, machine learning, deep learning**, and **data visualization**. 
-            During the bootcamp, I gained hands-on experience with programming languages like **Python** and libraries such as **Pandas, 
-            NumPy, Matplotlib, TensorFlow, and Scikit-learn**, which helped me build models for prediction, classification, and regression tasks.
-        </p>
+        <button class="accordion">Relevant Experience</button>
+        <div class="panel">
+            <p>
+                Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting...
+            </p>
+            <p>
+                As an **analytical accountant**, I worked extensively with **financial data management**, overseeing tasks such as cash flow analysis...
+            </p>
+        </div>
     </div>
 
-
-<div id="projects" class="section">
+    <div id="projects" class="section">
         <h2>My Projects</h2>
-        <div class="project">
+        <div class="project-card">
             <h3>Waste Classification with Deep Learning</h3>
-            <p>
-                Trained a deep learning model using convolutional neural networks (CNN) in Python to classify waste materials 
-                based on images. Implemented fine-tuning techniques to improve the model's accuracy.
-            </p>
+            <p>A deep learning model for classifying waste types using EfficientNet.</p>
             <a href="https://github.com/Jezabel-sh/waste-classification" class="button">View on GitHub</a>
             <a href="https://www.kaggle.com/jezabelsh/waste-classification" class="button">View on Kaggle</a>
         </div>
-        <div class="project">
+        <div class="project-card">
             <h3>Credit Risk Prediction</h3>
-            <p>
-                Developed a machine learning model in Python to analyze and predict credit risk, improving decision-making processes 
-                by evaluating client and transaction data.
-            </p>
+            <p>Developed a machine learning model in Python to analyze and predict credit risk...</p>
             <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
         </div>
-        <div class="project">
+        <div class="project-card">
             <h3>Logistics Optimization</h3>
-            <p>
-                Developed a genetic algorithm in Python to optimize the allocation of orders to trucks, considering mass and volume constraints.
-                Used SQL databases for efficient integration between orders, trucks, and routes.
-            </p>
+            <p>Developed a genetic algorithm to optimize the allocation of orders to trucks...</p>
             <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
         </div>
     </div>
 
-
     <script>
         // JavaScript to show and hide sections
         function showSection(sectionId) {
-            // Hide all sections
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
-
-            // Show the selected section
             const selectedSection = document.getElementById(sectionId);
             selectedSection.classList.add('active');
+        }
+
+        // Accordion functionality for "Relevant Experience"
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
         }
     </script>
 </body>
