@@ -523,16 +523,17 @@
 
 
 
-       /* Animación de máquina de escribir */
-       header p {
+        header p {
            overflow: hidden;
            white-space: nowrap;
            width: 0;
            display: inline-block;
-           animation: typing 7s steps(42, end) forwards;
            border-right: 2px solid #f5b31d; /* Cursor mientras se escribe */
+           animation: 
+               typing 7s steps(42, end) forwards,
+               removeCursor 0s 7s forwards;
        }
-       
+      
        /* Efecto de escritura */
        @keyframes typing {
            from { width: 0; }
@@ -541,14 +542,9 @@
       
        /* Hace que el cursor desaparezca al final */
        @keyframes removeCursor {
-           to { border-right: none; }
+           from { border-right: 2px solid #f5b31d; }
+           to { border-right: transparent; }
        }
-      
-       /* Aplica la eliminación del cursor cuando termine la escritura */
-       header p {
-           animation: typing 7s steps(42, end) forwards, removeCursor 0s 7s forwards;
-       }
-
 
 
 
