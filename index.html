@@ -587,14 +587,16 @@
         }
       
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px) translateX(0); }
+            to { opacity: 1; transform: translateY(0) translateX(0); }
         }
 
 
       
         /* 🔹 Estilos para el contenido de la bienvenida */
         .welcome-content {
+            text-align: center; /* Asegura el centrado */
+            margin: 0 auto; /* Evita desplazamientos */
             max-width: 600px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.1);
