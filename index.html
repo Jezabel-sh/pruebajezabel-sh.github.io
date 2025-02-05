@@ -532,6 +532,8 @@
            animation: 
                typing 7s steps(42, end) forwards,
                blink-caret 0.75s step-end infinite;
+           margin: 0 auto;  /* Para centrar el texto */
+           max-width: fit-content; /* Para que no exceda el ancho del contenido */
        }
       
        /* Efecto de escritura */
@@ -750,13 +752,27 @@
            document.getElementById('loader').style.display = 'none';
        }
 
-      // Código para detener el cursor cuando termine de escribir
-      const text = document.querySelector('header p');
-      setTimeout(() => {
-          text.classList.add('finished');
-      }, 7000); // 7 segundos, el mismo tiempo que dura la animación
-
-
+      // Calcular el ancho exacto del texto y ajustar la animación
+      document.addEventListener('DOMContentLoaded', function() {
+          const text = document.querySelector('header p');
+          const textContent = text.textContent;
+          const style = document.createElement('style');
+          
+          // Actualizar la animación con el ancho exacto
+          style.textContent = `
+              @keyframes typing {
+                  from { width: 0; }
+                  to { width: ${textContent.length}ch; }
+              }
+          `;
+          
+          document.head.appendChild(style);
+          
+          // Código para detener el cursor cuando termine de escribir
+          setTimeout(() => {
+              text.classList.add('finished');
+          }, 7000);
+      });
 
 
       
