@@ -544,7 +544,23 @@
            50% { border-color: transparent; }
        }
 
-
+       /* Elimina el cursor después de 7s (cuando termina la animación) */
+        header p::after {
+           content: "";
+           display: inline-block;
+           border-right: 2px solid #f5b31d;
+           animation: blinkCursor 0.7s infinite;
+       }
+      
+       /* Desaparece el cursor justo cuando termina la escritura */
+       @keyframes typingEnd {
+           to { border-right: none; }
+       }
+      
+       /* Aplicamos la animación de desaparición después de la escritura */
+       header p::after {
+           animation: blinkCursor 0.7s infinite, typingEnd 0s 7s forwards;
+       }
       
 
 
