@@ -563,18 +563,19 @@
 
        /* 🔹 Fondo animado con cambio de colores SOLO en la bienvenida */
        @keyframes backgroundAnimation {
-           0% { background: linear-gradient(135deg, #1b3652, #527191, #75b6ca); }
-           25% { background: linear-gradient(135deg, #527191, #75b6ca, #f5b31d); }
-           50% { background: linear-gradient(135deg, #f5b31d, #ffcc00, #527191); }
-           75% { background: linear-gradient(135deg, #75b6ca, #527191, #1b3652); }
-           100% { background: linear-gradient(135deg, #1b3652, #527191, #75b6ca); }
+           0% { background: linear-gradient(135deg, #1b3652, #2c4f75, #3f6a9a); }  /* Azul oscuro */
+           25% { background: linear-gradient(135deg, #2c4f75, #3f6a9a, #5c92c2); } /* Azul más claro */
+           50% { background: linear-gradient(135deg, #3f6a9a, #5c92c2, #8ccf78); } /* Verde */
+           75% { background: linear-gradient(135deg, #5c92c2, #8ccf78, #f5b31d); } /* Amarillo */
+          100% { background: linear-gradient(135deg, #3f6a9a, #2c4f75, #1b3652); } /* De vuelta al azul */
        }
       
        #welcome-screen {
            position: fixed;
            width: 100%;
            height: 100%;
-           animation: backgroundAnimation 15s infinite alternate ease-in-out;
+           background: linear-gradient(135deg, #1b3652, #2c4f75, #3f6a9a);
+           animation: smoothGradient 30s infinite alternate ease-in-out;
            display: flex;
            justify-content: center;
            align-items: center;
@@ -582,7 +583,7 @@
            color: white;
            z-index: 1000;
            flex-direction: column;
-           transition: background 2s ease-in-out;
+           transition: background 8s ease-in-out;
        }
        
        /* 🔹 Efecto de deslizamiento desde abajo */
