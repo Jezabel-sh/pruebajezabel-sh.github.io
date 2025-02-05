@@ -900,22 +900,31 @@
        });
    </script>
 
-   <script>
-       function enterPortfolio() {
-           document.getElementById("welcome-screen").style.display = "none"; // Oculta la bienvenida
-           let portfolio = document.getElementById("portfolio-content");
-           portfolio.style.visibility = "visible"; // Hace visible el contenido
-           portfolio.style.opacity = "1"; // Asegura que sea completamente visible
-           portfolio.style.transition = "opacity 0.5s ease-in-out"; // Efecto de aparición suave
-      
-           // 🔹 Reiniciar las animaciones AOS al entrar
-           setTimeout(() => {
-               AOS.refreshHard(); // Reinicia AOS completamente
-           }, 100); // Pequeño retraso para asegurar que el contenido ya está visible
+<script>
+   function enterPortfolio() {
+       // Ocultar la pantalla de bienvenida
+       document.getElementById("welcome-screen").style.display = "none";
 
-      
-       }
-   </script>
+       // Mostrar el portafolio
+       let portfolio = document.getElementById("portfolio-content");
+       portfolio.style.visibility = "visible";
+       portfolio.style.opacity = "1";
+       portfolio.style.transition = "opacity 0.5s ease-in-out";
+
+       // 🔹 Reiniciar las animaciones manualmente
+       setTimeout(() => {
+           let animatedElements = document.querySelectorAll("[data-aos]");
+           
+           animatedElements.forEach(el => {
+               el.classList.remove("aos-animate"); // Reiniciar la animación
+               void el.offsetWidth; // Forzar reflow (hack para reiniciar animaciones en CSS)
+           });
+
+           AOS.init({ duration: 1000, offset: 200 }); // Re-inicializar AOS
+       }, 300); // Retraso para asegurarnos de que el contenido ya es visible
+   }
+</script>
+
 
 
       
