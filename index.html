@@ -523,17 +523,26 @@
 
 
 
-       /* Animación de máquina de escribir */
+        /* Animación de máquina de escribir */
        header p {
            overflow: hidden;
-           border-right: 2px solid #f5b31d; /* Simula el cursor */
            white-space: nowrap;
-           width: 0; /* Empieza sin ancho */
-           display: inline-block; /* Para que el cursor se vea correctamente */
-           animation: typing 7s steps(60, end) forwards, blinkCursor 0.7s infinite;
+           width: 0;
+           display: inline-block;
+           animation: typing 7s steps(60, end) forwards;
+           position: relative; /* Necesario para el cursor */
        }
       
-       /* Efecto de escritura progresiva */
+       /* Cursor parpadeante mientras escribe */
+       header p::after {
+           content: "|"; /* Simula el cursor */
+           position: absolute;
+           right: 0;
+           color: #f5b31d;
+           animation: blinkCursor 0.7s infinite;
+       }
+      
+       /* Efecto de escritura */
        @keyframes typing {
            from { width: 0; }
            to { width: 100%; }
@@ -541,28 +550,17 @@
       
        /* Parpadeo del cursor */
        @keyframes blinkCursor {
-           50% { border-color: transparent; }
-       }
-
-       /* Elimina el cursor después de 7s (cuando termina la animación) */
-        header p::after {
-           content: "";
-           display: inline-block;
-           border-right: 2px solid #f5b31d;
-           animation: blinkCursor 0.7s infinite;
+           50% { opacity: 0; }
        }
       
-       /* Desaparece el cursor justo cuando termina la escritura */
-       @keyframes typingEnd {
-           to { border-right: none; }
-       }
-      
-       /* Aplicamos la animación de desaparición después de la escritura */
+       /* Hace que el cursor desaparezca al terminar la animación */
        header p::after {
-           animation: blinkCursor 0.7s infinite, typingEnd 0s 7s forwards;
+           animation: blinkCursor 0.7s infinite, disappearCursor 0s 7s forwards;
        }
       
-
+       @keyframes disappearCursor {
+           to { opacity: 0; }
+       }
 
 
 
