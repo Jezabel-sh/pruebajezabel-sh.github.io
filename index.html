@@ -523,6 +523,28 @@
 
 
 
+       /* Animación de máquina de escribir */
+       header p {
+           overflow: hidden;
+           border-right: 2px solid #f5b31d; /* Simula el cursor */
+           white-space: nowrap;
+           width: 0; /* Empieza sin ancho */
+           display: inline-block; /* Para que el cursor se vea correctamente */
+           animation: typing 3s steps(40, end) forwards, blinkCursor 0.7s infinite;
+       }
+      
+       /* Efecto de escritura progresiva */
+       @keyframes typing {
+           from { width: 0; }
+           to { width: 100%; }
+       }
+      
+       /* Parpadeo del cursor */
+       @keyframes blinkCursor {
+           50% { border-color: transparent; }
+       }
+
+
       
 
 
