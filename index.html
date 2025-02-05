@@ -516,54 +516,6 @@
 
 
 
-
-       /* Mantiene el footer siempre al final */
-       html, body {
-           height: 100%;
-           display: flex;
-           flex-direction: column;
-       }
-      
-       .container {
-           flex: 1;
-       }
-      
-           /* Asegura que el footer no quede "flotando" */
-       footer {
-           text-align: center;
-           padding: 20px;
-           background-color: #223140;
-           color: white;
-           font-size: 14px;
-           width: 100%;
-           margin-top: auto;
-       }
-
-
-
-      /* 🔹 Asegura que el footer se mantenga siempre abajo */
-       html, body {
-           height: 100%;
-           display: flex;
-           flex-direction: column;
-       }
-      
-       /* 🔹 Contenedor que envuelve el contenido */
-       .content-wrapper {
-           flex: 1;
-       }
-      
-       /* 🔹 Footer pegado abajo */
-       footer {
-           text-align: center;
-           padding: 20px;
-           background-color: #223140;
-           color: white;
-           font-size: 14px;
-           width: 100%;
-           margin-top: auto;
-       }
-
       
 
 
@@ -574,10 +526,12 @@
    </style>
 </head>
 <body onload="removeLoader()">
+   <!-- Loader Animation -->
    <div id="loader">
        <div class="loader"></div>
    </div>
 
+   <!-- Header & Menu -->
    <header>
        <h1>Welcome to my Portfolio!</h1>
        <p>Explore my work, experience, and projects.</p>
@@ -589,18 +543,6 @@
        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
    </nav>
-
-   <!-- 🔹 Nuevo contenedor para envolver el contenido -->
-   <div class="content-wrapper">
-      <div id="about" class="section active">...</div>
-      <div id="experience" class="section">...</div>
-      <div id="projects" class="section">...</div>
-      <div id="contact" class="section">...</div>
-   </div>
-   <!-- 🔹 Fin del contenedor -->
-
-
-
 
 <!-- Sections -->
       <div id="about" class="section active">
@@ -735,27 +677,24 @@
           <div class="contact-container">
               <h2 class="highlight">Contact Me</h2>
       
-              <form id="contactForm" action="https://formspree.io/f/tu_codigo" method="POST" class="contact-form">
+              <form class="contact-form">
                   <input type="text" name="name" placeholder="Your Name" required>
                   <input type="email" name="email" placeholder="Your Email" required>
                   <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
                   <button type="submit">Send Message</button>
               </form>
-          <div id="statusMessage"></div>
+          </div>
       </div>
 
 
-      <footer>
-          <p>Connect with me:</p>
-          <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-          <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
-          <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          <p>© 2025 Jezabel Sánchez Hernández</p>
-      </footer>
-
-      </body>
-      </html>
-         
+   <!-- Footer with Social Media Links -->
+   <footer>
+       <p>Connect with me:</p>
+       <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+       <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
+       <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+       <p>© 2025 Jezabel Sánchez Hernández</p>
+   </footer>
 
    <script>
        // JavaScript to show and hide sections
@@ -780,34 +719,5 @@
        });
    </script>
 
-   <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const contactForm = document.getElementById("contactForm");
-          if (contactForm) {
-              contactForm.addEventListener("submit", async function(event) {
-                  event.preventDefault();  // Evita que la página se recargue
-      
-                  const form = event.target;
-                  const formData = new FormData(form);
-      
-                  const response = await fetch(form.action, {
-                      method: form.method,
-                      body: formData,
-                      headers: { "Accept": "application/json" }
-                  });
-      
-                  if (response.ok) {
-                      document.getElementById("statusMessage").innerHTML = "✅ Message sent successfully!";
-                      document.getElementById("statusMessage").style.color = "green";
-                      form.reset();  // Limpia el formulario después de enviarlo
-                  } else {
-                      document.getElementById("statusMessage").innerHTML = "❌ Error sending message. Try again later.";
-                      document.getElementById("statusMessage").style.color = "red";
-                  }
-              });
-          }
-      });
-   </script>
-
-   </body>
-   </html> <!-- ✅ Ahora sí está correcto -->
+</body>
+</html>
