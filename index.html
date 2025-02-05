@@ -566,166 +566,177 @@
        <div class="loader"></div>
    </div>
 
-   <!-- Header & Menu -->
-   <header>
-       <h1>Jezabel Sánchez Hernández</h1>
-       <p>Explore my work, experience, and projects.</p>
-   </header>
+   <!-- Pantalla de Bienvenida -->
+   <div id="welcome-screen">
+       <div class="welcome-content">
+           <h1>Welcome to My Portfolio</h1>
+           <p>Discover my work, experience, and projects.</p>
+           <button onclick="enterPortfolio()" class="button">Enter</button>
+       </div>
+   </div>
 
-   <nav>
-       <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
-       <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
-       <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
-       <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
-   </nav>
+   <!-- Contenido del Portafolio (Oculto al Inicio) -->
+   <div id="portfolio-content" style="display: none;">
+       <!-- Header & Menu -->
+       <header>
+           <h1>Jezabel Sánchez Hernández</h1>
+           <p>Explore my work, experience, and projects.</p>
+       </header>
 
-<!-- Sections -->
-      <div id="about" class="section active">
-          <!-- Contenedor que centra todo -->
-          <div class="about-section">
-              <div class="about-container">
-                  <h2 class="highlight">Who I Am & What I Do</h2> <!-- Ahora está dentro del contenedor -->
-      
-                  <div class="about-content">
-                      <!-- Imagen -->
-                      <div class="profile-pic-container">
-                          <img src="https://res.cloudinary.com/dfpvup7ib/image/upload/v1738772971/fotocurriculum_dlsasq.jpg" 
-                               alt="Jezabel Sánchez Hernández" class="profile-pic">
-                      </div>
-      
-                      <!-- Texto -->
-                      <div class="about-text">
-                          <p>
-                              I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
-                              I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
-                              a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
-                              financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
-                              experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
-                          </p>
-                          <p>
-                              I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
-                              in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
-                              training in data science has given me the technical skills to approach problems from a data-driven perspective.
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-
-
-
-
-      <div id="experience" class="section">
-          <div class="experience-container">
-              <h2 class="highlight">Relevant Experience</h2>
-      
-              <div class="experience-content">
-                  <!-- Imagen 1 -->
-                  <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image1.jpeg" alt="Finance Analysis" class="experience-img">
-      
-                  <!-- Texto -->
-                  <div class="experience-text">
-                      <p>
-                          Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
-                          As an <strong>analyst</strong> in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
-                          that helped guide strategic business decisions.
-                      </p>
-                  </div>
-              </div>
-      
-              <div class="experience-content">
-                  <!-- Imagen 2 -->
-                  <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image2.jpeg" alt="Data Science Work" class="experience-img">
-      
-                  <!-- Texto -->
-                  <div class="experience-text">
-                      <p>
-                          This year, I made the decision to pivot my career towards <strong>Data Science</strong> and <strong>AI</strong>. 
-                          I completed a bootcamp in <strong>Data Analytics and AI</strong>, where I developed a solid understanding of 
-                          <strong>data manipulation, machine learning, and deep learning</strong>.
-                      </p>
-                  </div>
-              </div>
-      
-              <div class="experience-content">
-                  <!-- Imagen 3 -->
-                  <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image3.jpeg" alt="Machine Learning Model" class="experience-img">
-      
-                  <!-- Texto -->
-                  <div class="experience-text">
-                      <p>
-                          During the bootcamp, I gained hands-on experience with programming languages like <strong>Python</strong> 
-                          and libraries such as <strong>Pandas, NumPy, Matplotlib, TensorFlow, and Scikit-learn</strong>, which helped 
-                          me build models for prediction, classification, and regression tasks.
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-
-      <div id="projects" class="section">
-          <div class="projects-container">
-              <h2 class="highlight">My Projects</h2>
-      
-              <div class="project-card" data-aos="fade-up">
-                  <h3>Waste Classification with Deep Learning</h3>
-                  <p>A deep learning model for classifying waste types using EfficientNet.</p>
-                  <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">View on GitHub</a>
-              </div>
-      
-              <div class="project-card" data-aos="fade-up">
-                  <h3>Credit Risk Prediction</h3>
-                  <p>Developed a machine learning model in Python to analyze and predict credit risk.</p>
-                  <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
-              </div>
-      
-              <div class="project-card" data-aos="fade-up">
-                  <h3>Logistics Optimization</h3>
-                  <p>Developed a genetic algorithm to optimize the allocation of orders to trucks.</p>
-                  <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
-              </div>
-
-              <div class="project-card" data-aos="fade-up">
-                  <h3>Global Cost of Living Index: Country-Wise Analysis</h3>
-                  <p>Cost of Living Index analysis by country, highlighting affordability trends and disparities.</p>
-                  <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">View on Kaggle</a>
-              </div>
-      
-              <!-- Work in Progress Section -->
-              <div class="work-in-progress">
-                  🚧 Work in progress! New projects coming soon. 🚧
-              </div>
-      
-              <!-- Upcoming Projects Section -->
-              <div class="upcoming-projects">
-                  <h2 class="highlight">Upcoming Projects</h2>
-                  <ul>
-                      <li>Predictive Modeling for Financial Data</li>
-                      <li>AI-powered Marketing Optimization</li>
-                      <li>Advanced Image Recognition System</li>
-                  </ul>
-                  <p>Stay tuned for these exciting additions!</p>
-              </div>
-          </div>
-      </div>
-
-
-      <div id="contact" class="section">
-          <div class="contact-container">
-              <h2 class="highlight">Contact Me</h2>
-      
-              <form class="contact-form" action="https://formspree.io/f/mgvoyglg" method="POST">
-                  <input type="text" name="name" placeholder="Your Name" required>
-                  <input type="email" name="email" placeholder="Your Email" required>
-                  <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-                  <button type="submit">Send Message</button>
-              </form>
-          </div>
-      </div>
-
+       <nav>
+          <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+          <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+          <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+          <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
+      </nav>
+   
+   <!-- Sections -->
+         <div id="about" class="section active">
+             <!-- Contenedor que centra todo -->
+             <div class="about-section">
+                 <div class="about-container">
+                     <h2 class="highlight">Who I Am & What I Do</h2> <!-- Ahora está dentro del contenedor -->
+         
+                     <div class="about-content">
+                         <!-- Imagen -->
+                         <div class="profile-pic-container">
+                             <img src="https://res.cloudinary.com/dfpvup7ib/image/upload/v1738772971/fotocurriculum_dlsasq.jpg" 
+                                  alt="Jezabel Sánchez Hernández" class="profile-pic">
+                         </div>
+         
+                         <!-- Texto -->
+                         <div class="about-text">
+                             <p>
+                                 I have over 15 years of experience in administration, accounting, and financial management. Throughout my career, 
+                                 I have developed strong skills in financial analysis, cash flow management, and strategic planning. After completing 
+                                 a bootcamp in AI and Data Analytics, I am now applying advanced data techniques to enhance decision-making and optimize 
+                                 financial strategies. Currently, I am pursuing a degree in Applied Data Science, integrating my extensive management 
+                                 experience with cutting-edge technical skills to drive innovation at the intersection of finance and AI.
+                             </p>
+                             <p>
+                                 I am passionate about leveraging data to solve real-world problems and improve business strategies. My experience 
+                                 in accounting and finance has provided me with a strong foundation in working with complex data, while my recent 
+                                 training in data science has given me the technical skills to approach problems from a data-driven perspective.
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+   
+   
+   
+   
+   
+         <div id="experience" class="section">
+             <div class="experience-container">
+                 <h2 class="highlight">Relevant Experience</h2>
+         
+                 <div class="experience-content">
+                     <!-- Imagen 1 -->
+                     <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image1.jpeg" alt="Finance Analysis" class="experience-img">
+         
+                     <!-- Texto -->
+                     <div class="experience-text">
+                         <p>
+                             Over the years, I have built a strong foundation in financial analysis and management, particularly in the field of accounting. 
+                             As an <strong>analyst</strong> in various roles, I was responsible for processing, managing, and interpreting financial data to generate reports 
+                             that helped guide strategic business decisions.
+                         </p>
+                     </div>
+                 </div>
+         
+                 <div class="experience-content">
+                     <!-- Imagen 2 -->
+                     <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image2.jpeg" alt="Data Science Work" class="experience-img">
+         
+                     <!-- Texto -->
+                     <div class="experience-text">
+                         <p>
+                             This year, I made the decision to pivot my career towards <strong>Data Science</strong> and <strong>AI</strong>. 
+                             I completed a bootcamp in <strong>Data Analytics and AI</strong>, where I developed a solid understanding of 
+                             <strong>data manipulation, machine learning, and deep learning</strong>.
+                         </p>
+                     </div>
+                 </div>
+         
+                 <div class="experience-content">
+                     <!-- Imagen 3 -->
+                     <img src="https://raw.githubusercontent.com/Jezabel-sh/jezabel-sh.github.io/refs/heads/main/Image3.jpeg" alt="Machine Learning Model" class="experience-img">
+         
+                     <!-- Texto -->
+                     <div class="experience-text">
+                         <p>
+                             During the bootcamp, I gained hands-on experience with programming languages like <strong>Python</strong> 
+                             and libraries such as <strong>Pandas, NumPy, Matplotlib, TensorFlow, and Scikit-learn</strong>, which helped 
+                             me build models for prediction, classification, and regression tasks.
+                         </p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+   
+   
+         <div id="projects" class="section">
+             <div class="projects-container">
+                 <h2 class="highlight">My Projects</h2>
+         
+                 <div class="project-card" data-aos="fade-up">
+                     <h3>Waste Classification with Deep Learning</h3>
+                     <p>A deep learning model for classifying waste types using EfficientNet.</p>
+                     <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">View on GitHub</a>
+                 </div>
+         
+                 <div class="project-card" data-aos="fade-up">
+                     <h3>Credit Risk Prediction</h3>
+                     <p>Developed a machine learning model in Python to analyze and predict credit risk.</p>
+                     <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
+                 </div>
+         
+                 <div class="project-card" data-aos="fade-up">
+                     <h3>Logistics Optimization</h3>
+                     <p>Developed a genetic algorithm to optimize the allocation of orders to trucks.</p>
+                     <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
+                 </div>
+   
+                 <div class="project-card" data-aos="fade-up">
+                     <h3>Global Cost of Living Index: Country-Wise Analysis</h3>
+                     <p>Cost of Living Index analysis by country, highlighting affordability trends and disparities.</p>
+                     <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">View on Kaggle</a>
+                 </div>
+         
+                 <!-- Work in Progress Section -->
+                 <div class="work-in-progress">
+                     🚧 Work in progress! New projects coming soon. 🚧
+                 </div>
+         
+                 <!-- Upcoming Projects Section -->
+                 <div class="upcoming-projects">
+                     <h2 class="highlight">Upcoming Projects</h2>
+                     <ul>
+                         <li>Predictive Modeling for Financial Data</li>
+                         <li>AI-powered Marketing Optimization</li>
+                         <li>Advanced Image Recognition System</li>
+                     </ul>
+                     <p>Stay tuned for these exciting additions!</p>
+                 </div>
+             </div>
+         </div>
+   
+   
+         <div id="contact" class="section">
+             <div class="contact-container">
+                 <h2 class="highlight">Contact Me</h2>
+         
+                 <form class="contact-form" action="https://formspree.io/f/mgvoyglg" method="POST">
+                     <input type="text" name="name" placeholder="Your Name" required>
+                     <input type="email" name="email" placeholder="Your Email" required>
+                     <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                     <button type="submit">Send Message</button>
+                 </form>
+             </div>
+         </div>
+   
 
    <!-- Footer with Social Media Links -->
    <footer>
