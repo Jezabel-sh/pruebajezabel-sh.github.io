@@ -908,6 +908,12 @@
            portfolio.style.opacity = "1"; // Asegura que sea completamente visible
            portfolio.style.transition = "opacity 0.5s ease-in-out"; // Efecto de aparición suave
       
+           // 🔹 Reiniciar las animaciones AOS al entrar
+           setTimeout(() => {
+               AOS.refreshHard(); // Reinicia AOS completamente
+           }, 100); // Pequeño retraso para asegurar que el contenido ya está visible
+
+      
        }
    </script>
 
