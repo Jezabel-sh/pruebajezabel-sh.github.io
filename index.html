@@ -523,44 +523,32 @@
 
 
 
-        /* Animación de máquina de escribir */
+       /* Animación de máquina de escribir */
        header p {
            overflow: hidden;
            white-space: nowrap;
            width: 0;
            display: inline-block;
            animation: typing 7s steps(60, end) forwards;
-           position: relative; /* Necesario para el cursor */
+           border-right: 2px solid #f5b31d; /* Cursor mientras se escribe */
        }
-      
-       /* Cursor parpadeante mientras escribe */
-       header p::after {
-           content: "|"; /* Simula el cursor */
-           position: absolute;
-           right: 0;
-           color: #f5b31d;
-           animation: blinkCursor 0.7s infinite;
-       }
-      
+       
        /* Efecto de escritura */
        @keyframes typing {
            from { width: 0; }
            to { width: 100%; }
        }
       
-       /* Parpadeo del cursor */
-       @keyframes blinkCursor {
-           50% { opacity: 0; }
+       /* Hace que el cursor desaparezca al final */
+       @keyframes removeCursor {
+           to { border-right: none; }
        }
       
-       /* Hace que el cursor desaparezca al terminar la animación */
-       header p::after {
-           animation: blinkCursor 0.7s infinite, disappearCursor 0s 7s forwards;
+       /* Aplica la eliminación del cursor cuando termine la escritura */
+       header p {
+           animation: typing 7s steps(60, end) forwards, removeCursor 0s 7s forwards;
        }
-      
-       @keyframes disappearCursor {
-           to { opacity: 0; }
-       }
+
 
 
 
