@@ -655,7 +655,7 @@
    </div>
 
    <!-- Contenido del Portafolio (Oculto al Inicio) -->
-   <div id="portfolio-content" style="visibility: hidden;">
+   <div id="portfolio-content" style="display: none;">
        <!-- Header & Menu -->
        <header>
            <h1>Jezabel Sánchez Hernández</h1>
@@ -904,16 +904,15 @@
    function enterPortfolio() {
        document.getElementById("welcome-screen").style.display = "none"; // Oculta la bienvenida
        let portfolio = document.getElementById("portfolio-content");
-       portfolio.style.visibility = "visible"; // Hace visible el contenido
-       portfolio.style.opacity = "1"; // Asegura que sea completamente visible
-       portfolio.style.transition = "opacity 0.5s ease-in-out"; // Efecto de aparición suave
+       portfolio.style.display = "block"; // Volvemos a usar display en lugar de visibility
 
        // 🔹 Reiniciar las animaciones AOS al entrar
        setTimeout(() => {
-           AOS.refreshHard(); // Reinicia AOS completamente
-       }, 100); // Pequeño retraso para asegurar que el contenido ya está visible
+           AOS.refresh(); // Refresca AOS para que detecte los elementos
+       }, 100);
    }
 </script>
+
 
 
 
