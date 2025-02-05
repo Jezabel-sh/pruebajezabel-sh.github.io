@@ -167,12 +167,19 @@
        .work-in-progress {
            text-align: center;
            font-size: 1.2rem;
-           color: #f5b31d;
+           color: #d18b00;
            margin-top: 40px;
            font-weight: normal;
            width: 100%;
            display: flex;
            justify-content: center;
+           animation: fadeEffect 2.5s infinite alternate;
+       }
+
+      /* Animación ligera de opacidad */
+       @keyframes fadeEffect {
+          0% { opacity: 1; }
+          100% { opacity: 0.75; }
        }
 
        /* Upcoming Projects Section */
