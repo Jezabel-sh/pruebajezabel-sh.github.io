@@ -523,15 +523,15 @@
 
 
 
-        header p {
+       header p {
            overflow: hidden;
            white-space: nowrap;
            width: 0;
            display: inline-block;
-           border-right: 2px solid #ffffff; /* Cursor mientras se escribe */
+           border-right: 2px solid #f5b31d;
            animation: 
                typing 7s steps(42, end) forwards,
-               removeCursor 0s 7s forwards;
+               blink-caret 0.75s step-end infinite;
        }
       
        /* Efecto de escritura */
@@ -540,10 +540,16 @@
            to { width: 100%; }
        }
       
-       /* Hace que el cursor desaparezca al final */
-       @keyframes removeCursor {
-           from { border-right: 2px solid #f5b31d; }
-           to { border-right: transparent; }
+       /* Efecto de parpadeo del cursor */
+       @keyframes blink-caret {
+           from, to { border-right-color: transparent }
+           50% { border-right-color: #f5b31d }
+       }
+      
+       /* Detener el parpadeo cuando termine de escribir */
+       header p.finished {
+           border-right: transparent;
+           animation: typing 7s steps(42, end) forwards;
        }
 
 
@@ -744,6 +750,16 @@
            document.getElementById('loader').style.display = 'none';
        }
 
+      // Código para detener el cursor cuando termine de escribir
+      const text = document.querySelector('header p');
+      setTimeout(() => {
+          text.classList.add('finished');
+      }, 7000); // 7 segundos, el mismo tiempo que dura la animación
+
+
+
+
+      
        // Initialize AOS (Animate on Scroll)
        AOS.init({
            duration: 1000,
