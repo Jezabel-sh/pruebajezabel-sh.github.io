@@ -562,10 +562,10 @@
 
 
        /* 🔹 Efecto de brillo sutil en el fondo */
-       @keyframes subtleGlow {
-           0% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
-           50% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 50px rgba(255, 255, 255, 0.2); }
-           100% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+       @keyframes movingGlow {
+           0% { linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 40px rgba(255, 255, 255, 0.05) inset; }
+           50% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 80px rgba(255, 255, 255, 0.2) inset; }
+           100% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 40px rgba(255, 255, 255, 0.05) inset; }
        }
       
        #welcome-screen {
@@ -573,7 +573,7 @@
            width: 100%;
            height: 100%;
            background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75);
-           animation: subtleGlow 8s infinite alternate ease-in-out;
+           animation: movingGlow 10s infinite alternate ease-in-out;
            display: flex;
            justify-content: center;
            align-items: center;
