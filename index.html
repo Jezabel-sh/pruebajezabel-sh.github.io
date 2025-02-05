@@ -516,6 +516,54 @@
 
 
 
+
+       /* Mantiene el footer siempre al final */
+       html, body {
+           height: 100%;
+           display: flex;
+           flex-direction: column;
+       }
+      
+       .container {
+           flex: 1;
+       }
+      
+           /* Asegura que el footer no quede "flotando" */
+       footer {
+           text-align: center;
+           padding: 20px;
+           background-color: #223140;
+           color: white;
+           font-size: 14px;
+           width: 100%;
+           margin-top: auto;
+       }
+
+
+
+      /* 🔹 Asegura que el footer se mantenga siempre abajo */
+       html, body {
+           height: 100%;
+           display: flex;
+           flex-direction: column;
+       }
+      
+       /* 🔹 Contenedor que envuelve el contenido */
+       .content-wrapper {
+           flex: 1;
+       }
+      
+       /* 🔹 Footer pegado abajo */
+       footer {
+           text-align: center;
+           padding: 20px;
+           background-color: #223140;
+           color: white;
+           font-size: 14px;
+           width: 100%;
+           margin-top: auto;
+       }
+
       
 
 
@@ -526,12 +574,10 @@
    </style>
 </head>
 <body onload="removeLoader()">
-   <!-- Loader Animation -->
    <div id="loader">
        <div class="loader"></div>
    </div>
 
-   <!-- Header & Menu -->
    <header>
        <h1>Welcome to my Portfolio!</h1>
        <p>Explore my work, experience, and projects.</p>
@@ -543,6 +589,24 @@
        <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
        <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
    </nav>
+
+   <!-- 🔹 Nuevo contenedor para envolver el contenido -->
+   <div class="content-wrapper">
+      <div id="about" class="section active">...</div>
+      <div id="experience" class="section">...</div>
+      <div id="projects" class="section">...</div>
+      <div id="contact" class="section">...</div>
+   </div>
+   <!-- 🔹 Fin del contenedor -->
+
+   <footer>
+       <p>Connect with me:</p>
+       <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+       <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
+       <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+       <p>© 2025 Jezabel Sánchez Hernández</p>
+   </footer>
+
 
 <!-- Sections -->
       <div id="about" class="section active">
@@ -687,15 +751,6 @@
       </div>
 
 
-   <!-- Footer with Social Media Links -->
-   <footer>
-       <p>Connect with me:</p>
-       <a href="https://github.com/Jezabel-sh" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-       <a href="https://www.kaggle.com/jezabelsh" target="_blank"><i class="fab fa-kaggle"></i> Kaggle</a>
-       <a href="https://www.linkedin.com/in/jezabelsh/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-       <p>© 2025 Jezabel Sánchez Hernández</p>
-   </footer>
-
    <script>
        // JavaScript to show and hide sections
        function showSection(sectionId) {
@@ -748,8 +803,5 @@
       });
    </script>
 
-         
-
-         
-</body>
-</html>
+   </body>
+   </html> <!-- ✅ Ahora sí está correcto -->
