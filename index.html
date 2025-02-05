@@ -173,13 +173,13 @@
            width: 100%;
            display: flex;
            justify-content: center;
-           animation: fadeEffect 2.5s infinite alternate;
+           animation: pulseEffect 1.5s infinite alternate ease-in-out;
        }
 
       /* Animación ligera de opacidad */
        @keyframes fadeEffect {
-          0% { opacity: 1; }
-          100% { opacity: 0.75; }
+          0% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0.70; transform: scale(1.05); }
        }
 
        /* Upcoming Projects Section */
