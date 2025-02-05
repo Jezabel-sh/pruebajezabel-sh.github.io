@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
    <meta charset="UTF-8">
+   <meta name="description" content="Portfolio of Jezabel Sánchez Hernández, specializing in data science, AI, and financial analytics.">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Jezabel's Portfolio</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -303,16 +304,8 @@
            -webkit-font-smoothing: antialiased; /* Suaviza el renderizado del texto */
            -moz-osx-font-smoothing: grayscale;
        }
-       }
-       .profile-pic {
-           width: 100px; /* Ajusta el tamaño de la imagen */
-           height: auto;
-           border-radius: 50%; /* Hace que la imagen sea redonda */
-           display: block;
-           margin: 10px auto; /* Centra la imagen */
-           border: 2px solid #f5b31d; /* Borde dorado */
-           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
-       }
+       
+
 
 
 
@@ -662,7 +655,7 @@
    </div>
 
    <!-- Contenido del Portafolio (Oculto al Inicio) -->
-   <div id="portfolio-content" style="display: none;">
+   <div id="portfolio-content" style="visibility: hidden;">
        <!-- Header & Menu -->
        <header>
            <h1>Jezabel Sánchez Hernández</h1>
@@ -874,10 +867,13 @@
 
       
        // Initialize AOS (Animate on Scroll)
-       AOS.init({
-           duration: 1000,
-           offset: 200,
+       document.addEventListener("DOMContentLoaded", function() {
+           AOS.init({
+               duration: 1000,
+               offset: 200
+           });
        });
+
 
        // 🚀 Formspree AJAX Form Submission (Prevents Redirect)
        document.querySelector(".contact-form").addEventListener("submit", async function(event) {
