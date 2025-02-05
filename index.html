@@ -247,6 +247,9 @@
            background-color: #223140;
            color: white;
            font-size: 14px;
+           width: 100%; /* Se expande en todo el ancho */
+           position: relative; /* Asegura que el contenido no lo solape */
+           bottom: 0; 
        }
 
        footer a {
@@ -263,7 +266,14 @@
        footer p {
            text-align: center;
            width: 100%;
+           margin: 0 auto;
        }
+
+
+      footer {
+           z-index: 100;
+       }
+
 
 
        /* Loader */
