@@ -903,7 +903,11 @@
    <script>
        function enterPortfolio() {
            document.getElementById("welcome-screen").style.display = "none"; // Oculta la bienvenida
-           document.getElementById("portfolio-content").style.display = "block"; // Muestra el portafolio
+           let portfolio = document.getElementById("portfolio-content");
+           portfolio.style.visibility = "visible"; // Hace visible el contenido
+           portfolio.style.opacity = "1"; // Asegura que sea completamente visible
+           portfolio.style.transition = "opacity 0.5s ease-in-out"; // Efecto de aparición suave
+      
        }
    </script>
 
