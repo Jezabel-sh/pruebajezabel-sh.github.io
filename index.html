@@ -750,58 +750,67 @@
            background: #fff;
            animation: laserFade 1.5s linear forwards, colorShift 8s infinite;
            filter: blur(1px);
-           opacity: 1.1;
+           opacity: 1;
        }
       
        @keyframes colorShift {
            0% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #00ffff,
-                   0 0 20px #0099ff,
-                   0 0 25px #0066ff;
+                   0 0 12px #00ffff,
+                   0 0 16px #0099ff,
+                   0 0 20px #0066ff;
            }
            20% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #b19fff,
-                   0 0 20px #9966ff,
-                   0 0 25px #7744ff;
+                   0 0 12px #b19fff,
+                   0 0 16px #9966ff,
+                   0 0 20px #7744ff;
            }
            40% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #ff00ff,
-                   0 0 20px #cc00ff,
-                   0 0 25px #9900ff;
+                   0 0 12px #ff00ff,
+                   0 0 16px #cc00ff,
+                   0 0 20px #9900ff;
            }
            60% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #b19fff,
-                   0 0 20px #9966ff,
-                   0 0 25px #7744ff;
+                   0 0 12px #b19fff,
+                   0 0 16px #9966ff,
+                   0 0 20px #7744ff;
            }
            80% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #00ffff,
-                   0 0 20px #0099ff,
-                   0 0 25px #0066ff;
+                   0 0 12px #00ffff,
+                   0 0 16px #0099ff,
+                   0 0 20px #0066ff;
            }
            100% {
                box-shadow: 
                    0 0 8px #fff,
-                   0 0 15px #00ffff,
-                   0 0 20px #0099ff,
-                   0 0 25px #0066ff;
+                   0 0 12px #00ffff,
+                   0 0 16px #0099ff,
+                   0 0 20px #0066ff;
            }
        }
       
        @keyframes laserFade {
-           0% { opacity: 1; }
-           50% { opacity: 0.8; }
-           100% { opacity: 0; }
+           0% {
+               opacity: 1;
+               transform: rotate(var(--angle)) scaleX(1);
+           }
+           70% {
+               opacity: 0.7;
+               transform: rotate(var(--angle)) scaleX(0.98);
+           }
+           100% {
+               opacity: 0;
+               transform: rotate(var(--angle)) scaleX(0.95);
+           }
        }
       
        /* Aseguramos que el contenido del portfolio ocupe todo el espacio disponible */
@@ -1147,7 +1156,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 0.01) return;
+        if (distance < 0.5) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
@@ -1172,13 +1181,13 @@ document.addEventListener("DOMContentLoaded", function() {
         lastY = currentY;
     }
 
-    function throttledCreateLaserTrail(e) {
-        const now = Date.now();
-        if (now - lastCall >= 0.1) {
-            createLaserTrail(e);
-            lastCall = now;
-        }
-    }
+   function throttledCreateLaserTrail(e) {
+       const now = Date.now();
+       if (now - lastCall >= 2) {
+           createLaserTrail(e);
+           lastCall = now;
+       }
+   }
 
     welcomeScreen.addEventListener("mousemove", throttledCreateLaserTrail);
 
