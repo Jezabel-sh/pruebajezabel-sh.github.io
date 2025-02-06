@@ -665,7 +665,8 @@
 
 
 
-          #welcome-screen .cursor-trail {
+       /* 🔹 Estilos para el efecto de neón del cursor */
+       #welcome-screen .cursor-trail {
            position: absolute;
            width: 10px;
            height: 10px;
@@ -683,6 +684,7 @@
            from { opacity: 1; transform: scale(1); }
            to { opacity: 0; transform: scale(0.5); }
        }
+
 
 
       
@@ -970,10 +972,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const welcomeScreen = document.getElementById("welcome-screen");
     const portfolioContent = document.getElementById("portfolio-content");
-    let cursorActive = true; // Variable para activar/desactivar el rastro
+    let cursorActive = true; // Variable para activar/desactivar el efecto
 
     function createCursorTrail(e) {
-        if (!cursorActive) return; // Evita que el efecto se active después
+        if (!cursorActive) return; // Solo activa el efecto si cursorActive es true
+
         let trail = document.createElement("div");
         trail.classList.add("cursor-trail");
         document.body.appendChild(trail);
@@ -991,18 +994,21 @@ document.addEventListener("DOMContentLoaded", function() {
     // Activa el efecto solo en la pantalla de bienvenida
     welcomeScreen.addEventListener("mousemove", createCursorTrail);
 
-    // Desactiva el efecto cuando se entra al portafolio
+    // Desactiva el efecto al entrar al portafolio
     document.querySelector(".button").addEventListener("click", function() {
         cursorActive = false; // Desactiva el efecto
         welcomeScreen.removeEventListener("mousemove", createCursorTrail); // Elimina el evento
-        welcomeScreen.style.display = "none"; // Oculta la pantalla de bienvenida
-        portfolioContent.style.display = "block"; // Muestra el portafolio
+
+        // Oculta la pantalla de bienvenida y muestra el portafolio
+        welcomeScreen.style.display = "none";
+        portfolioContent.style.display = "block";
 
         // Borra todos los rastros de neón que queden en la pantalla
         document.querySelectorAll(".cursor-trail").forEach(trail => trail.remove());
     });
 });
 </script>
+
 
 
 
