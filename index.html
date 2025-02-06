@@ -816,7 +816,37 @@
            position: relative;
            z-index: 1001;
        }
-            
+
+
+       /* Contenedor principal con la animación */
+       .animated-title {
+           display: inline-block;
+           position: relative;
+           opacity: 0;
+           transform: translateY(30px);
+           animation: slideUpReveal 0.8s ease-out forwards;
+       }
+      
+       /* Animación desde abajo */
+       @keyframes slideUpReveal {
+           0% {
+               opacity: 0;
+               transform: translateY(30px);
+           }
+           100% {
+               opacity: 1;
+               transform: translateY(0);
+           }
+       }
+
+
+
+
+
+
+
+
+      
    </style>
 </head>
 <body onload="removeLoader()">
