@@ -734,12 +734,10 @@
            position: fixed;
            pointer-events: none;
            z-index: 9999;
-           height: 4px;
+           height: 2px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 1.5s linear forwards, colorShift 8s infinite;
-           filter: blur(1px);
-           opacity: 0.8;
+           animation: laserFade 0.3s linear forwards, colorShift 8s infinite;
        }
       
        @keyframes colorShift {
@@ -791,6 +789,10 @@
            0% {
                opacity: 1;
                transform: rotate(var(--angle)) scaleX(1);
+           }
+           70% {
+               opacity: 0.7;
+               transform: rotate(var(--angle)) scaleX(0.98);
            }
            100% {
                opacity: 0;
@@ -1106,6 +1108,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let lastX = 0;
     let lastY = 0;
     let isFirstMove = true;
+    let lastCall = 0;
 
     function createLaserTrail(e) {
         if (!cursorActive) return;
@@ -1121,7 +1124,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 1) return;
+        if (distance < 0.5) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
@@ -1140,16 +1143,15 @@ document.addEventListener("DOMContentLoaded", function() {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 300);
+        }, 1500);
 
         lastX = currentX;
         lastY = currentY;
     }
 
-    let lastCall = 0;
     function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 5) {
+        if (now - lastCall >= 2) {
             createLaserTrail(e);
             lastCall = now;
         }
