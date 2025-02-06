@@ -823,7 +823,9 @@
            display: block;
            position: relative;
            opacity: 0;
-           transform: translateY(30px);
+           transform: translate3d(0, 30px, 0);
+           will-change: transform, opacity;
+           text-rendering: optimizeLegibility;
            animation: slideUpReveal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
        }
       
@@ -831,11 +833,11 @@
        @keyframes slideUpReveal {
            0% {
                opacity: 0;
-               transform: translateY(30px);
+               transform: translate3d(0, 30px, 0);
            }
            100% {
                opacity: 1;
-               transform: translateY(0);
+               transform: translate3d(0, 0, 0);
            }
        }
 
