@@ -668,26 +668,52 @@
        /* 🔹 Estilos para el efecto de neón del cursor */
        #welcome-screen .cursor-trail {
            position: fixed;
-           width: 10px;
-           height: 10px;
-           background: rgba(245, 179, 29, 0.9);
-           border-radius: 50%;
+           width: 12px;
+           height: 12px;
            pointer-events: none;
            z-index: 9999;
            transform: translate(-50%, -50%);
-           animation: fadeOut 0.6s linear forwards;
+           border-radius: 50%;
+           background: rgba(245, 179, 29, 0.8);
+           box-shadow: 
+               0 0 6px #f5b31d,
+               0 0 12px #f5b31d,
+               0 0 24px rgba(245, 179, 29, 0.5);
+           filter: blur(0.5px);
+           animation: laserFade 0.8s ease-out forwards;
        }
       
-       @keyframes fadeOut {
-           0% { 
-               opacity: 1; 
-               transform: translate(-50%, -50%) scale(1); 
-           }
-           100% { 
-               opacity: 0; 
-               transform: translate(-50%, -50%) scale(0.3); 
-           }
+       #welcome-screen .cursor-trail::before {
+           content: '';
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           width: 100%;
+           height: 100%;
+           background: radial-gradient(circle at center, 
+               rgba(245, 179, 29, 0.9) 0%,
+               rgba(245, 179, 29, 0.5) 40%,
+               transparent 70%);
+           border-radius: 50%;
        }
+      
+       @keyframes laserFade {
+           0% {
+               opacity: 1;
+               transform: translate(-50%, -50%) scale(1);
+               filter: blur(0.5px);
+           }
+           50% {
+               opacity: 0.7;
+               transform: translate(-50%, -50%) scale(0.8);
+               filter: blur(1px);
+           }
+           100% {
+               opacity: 0;
+               transform: translate(-50%, -50%) scale(0.2);
+               filter: blur(2px);
+           }
 
 
 
@@ -976,43 +1002,63 @@
 document.addEventListener("DOMContentLoaded", function() {
     const welcomeScreen = document.getElementById("welcome-screen");
     let cursorActive = true;
+    let mouseTimeout;
+    let lastMousePosition = { x: 0, y: 0 };
 
     function createCursorTrail(e) {
         if (!cursorActive) return;
 
+        // Calcular la velocidad del movimiento
+        const speed = Math.hypot(e.clientX - lastMousePosition.x, e.clientY - lastMousePosition.y);
+        lastMousePosition = { x: e.clientX, y: e.clientY };
+
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
+        
+        // Ajustar el tamaño basado en la velocidad
+        const size = Math.min(12 + speed * 0.1, 20);
+        trail.style.width = `${size}px`;
+        trail.style.height = `${size}px`;
+        
         trail.style.left = `${e.clientX}px`;
         trail.style.top = `${e.clientY}px`;
         
         welcomeScreen.appendChild(trail);
         
+        // Limpiar el trail después de la animación
         setTimeout(() => {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 600);
+        }, 800); // Ajustado para coincidir con la duración de la animación
+
+        // Reiniciar el temporizador de inactividad
+        clearTimeout(mouseTimeout);
+        mouseTimeout = setTimeout(() => {
+            const trails = welcomeScreen.querySelectorAll(".cursor-trail");
+            trails.forEach(trail => {
+                trail.style.animationDuration = "1.2s"; // Desaparición más lenta cuando el cursor está quieto
+            });
+        }, 100);
     }
 
-    // Throttle the mousemove event
+    // Throttle el evento mousemove
     let lastCall = 0;
     function throttledCreateCursorTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 20) {
+        if (now - lastCall >= 15) { // Reducido a 15ms para un movimiento más fluido
             createCursorTrail(e);
             lastCall = now;
         }
     }
 
-    // Add trail effect only to welcome screen
     welcomeScreen.addEventListener("mousemove", throttledCreateCursorTrail);
 
-    // Remove effect when clicking explore button
     document.querySelector(".button").addEventListener("click", function() {
         cursorActive = false;
         welcomeScreen.removeEventListener("mousemove", throttledCreateCursorTrail);
+        clearTimeout(mouseTimeout);
         
-        // Remove any remaining trails
         const trails = welcomeScreen.querySelectorAll(".cursor-trail");
         trails.forEach(trail => trail.remove());
     });
