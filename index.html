@@ -784,33 +784,11 @@
            width: 100vw;
            height: 100vh;
            pointer-events: none; /* Para que no bloquee clics */
-           z-index: 9999;
+           z-index: 1001;
            background: transparent;
        }
 
-       .cursor-trail {
-           position: fixed;
-           pointer-events: none;
-           width: 3px; /* Grosor del láser */
-           height: 3px;
-           border-radius: 50%;
-           background: rgba(0, 255, 255, 1); /* Color azul brillante */
-           box-shadow: 
-               0 0 8px rgba(0, 255, 255, 0.9),
-               0 0 16px rgba(0, 255, 255, 0.6),
-           animation: laserFade 0.3s linear forwards;
-       }
-      
-       @keyframes laserFade {
-           0% {
-               opacity: 1;
-               transform: scale(1);
-           }
-           100% {
-               opacity: 0;
-               transform: scale(0.2);
-           }
-       }
+
 
 
       
@@ -1012,134 +990,138 @@
        <p>© 2025 Jezabel Sánchez Hernández</p>
    </footer>
 
-   <script>
-       // JavaScript to show and hide sections
-       function showSection(sectionId) {
-           const sections = document.querySelectorAll('.section');
-           sections.forEach(section => {
-               section.classList.remove('active');
-           });
-           const selectedSection = document.getElementById(sectionId);
-           selectedSection.classList.add('active');
-       }
+  <script>
+    // JavaScript to show and hide sections
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.add('active');
+    }
 
-       // Remove Loader
-       function removeLoader() {
-           document.getElementById('loader').style.display = 'none';
-       }
+    // Remove Loader
+    function removeLoader() {
+        document.getElementById('loader').style.display = 'none';
+    }
 
-      // Calcular el ancho exacto del texto y ajustar la animación
-      document.addEventListener('DOMContentLoaded', function() {
-          const text = document.querySelector('header p');
-          const textContent = text.textContent;
-          const style = document.createElement('style');
-          
-          // Actualizar la animación con el ancho exacto
-          style.textContent = `
-              @keyframes typing {
-                  from { width: 0; }
-                  to { width: ${textContent.length}ch; }
-              }
-          `;
-          
-          document.head.appendChild(style);
-          
-          // Código para detener el cursor cuando termine de escribir
-          setTimeout(() => {
-              text.classList.add('finished');
-          }, 7000);
-      });
+    // Función para entrar al portfolio
+    function enterPortfolio() {
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("portfolio-content").style.display = "block";
+    }
 
-      
+    // Inicialización del efecto láser
+    document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('cursorCanvas');
+        const ctx = canvas.getContext('2d');
+        const points = [];
+        let animationFrameId;
 
-      
-       // Initialize AOS (Animate on Scroll)
-       document.addEventListener("DOMContentLoaded", function() {
-           AOS.init({
-               duration: 1000,
-               offset: 200
-           });
-       });
+        // Ajustar tamaño del canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
+        // Manejar movimiento del mouse
+        document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+            points.push({
+                x: e.clientX,
+                y: e.clientY,
+                age: 0
+            });
+        });
 
-       // 🚀 Formspree AJAX Form Submission (Prevents Redirect)
-       document.querySelector(".contact-form").addEventListener("submit", async function(event) {
-           event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-           const form = event.target;
-           const formData = new FormData(form);
-           
-           try {
-               const response = await fetch(form.action, {
-                   method: form.method,
-                   body: formData,
-                   headers: { "Accept": "application/json" }
-               });
+        // Función de animación
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Actualizar y dibujar puntos
+            for(let i = points.length - 1; i >= 0; i--) {
+                const point = points[i];
+                point.age++;
+                
+                // Eliminar puntos viejos
+                if(point.age > 20) {
+                    points.splice(i, 1);
+                    continue;
+                }
 
-               if (response.ok) {
-                   // Muestra un mensaje de éxito dentro del formulario
-                   form.innerHTML = "<p style='color: #527191; font-size: 18px; text-align: center;'>✅ Message sent successfully! I'll get back to you soon.</p>";
-               } else {
-                   alert("There was a problem. Please try again.");
-               }
-           } catch (error) {
-               alert("There was an error. Please check your internet connection.");
-           }
-       });
-   </script>
+                // Dibujar punto
+                const opacity = 1 - (point.age / 20);
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 255, ${opacity})`;
+                ctx.fill();
 
-<script>
-   function enterPortfolio() {
-       document.getElementById("welcome-screen").style.display = "none";
-       document.getElementById("portfolio-content").style.display = "block";
-   
-       // 🚀 DESACTIVAR EL LÁSER CUANDO SE ENTRA AL PORTFOLIO
-       document.getElementById("welcome-screen").removeEventListener("mousemove", laserEffect);
-   }
+                // Efecto de brillo
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 255, ${opacity * 0.3})`;
+                ctx.fill();
+            }
 
-</script>
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    let mouseMoved = false; // Controla si el usuario ha movido el ratón al menos una vez
-
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-        if (!mouseMoved) {
-            mouseMoved = true; // Ahora sí permitimos el rastro
+            // Continuar animación
+            animationFrameId = requestAnimationFrame(animate);
         }
 
-        const trail = document.createElement("div");
-        trail.className = "cursor-trail";
+        // Iniciar animación
+        animate();
 
-        // Ajustamos la posición para que el láser siga bien el cursor
-        trail.style.left = `${e.clientX - 1.5}px`; 
-        trail.style.top = `${e.clientY - 1.5}px`;
+        // Limpiar animación cuando se oculte la pantalla de bienvenida
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.style.display === 'none') {
+                    cancelAnimationFrame(animationFrameId);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            });
+        });
 
-        document.getElementById("welcome-screen").appendChild(trail);
+        observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
 
-        // Eliminamos los puntos después de 150ms para que no queden acumulados
-        setTimeout(() => {
-            trail.remove();
-        }, 150);
+        // Formspree AJAX Form Submission
+        document.querySelector(".contact-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (response.ok) {
+                    form.innerHTML = "<p style='color: #527191; font-size: 18px; text-align: center;'>✅ Message sent successfully! I'll get back to you soon.</p>";
+                } else {
+                    alert("There was a problem. Please try again.");
+                }
+            } catch (error) {
+                alert("There was an error. Please check your internet connection.");
+            }
+        });
     });
-});
 
 
+   // Initialize AOS
+   document.addEventListener('DOMContentLoaded', function() {
+       AOS.init({
+           duration: 1000,
+           offset: 200
+       });
+   });
 
-   
+
+     
 </script>
-
-
-
-
-
-
-<script>
-document.addEventListener("mousemove", function(event) {
-    console.log("Mouse en:", event.clientX, event.clientY);
-});
-</script>
-
 
 
 
