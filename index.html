@@ -1038,7 +1038,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // Limitar la cantidad de puntos
-        if (points.length > 50) {
+        if (points.length > 25) {
             points.shift();
         }
     });
@@ -1088,7 +1088,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Envejecer los puntos
         for (let i = points.length - 1; i >= 0; i--) {
             points[i].age++;
-            if (points[i].age > 50) {
+            if (points[i].age > 25) {
                 points.splice(i, 1);
             }
         }
