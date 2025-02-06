@@ -816,7 +816,27 @@
            position: relative;
            z-index: 1001;
        }
-            
+
+
+
+
+
+       /* 🔹 Fondo reactivo al cursor con color dinámico */
+       #cursor-glow {
+           position: fixed;
+           width: 300px;
+           height: 300px;
+           border-radius: 50%;
+           pointer-events: none;
+           transform: translate(-50%, -50%);
+           filter: blur(50px);
+           opacity: 0;
+           transition: opacity 0.2s ease-out, background 0.3s ease-out;
+           z-index: 999;
+       }
+
+
+      
    </style>
 </head>
 <body onload="removeLoader()">
@@ -1169,6 +1189,37 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const cursorGlow = document.getElementById("cursor-glow");
+    const welcomeScreen = document.getElementById("welcome-screen");
+
+    // Lista de colores que el cursor usará en su rastro
+    const colors = ["#00ffff", "#0099ff", "#ff00ff", "#cc00ff", "#ff6600"];
+    let colorIndex = 0;
+
+    welcomeScreen.addEventListener("mousemove", function(e) {
+        cursorGlow.style.opacity = "1"; // Aparece cuando el cursor se mueve
+        cursorGlow.style.left = `${e.clientX}px`;
+        cursorGlow.style.top = `${e.clientY}px`;
+
+        // Obtiene el color actual del cursor y lo aplica al fondo
+        const currentColor = colors[colorIndex];
+        cursorGlow.style.background = `radial-gradient(circle, ${currentColor} 0%, rgba(0, 0, 0, 0) 80%)`;
+
+        // Cambia de color progresivamente
+        colorIndex = (colorIndex + 1) % colors.length;
+    });
+
+    welcomeScreen.addEventListener("mouseleave", function() {
+        cursorGlow.style.opacity = "0"; // Se oculta cuando el cursor sale
+    });
+});
+</script>
+
+
+      
 
 
       
