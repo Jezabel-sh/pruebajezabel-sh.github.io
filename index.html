@@ -743,45 +743,45 @@
        @keyframes colorShift {
            0% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #00ffff,
-                   0 0 12px #0099ff,
-                   0 0 14px #0066ff;
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #0099ff,
+                   0 0 10px #0066ff;
            }
            20% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #b19fff,
-                   0 0 12px #9966ff,
-                   0 0 14px #7744ff;
+                   0 0 4px #fff,
+                   0 0 6px #b19fff,
+                   0 0 8px #9966ff,
+                   0 0 10px #7744ff;
            }
            40% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #ff00ff,
-                   0 0 12px #cc00ff,
-                   0 0 14px #9900ff;
+                   0 0 4px #fff,
+                   0 0 6px #ff00ff,
+                   0 0 8px #cc00ff,
+                   0 0 10px #9900ff;
            }
            60% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #b19fff,
-                   0 0 12px #9966ff,
-                   0 0 14px #7744ff;
+                   0 0 4px #fff,
+                   0 0 6px #b19fff,
+                   0 0 8px #9966ff,
+                   0 0 10px #7744ff;
            }
            80% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #00ffff,
-                   0 0 12px #0099ff,
-                   0 0 14px #0066ff;
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #0099ff,
+                   0 0 10px #0066ff;
            }
            100% {
                box-shadow: 
-                   0 0 8px #fff,
-                   0 0 10px #00ffff,
-                   0 0 12px #0099ff,
-                   0 0 14px #0066ff;
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #0099ff,
+                   0 0 10px #0066ff;
            }
        }
       
@@ -816,27 +816,7 @@
            position: relative;
            z-index: 1001;
        }
-
-
-
-
-
-       /* 🔹 Fondo reactivo al cursor con color dinámico */
-       #cursor-glow {
-           position: fixed;
-           width: 350px;
-           height: 350px;
-           border-radius: 50%;
-           pointer-events: none;
-           transform: translate(-50%, -50%);
-           filter: blur(80px);
-           opacity: 0;
-           transition: opacity 0.1s ease-out, background 0.3s ease-out;
-           z-index: 998;
-       }
-
-
-      
+            
    </style>
 </head>
 <body onload="removeLoader()">
@@ -1189,37 +1169,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const cursorGlow = document.getElementById("cursor-glow");
-    const welcomeScreen = document.getElementById("welcome-screen");
-
-    // Lista de colores que el cursor usará en su rastro
-    const colors = ["#00ffff", "#0099ff", "#ff00ff", "#cc00ff", "#ff6600"];
-    let colorIndex = 0;
-
-    welcomeScreen.addEventListener("mousemove", function(e) {
-        cursorGlow.style.opacity = "1"; // Aparece cuando el cursor se mueve
-        cursorGlow.style.left = `${e.clientX}px`;
-        cursorGlow.style.top = `${e.clientY}px`;
-
-        // Obtiene el color actual del cursor y lo aplica al fondo
-        const currentColor = colors[colorIndex];
-        cursorGlow.style.background = `radial-gradient(circle, ${currentColor} 10%, rgba(0, 0, 0, 0) 80%)`;
-
-        // Cambia de color progresivamente
-        colorIndex = (colorIndex + 1) % colors.length;
-    });
-
-    welcomeScreen.addEventListener("mouseleave", function() {
-        cursorGlow.style.opacity = "0"; // Se oculta cuando el cursor sale
-    });
-});
-</script>
-
-
-      
 
 
       
