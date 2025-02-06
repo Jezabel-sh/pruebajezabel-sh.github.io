@@ -751,8 +751,6 @@
            animation: laserFade 0.4s linear forwards, colorShift 8s infinite;
            filter: blur(1px);
            opacity: 1;
-           transition: width 0.1s linear;
-           will-change: width, transform;
        }
       
        @keyframes colorShift {
@@ -1157,39 +1155,44 @@ document.addEventListener("DOMContentLoaded", function() {
     let isFirstMove = true;
     let lastCall = 0;
 
-let currentTrail = null;
+    function createLaserTrail(e) {
+        if (!cursorActive) return;
 
-function createLaserTrail(e) {
-    if (!cursorActive) return;
+        const currentX = e.clientX;
+        const currentY = e.clientY;
 
-    const currentX = e.clientX;
-    const currentY = e.clientY;
+        if (isFirstMove) {
+            lastX = currentX;
+            lastY = currentY;
+            isFirstMove = false;
+            return;
+        }
 
-    if (isFirstMove) {
+        const distance = Math.hypot(currentX - lastX, currentY - lastY);
+        if (distance < 0.1) return;
+
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+
+        const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
+
+        trail.style.width = `${distance}px`;
+        trail.style.left = `${lastX}px`;
+        trail.style.top = `${lastY}px`;
+        trail.style.setProperty('--angle', `${angle}deg`);
+        trail.style.transform = `rotate(${angle}deg)`;
+
+        welcomeScreen.appendChild(trail);
+
+        setTimeout(() => {
+            if (trail && trail.parentNode) {
+                trail.parentNode.removeChild(trail);
+            }
+        }, 400);
+
         lastX = currentX;
         lastY = currentY;
-        isFirstMove = false;
-        return;
     }
-
-    if (!currentTrail) {
-        currentTrail = document.createElement("div");
-        currentTrail.className = "cursor-trail";
-        welcomeScreen.appendChild(currentTrail);
-    }
-
-    const distance = Math.hypot(currentX - lastX, currentY - lastY);
-    const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
-
-    currentTrail.style.width = `${distance}px`;
-    currentTrail.style.left = `${lastX}px`;
-    currentTrail.style.top = `${lastY}px`;
-    currentTrail.style.setProperty('--angle', `${angle}deg`);
-    currentTrail.style.transform = `rotate(${angle}deg)`;
-
-    lastX = currentX;
-    lastY = currentY;
-}
 
    function throttledCreateLaserTrail(e) {
        const now = Date.now();
