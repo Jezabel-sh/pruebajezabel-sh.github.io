@@ -791,15 +791,15 @@
        .cursor-trail {
            position: fixed;
            pointer-events: none;
-           width: 15px; /* Grosor del láser */
-           height: 15px;
+           width: 6px; /* Grosor del láser */
+           height: 6px;
            border-radius: 50%;
-           background: rgba(0, 255, 255, 0.9); /* Color azul brillante */
+           background: rgba(0, 255, 255, 1); /* Color azul brillante */
            box-shadow: 
                0 0 10px rgba(0, 255, 255, 0.8),
                0 0 20px rgba(0, 255, 255, 0.7),
                0 0 40px rgba(0, 255, 255, 0.6); /* Efecto de brillo Star Wars */
-           animation: laserFade 0.5s linear forwards;
+           animation: laserFade 0.2s linear forwards;
        }
       
        @keyframes laserFade {
@@ -1110,8 +1110,8 @@ document.getElementById("welcome-screen").addEventListener("mousemove", function
     trail.className = "cursor-trail";
 
     // Posición del láser
-    trail.style.left = `${e.clientX}px`;
-    trail.style.top = `${e.clientY}px`;
+    trail.style.left = `${e.clientX - 3}px`;
+    trail.style.top = `${e.clientY - 3}px`;
 
     document.getElementById("welcome-screen").appendChild(trail);
 
@@ -1120,7 +1120,7 @@ document.getElementById("welcome-screen").addEventListener("mousemove", function
         if (trail && trail.parentNode) {
             trail.parentNode.removeChild(trail);
         }
-    }, 500); // Ajuste para que desaparezca más lentamente
+    }, 200); // Ajuste para que desaparezca más lentamente
 });
 
 
