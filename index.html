@@ -567,19 +567,15 @@
        }
       
        #welcome-screen {
-           position: fixed;
-           width: 100%;
-           height: 100%;
-           background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75);
-           animation: movingGlow 10s infinite alternate ease-in-out;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           text-align: center;
-           color: white;
-           z-index: 1000;
-           flex-direction: column;
-           transition: background 3s ease-in-out;
+           transition: background 1s ease;
+           animation: backgroundShift 8s infinite;
+       }
+      
+       @keyframes backgroundShift {
+           0% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
+           33% { background: linear-gradient(135deg, #2b1b46, #462b74, #6b4e9c); }
+           66% { background: linear-gradient(135deg, #1b2846, #2b4374, #4e699c); }
+           100% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
        }
 
 
@@ -669,20 +665,42 @@
            position: fixed;
            pointer-events: none;
            z-index: 9999;
-           height: 2px; /* Línea más fina para mayor definición */
+           height: 2px;
            transform-origin: left center;
-           background: #fff; /* Núcleo blanco sólido */
-           box-shadow: 
-               /* Núcleo brillante */
-               0 0 6px #fff,
-               /* Capa interna intensa */
-               0 0 8px #00ffff,
-               /* Resplandor medio */
-               0 0 10px #0099ff,
-               /* Halo exterior */
-               0 0 12px #0066ff;
-           animation: laserFade 0.4s linear forwards;
-           opacity: 1;
+           background: #fff;
+           animation: laserFade 0.3s linear forwards, colorShift 8s infinite;
+       }
+      
+       /* Colores dinámicos para el láser */
+       @keyframes colorShift {
+           0% {
+               box-shadow: 
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #0099ff,
+                   0 0 10px #0066ff;
+           }
+           33% {
+               box-shadow: 
+                   0 0 4px #fff,
+                   0 0 6px #ff00ff,
+                   0 0 8px #cc00ff,
+                   0 0 10px #9900ff;
+           }
+           66% {
+               box-shadow: 
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #9966ff,
+                   0 0 10px #6600ff;
+           }
+           100% {
+               box-shadow: 
+                   0 0 4px #fff,
+                   0 0 6px #00ffff,
+                   0 0 8px #0099ff,
+                   0 0 10px #0066ff;
+           }
        }
       
        @keyframes laserFade {
@@ -694,7 +712,13 @@
                opacity: 0;
                transform: rotate(var(--angle)) scaleX(0.95);
            }
-       } 
+       }
+      
+       /* Ajustamos el color del texto en la pantalla de bienvenida para que contraste */
+       #welcome-screen .welcome-content {
+           color: #fff;
+           text-shadow: 0 0 10px rgba(0,0,0,0.5);
+       }
       
    </style>
 </head>
@@ -997,17 +1021,14 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Solo crear línea si hay suficiente movimiento
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
         if (distance < 1) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
 
-        // Calcular ángulo y longitud
         const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
 
-        // Aplicar posición y rotación
         trail.style.width = `${distance}px`;
         trail.style.left = `${lastX}px`;
         trail.style.top = `${lastY}px`;
@@ -1016,7 +1037,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         welcomeScreen.appendChild(trail);
 
-        // Limpiar después de la animación
         setTimeout(() => {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
@@ -1027,11 +1047,10 @@ document.addEventListener("DOMContentLoaded", function() {
         lastY = currentY;
     }
 
-    // Throttle optimizado
     let lastCall = 0;
     function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 5) { // Intervalo más corto para línea más continua
+        if (now - lastCall >= 5) {
             createLaserTrail(e);
             lastCall = now;
         }
@@ -1051,7 +1070,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-
 
 
 
