@@ -734,10 +734,12 @@
            position: fixed;
            pointer-events: none;
            z-index: 9999;
-           height: 2px;
+           height: 4px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 0.3s linear forwards, colorShift 8s infinite;
+           animation: laserFade 1.5s linear forwards, colorShift 8s infinite;
+           filter: blur(1px);
+           opacity: 0.8;
        }
       
        @keyframes colorShift {
