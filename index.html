@@ -669,51 +669,32 @@
            position: fixed;
            pointer-events: none;
            z-index: 9999;
-           height: 4px; /* Núcleo un poco más grueso */
+           height: 2px; /* Línea más fina para mayor definición */
            transform-origin: left center;
-           /* Gradiente con núcleo blanco brillante */
-           background: linear-gradient(
-               to right,
-               rgba(255, 255, 255, 1) 0%,
-               rgba(245, 179, 29, 1) 20%,
-               rgba(245, 179, 29, 0.8) 100%
-           );
-           /* Múltiples capas de sombra para el efecto de brillo */
+           background: #fff; /* Núcleo blanco sólido */
            box-shadow: 
-               /* Núcleo interno brillante */
-               0 0 4px rgba(255, 255, 255, 0.9),
-               /* Capa media del sable */
-               0 0 8px rgba(245, 179, 29, 0.8),
-               /* Resplandor exterior */
-               0 0 15px rgba(245, 179, 29, 0.6),
-               /* Halo exterior suave */
-               0 0 25px rgba(245, 179, 29, 0.4);
-           animation: laserFade 0.4s ease-out forwards;
-       }
-      
-       /* Pseudo-elemento para añadir más brillo */
-       #welcome-screen .cursor-trail::before {
-           content: '';
-           position: absolute;
-           top: 50%;
-           left: 0;
-           right: 0;
-           height: 1px; /* Línea brillante central */
-           background: rgba(255, 255, 255, 0.9);
-           transform: translateY(-50%);
+               /* Núcleo brillante */
+               0 0 2px #fff,
+               /* Capa interna intensa */
+               0 0 4px #f5b31d,
+               /* Resplandor medio */
+               0 0 6px #f5b31d,
+               /* Halo exterior */
+               0 0 8px #f5b31d;
+           animation: laserFade 0.3s linear forwards;
+           opacity: 1;
        }
       
        @keyframes laserFade {
            0% {
                opacity: 1;
-               transform: rotate(var(--angle)) scaleY(1);
+               transform: rotate(var(--angle)) scaleX(1);
            }
            100% {
                opacity: 0;
-               transform: rotate(var(--angle)) scaleY(0.4);
+               transform: rotate(var(--angle)) scaleX(0.95);
            }
-       }
-
+       } 
       
    </style>
 </head>
@@ -1016,15 +997,18 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        // Solo crear línea si hay suficiente movimiento
+        const distance = Math.hypot(currentX - lastX, currentY - lastY);
+        if (distance < 1) return;
+
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
 
-        // Calcular longitud y ángulo
-        const length = Math.hypot(currentX - lastX, currentY - lastY);
+        // Calcular ángulo y longitud
         const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
 
-        // Posicionar y rotar la línea
-        trail.style.width = `${length}px`;
+        // Aplicar posición y rotación
+        trail.style.width = `${distance}px`;
         trail.style.left = `${lastX}px`;
         trail.style.top = `${lastY}px`;
         trail.style.setProperty('--angle', `${angle}deg`);
@@ -1037,17 +1021,17 @@ document.addEventListener("DOMContentLoaded", function() {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 400);
+        }, 300);
 
         lastX = currentX;
         lastY = currentY;
     }
 
-    // Throttle para suavidad
+    // Throttle optimizado
     let lastCall = 0;
     function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 8) { // Reducido para máxima suavidad
+        if (now - lastCall >= 5) { // Intervalo más corto para línea más continua
             createLaserTrail(e);
             lastCall = now;
         }
