@@ -668,8 +668,8 @@
        /* 🔹 Estilos para el efecto de neón del cursor */
        #welcome-screen .cursor-trail {
            position: fixed;
-           width: 12px;
-           height: 12px;
+           width: 6px;
+           height: 6px;
            pointer-events: none;
            z-index: 9999;
            transform: translate(-50%, -50%);
@@ -1016,7 +1016,7 @@ document.addEventListener("DOMContentLoaded", function() {
         trail.className = "cursor-trail";
         
         // Ajustar el tamaño basado en la velocidad
-        const size = Math.min(12 + speed * 0.1, 20);
+        const size = Math.min(6 + speed * 0.1, 12);
         trail.style.width = `${size}px`;
         trail.style.height = `${size}px`;
         
