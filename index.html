@@ -661,6 +661,30 @@
       
 
 
+
+
+
+
+          #welcome-screen .cursor-trail {
+           position: absolute;
+           width: 10px;
+           height: 10px;
+           background: rgba(245, 179, 29, 0.9); /* Color neón */
+           border-radius: 50%;
+           box-shadow: 0 0 10px rgba(245, 179, 29, 0.8), 
+                       0 0 20px rgba(245, 179, 29, 0.6),
+                       0 0 30px rgba(245, 179, 29, 0.4);
+           pointer-events: none;
+           animation: fadeOut 0.6s linear forwards;
+       }
+      
+       /* 🔹 Animación para que el rastro desaparezca suavemente */
+       @keyframes fadeOut {
+           from { opacity: 1; transform: scale(1); }
+           to { opacity: 0; transform: scale(0.5); }
+       }
+
+
       
    </style>
 </head>
@@ -939,6 +963,40 @@
 </script>
 
 
+
+
+
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const welcomeScreen = document.getElementById("welcome-screen");
+
+    function createCursorTrail(e) {
+        if (!document.body.contains(welcomeScreen)) return; // Evita que el efecto siga activo después
+        let trail = document.createElement("div");
+        trail.classList.add("cursor-trail");
+        document.body.appendChild(trail);
+
+        // Posiciona la partícula en la ubicación del cursor
+        trail.style.left = e.clientX + "px";
+        trail.style.top = e.clientY + "px";
+
+        // Elimina la partícula después de la animación
+        setTimeout(() => {
+            trail.remove();
+        }, 600);
+    }
+
+    // Activa el efecto solo en la pantalla de bienvenida
+    welcomeScreen.addEventListener("mousemove", createCursorTrail);
+
+    // Desactiva el efecto cuando se entra al portafolio
+    document.querySelector(".button").addEventListener("click", function() {
+        welcomeScreen.removeEventListener("mousemove", createCursorTrail);
+        document.getElementById("welcome-screen").style.display = "none"; // Oculta la pantalla de inicio
+        document.getElementById("portfolio-content").style.display = "block"; // Muestra el portafolio
+    });
+});
+</script>
 
 
 
