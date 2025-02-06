@@ -818,32 +818,27 @@
        }
 
 
-       /* Contenedor principal con la animación */
        .animated-title {
-           display: block;
+           display: inline-block;
            position: relative;
            opacity: 0;
-           transform: translate3d(0, 30px, 0);
-           will-change: transform, opacity;
-           text-rendering: optimizeLegibility;
-           animation: slideUpReveal 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+           transform: translateY(30px);
+           animation: slideUpReveal 1s ease-out forwards;
+           transform-origin: center;
        }
       
-       /* Animación desde abajo */
+       /* Animación optimizada */
        @keyframes slideUpReveal {
            0% {
                opacity: 0;
-               transform: translate3d(0, 30px, 0) scale(1);
-           }
-           99% {
-               opacity: 1;
-               transform: translate3d(0, 1px, 0) scale(1.01);
+               transform: translateY(30px);
            }
            100% {
                opacity: 1;
-               transform: translate3d(0, 0, 0) scale(1);
+               transform: translateY(0);
            }
        }
+
 
 
 
@@ -1208,10 +1203,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector(".animated-title").style.animation = "slideUpReveal 1s ease-out forwards";
+        let title = document.querySelector(".animated-title");
+        title.addEventListener("animationend", function() {
+            title.style.transform = "translateY(0)";
+            title.style.opacity = "1";
+        });
     });
 </script>
-      
+
 
 
       
