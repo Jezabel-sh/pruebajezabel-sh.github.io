@@ -740,90 +740,8 @@
 
 
 
+   
 
-       #welcome-screen .cursor-trail {
-           position: fixed;
-           pointer-events: none;
-           z-index: 998;
-           height: 4px;
-           transform-origin: left center;
-           background: #fff;
-           animation: laserFade 0.4s linear forwards, colorShift 8s infinite;
-           filter: blur(1px);
-           opacity: 1;
-       }
-      
-       @keyframes colorShift {
-           0% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #00ffff,
-                   0 0 16px #0099ff,
-                   0 0 20px #0066ff;
-           }
-           20% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #b19fff,
-                   0 0 16px #9966ff,
-                   0 0 20px #7744ff;
-           }
-           40% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #ff00ff,
-                   0 0 16px #cc00ff,
-                   0 0 20px #9900ff;
-           }
-           60% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #b19fff,
-                   0 0 16px #9966ff,
-                   0 0 20px #7744ff;
-           }
-           80% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #00ffff,
-                   0 0 16px #0099ff,
-                   0 0 20px #0066ff;
-           }
-           100% {
-               box-shadow: 
-                   0 0 8px #fff,
-                   0 0 12px #00ffff,
-                   0 0 16px #0099ff,
-                   0 0 20px #0066ff;
-           }
-       }
-      
-       @keyframes laserFade {
-           0% {
-               opacity: 1;
-               transform: rotate(var(--angle)) scaleX(1);
-           }
-           30% {
-               opacity: 0.9;
-               transform: rotate(var(--angle)) scaleX(0.99);
-           }
-           50% {
-               opacity: 0.8;
-               transform: rotate(var(--angle)) scaleX(0.98);
-           }
-           70% {
-               opacity: 0.7;
-               transform: rotate(var(--angle)) scaleX(0.97);
-           }
-           85% {
-               opacity: 0.4;
-               transform: rotate(var(--angle)) scaleX(0.96);
-           }
-           100% {
-               opacity: 0;
-               transform: rotate(var(--angle)) scaleX(0.95);
-           }
-       }
       
        /* Aseguramos que el contenido del portfolio ocupe todo el espacio disponible */
        #portfolio-content {
@@ -1146,73 +1064,60 @@
 
 
 
+<canvas id="cursorCanvas"></canvas>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const welcomeScreen = document.getElementById("welcome-screen");
-    let cursorActive = true;
-    let lastX = 0;
-    let lastY = 0;
-    let isFirstMove = true;
-    let lastCall = 0;
+    const canvas = document.getElementById("cursorCanvas");
+    const ctx = canvas.getContext("2d");
 
-    function createLaserTrail(e) {
-        if (!cursorActive) return;
+    let lastX = null, lastY = null;
+    let trails = []; // Almacena los puntos de la estela
 
-        const currentX = e.clientX;
-        const currentY = e.clientY;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
 
-        if (isFirstMove) {
-            lastX = currentX;
-            lastY = currentY;
-            isFirstMove = false;
-            return;
-        }
-
-        const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 0.1) return;
-
-        const trail = document.createElement("div");
-        trail.className = "cursor-trail";
-
-        const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
-
-        trail.style.width = `${distance}px`;
-        trail.style.left = `${lastX}px`;
-        trail.style.top = `${lastY}px`;
-        trail.style.setProperty('--angle', `${angle}deg`);
-        trail.style.transform = `rotate(${angle}deg)`;
-
-        welcomeScreen.appendChild(trail);
-
-        setTimeout(() => {
-            if (trail && trail.parentNode) {
-                trail.parentNode.removeChild(trail);
+    function drawTrail() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        
+        for (let i = 0; i < trails.length; i++) {
+            const opacity = 1 - (i / trails.length); // Desvanece la estela progresivamente
+            ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
+            ctx.lineWidth = 3;
+            
+            if (i > 0) {
+                ctx.beginPath();
+                ctx.moveTo(trails[i - 1].x, trails[i - 1].y);
+                ctx.lineTo(trails[i].x, trails[i].y);
+                ctx.stroke();
             }
-        }, 400);
-
-        lastX = currentX;
-        lastY = currentY;
+        }
     }
 
-   function throttledCreateLaserTrail(e) {
-       const now = Date.now();
-       if (now - lastCall >= 1) {
-           createLaserTrail(e);
-           lastCall = now;
-       }
-   }
+    function updateTrail(x, y) {
+        trails.push({ x, y });
+        if (trails.length > 20) trails.shift(); // Limita la longitud de la estela
 
-    welcomeScreen.addEventListener("mousemove", throttledCreateLaserTrail);
+        drawTrail();
+    }
 
-    document.querySelector(".button").addEventListener("click", function() {
-        cursorActive = false;
-        welcomeScreen.removeEventListener("mousemove", throttledCreateLaserTrail);
-        const trails = welcomeScreen.querySelectorAll(".cursor-trail");
-        trails.forEach(trail => trail.remove());
+    document.getElementById("welcome-screen").addEventListener("mousemove", function(event) {
+        if (lastX !== null && lastY !== null) {
+            updateTrail(event.clientX, event.clientY);
+        }
+        lastX = event.clientX;
+        lastY = event.clientY;
     });
 
-    welcomeScreen.addEventListener("mouseenter", function() {
-        isFirstMove = true;
+    document.querySelector(".button").addEventListener("click", function() {
+        trails = [];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
 });
 </script>
