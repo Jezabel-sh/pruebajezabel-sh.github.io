@@ -788,6 +788,30 @@
            background: transparent;
        }
 
+       .cursor-trail {
+           position: fixed;
+           pointer-events: none;
+           width: 15px; /* Grosor del láser */
+           height: 15px;
+           border-radius: 50%;
+           background: rgba(0, 255, 255, 0.9); /* Color azul brillante */
+           box-shadow: 
+               0 0 10px rgba(0, 255, 255, 0.8),
+               0 0 20px rgba(0, 255, 255, 0.7),
+               0 0 40px rgba(0, 255, 255, 0.6); /* Efecto de brillo Star Wars */
+           animation: laserFade 0.5s linear forwards;
+       }
+      
+       @keyframes laserFade {
+           0% {
+               opacity: 1;
+               transform: scale(1);
+           }
+           100% {
+               opacity: 0;
+               transform: scale(0.5);
+           }
+       }
 
 
       
@@ -1081,54 +1105,24 @@
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById("cursorCanvas");
-    const ctx = canvas.getContext("2d");
+document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+    const trail = document.createElement("div");
+    trail.className = "cursor-trail";
 
-    let trails = []; // Guarda los puntos de la estela
+    // Posición del láser
+    trail.style.left = `${e.clientX}px`;
+    trail.style.top = `${e.clientY}px`;
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
+    document.getElementById("welcome-screen").appendChild(trail);
 
-    function drawTrail() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.lineJoin = "round";
-        ctx.lineCap = "round";
-
-        if (trails.length < 2) return;
-
-        ctx.beginPath();
-        ctx.moveTo(trails[0].x, trails[0].y);
-
-        for (let i = 1; i < trails.length; i++) {
-            const opacity = 1 - (i / trails.length); // Desvanece la estela progresivamente
-            ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
-            ctx.lineWidth = 3;
-            ctx.lineTo(trails[i].x, trails[i].y);
+    // Eliminar el rastro después de un tiempo
+    setTimeout(() => {
+        if (trail && trail.parentNode) {
+            trail.parentNode.removeChild(trail);
         }
-        ctx.stroke();
-    }
-
-    function updateTrail(x, y) {
-        trails.push({ x, y });
-        if (trails.length > 30) trails.shift(); // Mantiene la longitud de la estela
-
-        drawTrail();
-    }
-
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(event) {
-        updateTrail(event.clientX, event.clientY);
-    });
-
-    document.querySelector(".button").addEventListener("click", function() {
-        trails = [];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
+    }, 500); // Ajuste para que desaparezca más lentamente
 });
+
 
 
 document.addEventListener("mousemove", function(event) {
