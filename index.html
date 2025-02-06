@@ -966,12 +966,14 @@
 
 
 
-      <script>
+<script>
 document.addEventListener("DOMContentLoaded", function() {
     const welcomeScreen = document.getElementById("welcome-screen");
+    const portfolioContent = document.getElementById("portfolio-content");
+    let cursorActive = true; // Variable para activar/desactivar el rastro
 
     function createCursorTrail(e) {
-        if (!document.body.contains(welcomeScreen)) return; // Evita que el efecto siga activo después
+        if (!cursorActive) return; // Evita que el efecto se active después
         let trail = document.createElement("div");
         trail.classList.add("cursor-trail");
         document.body.appendChild(trail);
@@ -991,12 +993,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Desactiva el efecto cuando se entra al portafolio
     document.querySelector(".button").addEventListener("click", function() {
-        welcomeScreen.removeEventListener("mousemove", createCursorTrail);
-        document.getElementById("welcome-screen").style.display = "none"; // Oculta la pantalla de inicio
-        document.getElementById("portfolio-content").style.display = "block"; // Muestra el portafolio
+        cursorActive = false; // Desactiva el efecto
+        welcomeScreen.removeEventListener("mousemove", createCursorTrail); // Elimina el evento
+        welcomeScreen.style.display = "none"; // Oculta la pantalla de bienvenida
+        portfolioContent.style.display = "block"; // Muestra el portafolio
+
+        // Borra todos los rastros de neón que queden en la pantalla
+        document.querySelectorAll(".cursor-trail").forEach(trail => trail.remove());
     });
 });
 </script>
+
 
 
 
