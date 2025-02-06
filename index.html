@@ -748,7 +748,7 @@
            height: 4px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 1.5s linear forwards, colorShift 8s infinite;
+           animation: laserFade 0.8s linear forwards, colorShift 8s infinite;
            filter: blur(1px);
            opacity: 1;
        }
@@ -1080,6 +1080,7 @@
           }, 7000);
       });
 
+      
 
       
        // Initialize AOS (Animate on Scroll)
@@ -1175,7 +1176,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 1500);
+        }, 800);
 
         lastX = currentX;
         lastY = currentY;
