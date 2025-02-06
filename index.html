@@ -785,6 +785,7 @@
            height: 100vh;
            pointer-events: none; /* Para que no bloquee clics */
            z-index: 9999;
+           background: transparent;
        }
 
 
@@ -1087,7 +1088,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const ctx = canvas.getContext("2d");
 
     let trails = []; // Guarda los puntos de la estela
-    let isDrawing = false; // Para evitar errores en el primer movimiento
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -1109,42 +1109,54 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i = 1; i < trails.length; i++) {
             const opacity = 1 - (i / trails.length); // Desvanece la estela progresivamente
             ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
-            ctx.lineWidth = 4; // Ajusta el grosor del láser
+            ctx.lineWidth = 3;
             ctx.lineTo(trails[i].x, trails[i].y);
         }
         ctx.stroke();
     }
 
     function updateTrail(x, y) {
-        if (!isDrawing) return;
-        
         trails.push({ x, y });
-        if (trails.length > 20) trails.shift(); // Limita la longitud de la estela
+        if (trails.length > 30) trails.shift(); // Mantiene la longitud de la estela
 
-        requestAnimationFrame(drawTrail); // Redibuja suavemente
+        drawTrail();
     }
 
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(event) {
-        isDrawing = true;
+    document.addEventListener("mousemove", function(event) {
         updateTrail(event.clientX, event.clientY);
     });
 
-    // Limpia la estela al entrar al portfolio
     document.querySelector(".button").addEventListener("click", function() {
-        isDrawing = false;
         trails = [];
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
+});
 
-    // Asegurar que el evento comienza correctamente
-    document.getElementById("welcome-screen").addEventListener("mouseenter", function() {
-        isDrawing = true;
-    });
 
-    document.getElementById("welcome-screen").addEventListener("mouseleave", function() {
-        isDrawing = false;
-        trails = [];
-    });
+document.addEventListener("mousemove", function(event) {
+    const canvas = document.getElementById("cursorCanvas");
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
+    ctx.beginPath();
+    ctx.arc(event.clientX, event.clientY, 5, 0, Math.PI * 2);
+    ctx.fill();
+});
+
+
+
+
+   
+</script>
+
+
+
+
+
+
+<script>
+document.addEventListener("mousemove", function(event) {
+    console.log("Mouse en:", event.clientX, event.clientY);
 });
 </script>
 
