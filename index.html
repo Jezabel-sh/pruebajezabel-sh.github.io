@@ -667,22 +667,26 @@
 
        /* 🔹 Estilos para el efecto de neón del cursor */
        #welcome-screen .cursor-trail {
-           position: absolute;
+           position: fixed;
            width: 10px;
            height: 10px;
-           background: rgba(245, 179, 29, 0.9); /* Color neón */
+           background: rgba(245, 179, 29, 0.9);
            border-radius: 50%;
-           box-shadow: 0 0 10px rgba(245, 179, 29, 0.8), 
-                       0 0 20px rgba(245, 179, 29, 0.6),
-                       0 0 30px rgba(245, 179, 29, 0.4);
            pointer-events: none;
+           z-index: 9999;
+           transform: translate(-50%, -50%);
            animation: fadeOut 0.6s linear forwards;
        }
       
-       /* 🔹 Animación para que el rastro desaparezca suavemente */
        @keyframes fadeOut {
-           from { opacity: 1; transform: scale(1); }
-           to { opacity: 0; transform: scale(0.5); }
+           0% { 
+               opacity: 1; 
+               transform: translate(-50%, -50%) scale(1); 
+           }
+           100% { 
+               opacity: 0; 
+               transform: translate(-50%, -50%) scale(0.3); 
+           }
        }
 
 
@@ -971,40 +975,46 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const welcomeScreen = document.getElementById("welcome-screen");
-    const portfolioContent = document.getElementById("portfolio-content");
-    let cursorActive = true; // Variable para activar/desactivar el efecto
+    let cursorActive = true;
 
     function createCursorTrail(e) {
-        if (!cursorActive) return; // Solo activa el efecto si cursorActive es true
+        if (!cursorActive) return;
 
-        let trail = document.createElement("div");
-        trail.classList.add("cursor-trail");
-        document.body.appendChild(trail);
-
-        // Posiciona la partícula en la ubicación del cursor
-        trail.style.left = e.clientX + "px";
-        trail.style.top = e.clientY + "px";
-
-        // Elimina la partícula después de la animación
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+        trail.style.left = `${e.clientX}px`;
+        trail.style.top = `${e.clientY}px`;
+        
+        welcomeScreen.appendChild(trail);
+        
         setTimeout(() => {
-            trail.remove();
+            if (trail && trail.parentNode) {
+                trail.parentNode.removeChild(trail);
+            }
         }, 600);
     }
 
-    // Activa el efecto solo en la pantalla de bienvenida
-    welcomeScreen.addEventListener("mousemove", createCursorTrail);
+    // Throttle the mousemove event
+    let lastCall = 0;
+    function throttledCreateCursorTrail(e) {
+        const now = Date.now();
+        if (now - lastCall >= 20) {
+            createCursorTrail(e);
+            lastCall = now;
+        }
+    }
 
-    // Desactiva el efecto al entrar al portafolio
+    // Add trail effect only to welcome screen
+    welcomeScreen.addEventListener("mousemove", throttledCreateCursorTrail);
+
+    // Remove effect when clicking explore button
     document.querySelector(".button").addEventListener("click", function() {
-        cursorActive = false; // Desactiva el efecto
-        welcomeScreen.removeEventListener("mousemove", createCursorTrail); // Elimina el evento
-
-        // Oculta la pantalla de bienvenida y muestra el portafolio
-        welcomeScreen.style.display = "none";
-        portfolioContent.style.display = "block";
-
-        // Borra todos los rastros de neón que queden en la pantalla
-        document.querySelectorAll(".cursor-trail").forEach(trail => trail.remove());
+        cursorActive = false;
+        welcomeScreen.removeEventListener("mousemove", throttledCreateCursorTrail);
+        
+        // Remove any remaining trails
+        const trails = welcomeScreen.querySelectorAll(".cursor-trail");
+        trails.forEach(trail => trail.remove());
     });
 });
 </script>
