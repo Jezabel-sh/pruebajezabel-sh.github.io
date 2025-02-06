@@ -665,36 +665,54 @@
 
 
 
-       /* 🔹 Estilos para el efecto de neón del cursor */
        #welcome-screen .cursor-trail {
            position: fixed;
            pointer-events: none;
            z-index: 9999;
+           height: 4px; /* Núcleo un poco más grueso */
+           transform-origin: left center;
+           /* Gradiente con núcleo blanco brillante */
            background: linear-gradient(
                to right,
-               rgba(245, 179, 29, 0.8),
-               rgba(245, 179, 29, 0.4)
+               rgba(255, 255, 255, 1) 0%,
+               rgba(245, 179, 29, 1) 20%,
+               rgba(245, 179, 29, 0.8) 100%
            );
-           height: 3px; /* Grosor de la línea */
-           filter: blur(0.5px);
-           transform-origin: left center;
+           /* Múltiples capas de sombra para el efecto de brillo */
            box-shadow: 
-               0 0 4px #f5b31d,
-               0 0 8px rgba(245, 179, 29, 0.5);
-           animation: laserFade 0.5s ease-out forwards;
+               /* Núcleo interno brillante */
+               0 0 4px rgba(255, 255, 255, 0.9),
+               /* Capa media del sable */
+               0 0 8px rgba(245, 179, 29, 0.8),
+               /* Resplandor exterior */
+               0 0 15px rgba(245, 179, 29, 0.6),
+               /* Halo exterior suave */
+               0 0 25px rgba(245, 179, 29, 0.4);
+           animation: laserFade 0.4s ease-out forwards;
+       }
+      
+       /* Pseudo-elemento para añadir más brillo */
+       #welcome-screen .cursor-trail::before {
+           content: '';
+           position: absolute;
+           top: 50%;
+           left: 0;
+           right: 0;
+           height: 1px; /* Línea brillante central */
+           background: rgba(255, 255, 255, 0.9);
+           transform: translateY(-50%);
        }
       
        @keyframes laserFade {
            0% {
                opacity: 1;
-               filter: blur(0.5px);
+               transform: rotate(var(--angle)) scaleY(1);
            }
            100% {
                opacity: 0;
-               filter: blur(2px);
+               transform: rotate(var(--angle)) scaleY(0.4);
            }
        }
-
 
       
    </style>
@@ -1001,7 +1019,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
 
-        // Calcular la longitud y ángulo de la línea
+        // Calcular longitud y ángulo
         const length = Math.hypot(currentX - lastX, currentY - lastY);
         const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
 
@@ -1009,26 +1027,27 @@ document.addEventListener("DOMContentLoaded", function() {
         trail.style.width = `${length}px`;
         trail.style.left = `${lastX}px`;
         trail.style.top = `${lastY}px`;
+        trail.style.setProperty('--angle', `${angle}deg`);
         trail.style.transform = `rotate(${angle}deg)`;
 
         welcomeScreen.appendChild(trail);
 
-        // Limpiar el trail después de la animación
+        // Limpiar después de la animación
         setTimeout(() => {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 500);
+        }, 400);
 
         lastX = currentX;
         lastY = currentY;
     }
 
-    // Throttle el evento mousemove
+    // Throttle para suavidad
     let lastCall = 0;
     function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 10) { // Reducido para mayor suavidad
+        if (now - lastCall >= 8) { // Reducido para máxima suavidad
             createLaserTrail(e);
             lastCall = now;
         }
@@ -1036,7 +1055,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     welcomeScreen.addEventListener("mousemove", throttledCreateLaserTrail);
 
-    // Limpiar cuando se hace clic en el botón
     document.querySelector(".button").addEventListener("click", function() {
         cursorActive = false;
         welcomeScreen.removeEventListener("mousemove", throttledCreateLaserTrail);
@@ -1044,7 +1062,6 @@ document.addEventListener("DOMContentLoaded", function() {
         trails.forEach(trail => trail.remove());
     });
 
-    // Reiniciar lastX y lastY cuando el mouse vuelve a entrar
     welcomeScreen.addEventListener("mouseenter", function() {
         isFirstMove = true;
     });
