@@ -791,15 +791,14 @@
        .cursor-trail {
            position: fixed;
            pointer-events: none;
-           width: 6px; /* Grosor del láser */
-           height: 6px;
+           width: 3px; /* Grosor del láser */
+           height: 3px;
            border-radius: 50%;
            background: rgba(0, 255, 255, 1); /* Color azul brillante */
            box-shadow: 
-               0 0 10px rgba(0, 255, 255, 0.8),
-               0 0 20px rgba(0, 255, 255, 0.7),
-               0 0 40px rgba(0, 255, 255, 0.6); /* Efecto de brillo Star Wars */
-           animation: laserFade 0.2s linear forwards;
+               0 0 8px rgba(0, 255, 255, 0.9),
+               0 0 16px rgba(0, 255, 255, 0.6),
+           animation: laserFade 0.3s linear forwards;
        }
       
        @keyframes laserFade {
@@ -809,7 +808,7 @@
            }
            100% {
                opacity: 0;
-               transform: scale(0.5);
+               transform: scale(0.2);
            }
        }
 
@@ -1101,40 +1100,29 @@
 
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    let mouseMoved = false; // Controla si el usuario ha movido el ratón al menos una vez
 
-
-
-<script>
-document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-    const trail = document.createElement("div");
-    trail.className = "cursor-trail";
-
-    // Posición del láser
-    trail.style.left = `${e.clientX - 3}px`;
-    trail.style.top = `${e.clientY - 3}px`;
-
-    document.getElementById("welcome-screen").appendChild(trail);
-
-    // Eliminar el rastro después de un tiempo
-    setTimeout(() => {
-        if (trail && trail.parentNode) {
-            trail.parentNode.removeChild(trail);
+    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+        if (!mouseMoved) {
+            mouseMoved = true; // Ahora sí permitimos el rastro
         }
-    }, 200); // Ajuste para que desaparezca más lentamente
+
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+
+        // Ajustamos la posición para que el láser siga bien el cursor
+        trail.style.left = `${e.clientX - 1.5}px`; 
+        trail.style.top = `${e.clientY - 1.5}px`;
+
+        document.getElementById("welcome-screen").appendChild(trail);
+
+        // Eliminamos los puntos después de 150ms para que no queden acumulados
+        setTimeout(() => {
+            trail.remove();
+        }, 150);
+    });
 });
-
-
-
-document.addEventListener("mousemove", function(event) {
-    const canvas = document.getElementById("cursorCanvas");
-    const ctx = canvas.getContext("2d");
-
-    ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
-    ctx.beginPath();
-    ctx.arc(event.clientX, event.clientY, 5, 0, Math.PI * 2);
-    ctx.fill();
-});
-
 
 
 
