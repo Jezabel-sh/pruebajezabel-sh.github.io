@@ -1169,7 +1169,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 0.2) return;
+        if (distance < 0.1) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
@@ -1188,7 +1188,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 600);
+        }, 400);
 
         lastX = currentX;
         lastY = currentY;
