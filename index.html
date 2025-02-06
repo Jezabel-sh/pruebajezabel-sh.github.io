@@ -748,7 +748,7 @@
            height: 4px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 0.6s linear forwards, colorShift 8s infinite;
+           animation: laserFade 0.4s linear forwards, colorShift 8s infinite;
            filter: blur(1px);
            opacity: 1;
        }
@@ -803,13 +803,9 @@
                opacity: 1;
                transform: rotate(var(--angle)) scaleX(1);
            }
-           70% {
-               opacity: 0.7;
-               transform: rotate(var(--angle)) scaleX(0.98);
-           }
            100% {
                opacity: 0;
-               transform: rotate(var(--angle)) scaleX(0.95);
+               transform: rotate(var(--angle)) scaleX(1);  // Mantiene el scale constante
            }
        }
       
@@ -1157,7 +1153,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 5) return;
+        if (distance < 0.2) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
@@ -1184,7 +1180,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
    function throttledCreateLaserTrail(e) {
        const now = Date.now();
-       if (now - lastCall >= 15) {
+       if (now - lastCall >= 1) {
            createLaserTrail(e);
            lastCall = now;
        }
