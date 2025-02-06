@@ -745,12 +745,12 @@
            position: fixed;
            pointer-events: none;
            z-index: 998;
-           height: 4px;
+           height: 3px;
            transform-origin: left center;
            background: #fff;
            animation: laserFade 0.8s linear forwards, colorShift 8s infinite;
-           filter: blur(1px);
-           opacity: 0.8;
+           filter: blur(2px);
+           opacity: 0.9;
        }
       
        @keyframes colorShift {
@@ -1156,7 +1156,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const distance = Math.hypot(currentX - lastX, currentY - lastY);
-        if (distance < 0.5) return;
+        if (distance < 0.1) return;
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
@@ -1183,7 +1183,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 2) {
+        if (now - lastCall >= 1) {
             createLaserTrail(e);
             lastCall = now;
         }
