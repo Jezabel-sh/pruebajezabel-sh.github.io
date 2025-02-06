@@ -1066,15 +1066,13 @@
 
 <script>
    function enterPortfolio() {
-       document.getElementById("welcome-screen").style.display = "none"; // Oculta la bienvenida
-       let portfolio = document.getElementById("portfolio-content");
-       portfolio.style.display = "block"; // Volvemos a usar display en lugar de visibility
-
-       // 🔹 Reiniciar las animaciones AOS al entrar
-       setTimeout(() => {
-           AOS.refresh(); // Refresca AOS para que detecte los elementos
-       }, 100);
+       document.getElementById("welcome-screen").style.display = "none";
+       document.getElementById("portfolio-content").style.display = "block";
+   
+       // 🚀 DESACTIVAR EL LÁSER CUANDO SE ENTRA AL PORTFOLIO
+       document.getElementById("welcome-screen").removeEventListener("mousemove", laserEffect);
    }
+
 </script>
 
 
@@ -1122,7 +1120,7 @@ document.addEventListener("DOMContentLoaded", function() {
         drawTrail();
     }
 
-    document.addEventListener("mousemove", function(event) {
+    document.getElementById("welcome-screen").addEventListener("mousemove", function(event) {
         updateTrail(event.clientX, event.clientY);
     });
 
