@@ -668,53 +668,32 @@
        /* 🔹 Estilos para el efecto de neón del cursor */
        #welcome-screen .cursor-trail {
            position: fixed;
-           width: 4px;
-           height: 4px;
            pointer-events: none;
            z-index: 9999;
-           transform: translate(-50%, -50%);
-           border-radius: 50%;
-           background: rgba(245, 179, 29, 0.8);
-           box-shadow: 
-               0 0 6px #f5b31d,
-               0 0 12px #f5b31d,
-               0 0 24px rgba(245, 179, 29, 0.5);
+           background: linear-gradient(
+               to right,
+               rgba(245, 179, 29, 0.8),
+               rgba(245, 179, 29, 0.4)
+           );
+           height: 3px; /* Grosor de la línea */
            filter: blur(0.5px);
-           animation: laserFade 0.8s ease-out forwards;
-       }
-      
-       #welcome-screen .cursor-trail::before {
-           content: '';
-           position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           width: 100%;
-           height: 100%;
-           background: radial-gradient(circle at center, 
-               rgba(245, 179, 29, 0.9) 0%,
-               rgba(245, 179, 29, 0.5) 40%,
-               transparent 70%);
-           border-radius: 50%;
+           transform-origin: left center;
+           box-shadow: 
+               0 0 4px #f5b31d,
+               0 0 8px rgba(245, 179, 29, 0.5);
+           animation: laserFade 0.5s ease-out forwards;
        }
       
        @keyframes laserFade {
            0% {
                opacity: 1;
-               transform: translate(-50%, -50%) scale(1);
                filter: blur(0.5px);
-           }
-           50% {
-               opacity: 0.7;
-               transform: translate(-50%, -50%) scale(0.8);
-               filter: blur(1px);
            }
            100% {
                opacity: 0;
-               transform: translate(-50%, -50%) scale(0.2);
                filter: blur(2px);
            }
-
+       }
 
 
       
@@ -1002,65 +981,72 @@
 document.addEventListener("DOMContentLoaded", function() {
     const welcomeScreen = document.getElementById("welcome-screen");
     let cursorActive = true;
-    let mouseTimeout;
-    let lastMousePosition = { x: 0, y: 0 };
+    let lastX = 0;
+    let lastY = 0;
+    let isFirstMove = true;
 
-    function createCursorTrail(e) {
+    function createLaserTrail(e) {
         if (!cursorActive) return;
 
-        // Calcular la velocidad del movimiento
-        const speed = Math.hypot(e.clientX - lastMousePosition.x, e.clientY - lastMousePosition.y);
-        lastMousePosition = { x: e.clientX, y: e.clientY };
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+
+        if (isFirstMove) {
+            lastX = currentX;
+            lastY = currentY;
+            isFirstMove = false;
+            return;
+        }
 
         const trail = document.createElement("div");
         trail.className = "cursor-trail";
-        
-        // Ajustar el tamaño basado en la velocidad
-        const size = Math.min(4 + speed * 0.1, 7);
-        trail.style.width = `${size}px`;
-        trail.style.height = `${size}px`;
-        
-        trail.style.left = `${e.clientX}px`;
-        trail.style.top = `${e.clientY}px`;
-        
+
+        // Calcular la longitud y ángulo de la línea
+        const length = Math.hypot(currentX - lastX, currentY - lastY);
+        const angle = Math.atan2(currentY - lastY, currentX - lastX) * 180 / Math.PI;
+
+        // Posicionar y rotar la línea
+        trail.style.width = `${length}px`;
+        trail.style.left = `${lastX}px`;
+        trail.style.top = `${lastY}px`;
+        trail.style.transform = `rotate(${angle}deg)`;
+
         welcomeScreen.appendChild(trail);
-        
+
         // Limpiar el trail después de la animación
         setTimeout(() => {
             if (trail && trail.parentNode) {
                 trail.parentNode.removeChild(trail);
             }
-        }, 800); // Ajustado para coincidir con la duración de la animación
+        }, 500);
 
-        // Reiniciar el temporizador de inactividad
-        clearTimeout(mouseTimeout);
-        mouseTimeout = setTimeout(() => {
-            const trails = welcomeScreen.querySelectorAll(".cursor-trail");
-            trails.forEach(trail => {
-                trail.style.animationDuration = "1.2s"; // Desaparición más lenta cuando el cursor está quieto
-            });
-        }, 100);
+        lastX = currentX;
+        lastY = currentY;
     }
 
     // Throttle el evento mousemove
     let lastCall = 0;
-    function throttledCreateCursorTrail(e) {
+    function throttledCreateLaserTrail(e) {
         const now = Date.now();
-        if (now - lastCall >= 15) { // Reducido a 15ms para un movimiento más fluido
-            createCursorTrail(e);
+        if (now - lastCall >= 10) { // Reducido para mayor suavidad
+            createLaserTrail(e);
             lastCall = now;
         }
     }
 
-    welcomeScreen.addEventListener("mousemove", throttledCreateCursorTrail);
+    welcomeScreen.addEventListener("mousemove", throttledCreateLaserTrail);
 
+    // Limpiar cuando se hace clic en el botón
     document.querySelector(".button").addEventListener("click", function() {
         cursorActive = false;
-        welcomeScreen.removeEventListener("mousemove", throttledCreateCursorTrail);
-        clearTimeout(mouseTimeout);
-        
+        welcomeScreen.removeEventListener("mousemove", throttledCreateLaserTrail);
         const trails = welcomeScreen.querySelectorAll(".cursor-trail");
         trails.forEach(trail => trail.remove());
+    });
+
+    // Reiniciar lastX y lastY cuando el mouse vuelve a entrar
+    welcomeScreen.addEventListener("mouseenter", function() {
+        isFirstMove = true;
     });
 });
 </script>
