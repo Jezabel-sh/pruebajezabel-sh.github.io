@@ -776,6 +776,21 @@
        }
 
 
+
+       #cursorCanvas {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100vw;
+           height: 100vh;
+           pointer-events: none; /* Para que no bloquee clics */
+           z-index: 9999;
+       }
+
+
+
+      
+
       
    </style>
 </head>
@@ -1072,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const ctx = canvas.getContext("2d");
 
     let lastX = null, lastY = null;
-    let trails = []; // Almacena los puntos de la estela
+    let trails = []; // Guarda los puntos de la estela
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -1086,17 +1101,15 @@ document.addEventListener("DOMContentLoaded", function() {
         ctx.lineJoin = "round";
         ctx.lineCap = "round";
         
-        for (let i = 0; i < trails.length; i++) {
-            const opacity = 1 - (i / trails.length); // Desvanece la estela progresivamente
+        for (let i = 0; i < trails.length - 1; i++) {
+            const opacity = 1 - (i / trails.length); // Desvanece la estela
             ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
-            ctx.lineWidth = 3;
-            
-            if (i > 0) {
-                ctx.beginPath();
-                ctx.moveTo(trails[i - 1].x, trails[i - 1].y);
-                ctx.lineTo(trails[i].x, trails[i].y);
-                ctx.stroke();
-            }
+            ctx.lineWidth = 4; // Ajusta el grosor del láser
+
+            ctx.beginPath();
+            ctx.moveTo(trails[i].x, trails[i].y);
+            ctx.lineTo(trails[i + 1].x, trails[i + 1].y);
+            ctx.stroke();
         }
     }
 
@@ -1108,13 +1121,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     document.getElementById("welcome-screen").addEventListener("mousemove", function(event) {
-        if (lastX !== null && lastY !== null) {
-            updateTrail(event.clientX, event.clientY);
-        }
-        lastX = event.clientX;
-        lastY = event.clientY;
+        updateTrail(event.clientX, event.clientY);
     });
 
+    // Limpia la estela al entrar al portfolio
     document.querySelector(".button").addEventListener("click", function() {
         trails = [];
         ctx.clearRect(0, 0, canvas.width, canvas.height);
