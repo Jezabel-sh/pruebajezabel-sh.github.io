@@ -816,38 +816,7 @@
            position: relative;
            z-index: 1001;
        }
-
-
-       .animated-title {
-           display: inline-block;
-           position: relative;
-           opacity: 0;
-           transform: translateY(30px);
-           animation: slideUpReveal 1s ease-out forwards;
-           transform-origin: center;
-       }
-      
-       /* Animación optimizada */
-       @keyframes slideUpReveal {
-           0% {
-               opacity: 0;
-               transform: translateY(30px);
-           }
-           100% {
-               opacity: 1;
-               transform: translateY(0);
-           }
-       }
-
-
-
-
-
-
-
-
-
-      
+            
    </style>
 </head>
 <body onload="removeLoader()">
@@ -859,7 +828,7 @@
    <!-- Pantalla de Bienvenida -->
    <div id="welcome-screen">
        <div class="welcome-content">
-           <h1 class="animated-title">Welcome to My Portfolio</h1>
+           <h1 class="slide-up">Welcome to My Portfolio</h1>
            <p>Discover my work, experience, and projects.</p>
            <button onclick="enterPortfolio()" class="button">Explore</button>
        </div>
@@ -1199,17 +1168,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let title = document.querySelector(".animated-title");
-        title.addEventListener("animationend", function() {
-            title.style.transform = "translateY(0)";
-            title.style.opacity = "1";
-        });
-    });
-</script>
 
 
 
