@@ -803,9 +803,25 @@
                opacity: 1;
                transform: rotate(var(--angle)) scaleX(1);
            }
+           30% {
+               opacity: 0.9;
+               transform: rotate(var(--angle)) scaleX(0.99);
+           }
+           50% {
+               opacity: 0.8;
+               transform: rotate(var(--angle)) scaleX(0.98);
+           }
+           70% {
+               opacity: 0.7;
+               transform: rotate(var(--angle)) scaleX(0.97);
+           }
+           85% {
+               opacity: 0.4;
+               transform: rotate(var(--angle)) scaleX(0.96);
+           }
            100% {
                opacity: 0;
-               transform: rotate(var(--angle)) scaleX(1);  // Mantiene el scale constante
+               transform: rotate(var(--angle)) scaleX(0.95);
            }
        }
       
