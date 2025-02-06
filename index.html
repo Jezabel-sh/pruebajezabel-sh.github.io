@@ -589,62 +589,64 @@
            z-index: 1000;
            flex-direction: column;
            overflow: hidden;
-           animation: backgroundShift 8s infinite;
+           animation: backgroundShift 10s infinite;
        }
       
        @keyframes backgroundShift {
+           /* Inicio con Azul */
            0% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
-           2% { background: linear-gradient(135deg, #0b2046, #1c3754, #2d5077); }
-           4% { background: linear-gradient(135deg, #0c2148, #1d3856, #2e5179); }
-           6% { background: linear-gradient(135deg, #0d224a, #1e3958, #2f527b); }
-           8% { background: linear-gradient(135deg, #0e234c, #1f3a5a, #30537d); }
-           10% { background: linear-gradient(135deg, #0f244e, #203b5c, #31547f); }
-           12% { background: linear-gradient(135deg, #102550, #213c5e, #325581); }
-           14% { background: linear-gradient(135deg, #112652, #223d60, #335683); }
-           16% { background: linear-gradient(135deg, #122754, #233e62, #345785); }
-           18% { background: linear-gradient(135deg, #132856, #243f64, #355887); }
-           20% { background: linear-gradient(135deg, #142958, #254066, #365989); }
-           22% { background: linear-gradient(135deg, #152a5a, #264168, #375a8b); }
-           24% { background: linear-gradient(135deg, #162b5c, #27426a, #385b8d); }
-           26% { background: linear-gradient(135deg, #172c5e, #28436c, #395c8f); }
-           28% { background: linear-gradient(135deg, #182d60, #29446e, #3a5d91); }
-           30% { background: linear-gradient(135deg, #192e62, #2a4570, #3b5e93); }
-           32% { background: linear-gradient(135deg, #1a2f64, #2b4672, #3c5f95); }
-           34% { background: linear-gradient(135deg, #1b3066, #2c4774, #3d6097); }
-           36% { background: linear-gradient(135deg, #1c3168, #2d4876, #3e6199); }
-           38% { background: linear-gradient(135deg, #1d326a, #2e4978, #3f629b); }
-           40% { background: linear-gradient(135deg, #1e336c, #2f4a7a, #40639d); }
-           42% { background: linear-gradient(135deg, #1d326a, #2e4978, #3f629b); }
-           44% { background: linear-gradient(135deg, #1c3168, #2d4876, #3e6199); }
-           46% { background: linear-gradient(135deg, #1b3066, #2c4774, #3d6097); }
-           48% { background: linear-gradient(135deg, #1a2f64, #2b4672, #3c5f95); }
-           50% { background: linear-gradient(135deg, #192e62, #2a4570, #3b5e93); }
-           52% { background: linear-gradient(135deg, #182d60, #29446e, #3a5d91); }
-           54% { background: linear-gradient(135deg, #172c5e, #28436c, #395c8f); }
-           56% { background: linear-gradient(135deg, #162b5c, #27426a, #385b8d); }
-           58% { background: linear-gradient(135deg, #152a5a, #264168, #375a8b); }
-           60% { background: linear-gradient(135deg, #142958, #254066, #365989); }
-           62% { background: linear-gradient(135deg, #132856, #243f64, #355887); }
-           64% { background: linear-gradient(135deg, #122754, #233e62, #345785); }
-           66% { background: linear-gradient(135deg, #112652, #223d60, #335683); }
-           68% { background: linear-gradient(135deg, #102550, #213c5e, #325581); }
-           70% { background: linear-gradient(135deg, #0f244e, #203b5c, #31547f); }
-           72% { background: linear-gradient(135deg, #0e234c, #1f3a5a, #30537d); }
-           74% { background: linear-gradient(135deg, #0d224a, #1e3958, #2f527b); }
-           76% { background: linear-gradient(135deg, #0c2148, #1d3856, #2e5179); }
-           78% { background: linear-gradient(135deg, #0b2046, #1c3754, #2d5077); }
-           80% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
-           82% { background: linear-gradient(135deg, #0b2046, #1c3754, #2d5077); }
-           84% { background: linear-gradient(135deg, #0c2148, #1d3856, #2e5179); }
-           86% { background: linear-gradient(135deg, #0d224a, #1e3958, #2f527b); }
-           88% { background: linear-gradient(135deg, #0e234c, #1f3a5a, #30537d); }
-           90% { background: linear-gradient(135deg, #0f244e, #203b5c, #31547f); }
-           92% { background: linear-gradient(135deg, #0e234c, #1f3a5a, #30537d); }
-           94% { background: linear-gradient(135deg, #0d224a, #1e3958, #2f527b); }
-           96% { background: linear-gradient(135deg, #0c2148, #1d3856, #2e5179); }
-           98% { background: linear-gradient(135deg, #0b2046, #1c3754, #2d5077); }
+           2.5% { background: linear-gradient(135deg, #0b2045, #1c3753, #2d4f76); }
+           5% { background: linear-gradient(135deg, #0c2146, #1d3854, #2e4f77); }
+           7.5% { background: linear-gradient(135deg, #0d2147, #1e3855, #2f4f78); }
+           10% { background: linear-gradient(135deg, #1b2247, #2a3956, #384f79); }
+           12.5% { background: linear-gradient(135deg, #241f44, #333854, #423f75); }
+      
+           /* Transición a Púrpura */
+           15% { background: linear-gradient(135deg, #2d1f44, #3b3652, #4a2d75); }
+           17.5% { background: linear-gradient(135deg, #2e1f45, #3c3753, #4b2d76); }
+           20% { background: linear-gradient(135deg, #2f1f46, #3d3854, #4c2d77); }
+           22.5% { background: linear-gradient(135deg, #301f47, #3e3855, #4d2d78); }
+           25% { background: linear-gradient(135deg, #2a2547, #383956, #462d79); }
+           27.5% { background: linear-gradient(135deg, #252844, #333a54, #402d75); }
+      
+           /* Transición a Azul profundo */
+           30% { background: linear-gradient(135deg, #1f2f44, #2d3f52, #2d4a75); }
+           32.5% { background: linear-gradient(135deg, #1f3045, #2e4053, #2e4b76); }
+           35% { background: linear-gradient(135deg, #1f3146, #2f4154, #2f4c77); }
+           37.5% { background: linear-gradient(135deg, #1f3247, #304255, #304d78); }
+           40% { background: linear-gradient(135deg, #1f3347, #314356, #314e79); }
+           42.5% { background: linear-gradient(135deg, #1f3444, #324454, #324f75); }
+      
+           /* Transición a Índigo */
+           45% { background: linear-gradient(135deg, #1f1f44, #2d2d52, #2d2d75); }
+           47.5% { background: linear-gradient(135deg, #201f45, #2e2d53, #2e2d76); }
+           50% { background: linear-gradient(135deg, #211f46, #2f2d54, #2f2d77); }
+           52.5% { background: linear-gradient(135deg, #221f47, #302d55, #302d78); }
+           55% { background: linear-gradient(135deg, #231f47, #312d56, #312d79); }
+           57.5% { background: linear-gradient(135deg, #241f44, #322d54, #322d75); }
+      
+           /* Transición a Azul-verdoso */
+           60% { background: linear-gradient(135deg, #1f3f44, #2d5f52, #2d6575); }
+           62.5% { background: linear-gradient(135deg, #1f4045, #2e6053, #2e6676); }
+           65% { background: linear-gradient(135deg, #1f4146, #2f6154, #2f6777); }
+           67.5% { background: linear-gradient(135deg, #1f4247, #306255, #306878); }
+           70% { background: linear-gradient(135deg, #1f4347, #316356, #316979); }
+           72.5% { background: linear-gradient(135deg, #1f4444, #326454, #326a75); }
+      
+           /* Transición a Azul medianoche */
+           75% { background: linear-gradient(135deg, #1a1f35, #2d2f45, #2d3555); }
+           77.5% { background: linear-gradient(135deg, #1b1f36, #2e2f46, #2e3556); }
+           80% { background: linear-gradient(135deg, #1c1f37, #2f2f47, #2f3557); }
+           82.5% { background: linear-gradient(135deg, #1d1f38, #302f48, #303558); }
+           85% { background: linear-gradient(135deg, #1e1f39, #312f49, #313559); }
+           87.5% { background: linear-gradient(135deg, #1f1f3a, #322f4a, #32355a); }
+      
+           /* Volver al inicio (Azul) gradualmente */
+           90% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
+           92.5% { background: linear-gradient(135deg, #0b2045, #1c3753, #2d4f76); }
+           95% { background: linear-gradient(135deg, #0c2146, #1d3854, #2e4f77); }
+           97.5% { background: linear-gradient(135deg, #0d2147, #1e3855, #2f4f78); }
            100% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); }
-       }
        }
 
 
