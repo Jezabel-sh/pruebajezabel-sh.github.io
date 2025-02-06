@@ -737,7 +737,7 @@
            height: 4px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 1s linear forwards, colorShift 8s infinite;
+           animation: laserFade 0.8s linear forwards, colorShift 8s infinite;
            filter: blur(1px);
            opacity: 0.8;
        }
@@ -822,7 +822,20 @@
            position: relative;
            z-index: 1001;
        }
-            
+
+
+       .welcome-header {
+           margin-bottom: 30px;
+           padding-bottom: 20px;
+           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+       }
+      
+       .welcome-cta {
+           padding-top: 10px;
+       }
+
+
+      
    </style>
 </head>
 <body onload="removeLoader()">
@@ -834,9 +847,15 @@
    <!-- Pantalla de Bienvenida -->
    <div id="welcome-screen">
        <div class="welcome-content">
-           <h1 class="slide-up">Welcome to My Portfolio</h1>
-           <p>Discover my work, experience, and projects.</p>
-           <button onclick="enterPortfolio()" class="button">Explore</button>
+           <!-- Primera sección -->
+           <div class="welcome-header">
+               <h1 class="slide-up">Welcome to My Portfolio</h1>
+               <p>Discover my work, experience, and projects.</p>
+           </div>
+           <!-- Segunda sección -->
+           <div class="welcome-cta">
+               <button onclick="enterPortfolio()" class="button">Explore</button>
+           </div>
        </div>
    </div>
 
