@@ -566,8 +566,29 @@
            100% { background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75); box-shadow: 0 0 40px rgba(255, 255, 255, 0.05) inset; }
        }
       
+       body, html {
+           margin: 0;
+           padding: 0;
+           width: 100%;
+           height: 100%;
+           overflow-x: hidden;
+       }
+      
        #welcome-screen {
-           transition: background 1s ease;
+           position: fixed;
+           width: 100vw;
+           height: 100vh;
+           margin: 0;
+           padding: 0;
+           background: linear-gradient(135deg, #0a1f44, #1b3652, #2c4f75);
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+           color: white;
+           z-index: 1000;
+           flex-direction: column;
+           overflow: hidden;
            animation: backgroundShift 8s infinite;
        }
       
@@ -671,7 +692,6 @@
            animation: laserFade 0.3s linear forwards, colorShift 8s infinite;
        }
       
-       /* Colores dinámicos para el láser */
        @keyframes colorShift {
            0% {
                box-shadow: 
@@ -714,12 +734,27 @@
            }
        }
       
-       /* Ajustamos el color del texto en la pantalla de bienvenida para que contraste */
-       #welcome-screen .welcome-content {
-           color: #fff;
-           text-shadow: 0 0 10px rgba(0,0,0,0.5);
+       /* Aseguramos que el contenido del portfolio ocupe todo el espacio disponible */
+       #portfolio-content {
+           min-height: 100vh;
+           width: 100%;
+           position: relative;
+           overflow-x: hidden;
        }
       
+       /* Ajustamos el contenedor de bienvenida */
+       .welcome-content {
+           max-width: 600px;
+           width: 90%;
+           padding: 2rem;
+           background: rgba(255, 255, 255, 0.1);
+           border-radius: 15px;
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+           margin: 0 auto;
+           position: relative;
+           z-index: 1001;
+       }
+            
    </style>
 </head>
 <body onload="removeLoader()">
