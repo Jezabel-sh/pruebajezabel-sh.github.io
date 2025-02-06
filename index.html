@@ -673,7 +673,18 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
+
+
+
+         .welcome-cta .button {
+           position: relative;
+           z-index: 1000;
+       }
       
        .welcome-content p {
            font-size: 1.2rem;
@@ -733,7 +744,7 @@
        #welcome-screen .cursor-trail {
            position: fixed;
            pointer-events: none;
-           z-index: 9999;
+           z-index: 998;
            height: 4px;
            transform-origin: left center;
            background: #fff;
