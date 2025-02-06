@@ -1013,135 +1013,111 @@
     }
 
     // Inicialización del efecto láser
-// Inicialización del efecto láser
-document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById('cursorCanvas');
-    const ctx = canvas.getContext('2d');
-    const points = [];
-    let animationFrameId;
+    document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('cursorCanvas');
+        const ctx = canvas.getContext('2d');
+        const points = [];
+        let animationFrameId;
 
-    // Ajustar tamaño del canvas
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Manejar movimiento del mouse
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-        points.push({
-            x: e.clientX,
-            y: e.clientY,
-            age: 0
-        });
-
-        // Limitar la cantidad de puntos
-        if (points.length > 25) {
-            points.shift();
+        // Ajustar tamaño del canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-    });
-
-    // Función de animación
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Dibujar la línea que conecta los puntos
-        if (points.length > 2) {
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            
-            // Crear una curva suave a través de los puntos
-            for (let i = 1; i < points.length - 2; i++) {
-                const xc = (points[i].x + points[i + 1].x) / 2;
-                const yc = (points[i].y + points[i + 1].y) / 2;
-                ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-            }
-            
-            // Conectar los últimos dos puntos
-            if (points.length > 1) {
-                ctx.quadraticCurveTo(
-                    points[points.length - 2].x, 
-                    points[points.length - 2].y,
-                    points[points.length - 1].x,
-                    points[points.length - 1].y
-                );
-            }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-            // Configurar el estilo de la línea
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'rgba(0, 255, 255, 1)';
-            ctx.stroke();
-
-            // Añadir efecto de brillo
-            ctx.lineWidth = 6;
-            ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
-            ctx.stroke();
-
-            // Segundo efecto de brillo más amplio
-            ctx.lineWidth = 12;
-            ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)';
-            ctx.stroke();
-        }
-
-        // Envejecer los puntos
-        for (let i = points.length - 1; i >= 0; i--) {
-            points[i].age++;
-            if (points[i].age > 25) {
-                points.splice(i, 1);
-            }
-        }
-
-        // Continuar animación
-        animationFrameId = requestAnimationFrame(animate);
-    }
-
-    // Iniciar animación
-    animate();
-
-    // Limpiar animación cuando se oculte la pantalla de bienvenida
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.target.style.display === 'none') {
-                cancelAnimationFrame(animationFrameId);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-        });
-    });
-
-    observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
-
-    // Formspree AJAX Form Submission
-    document.querySelector(".contact-form").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
-        
-        try {
-            const response = await fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: { "Accept": "application/json" }
+        // Manejar movimiento del mouse
+        document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+            points.push({
+                x: e.clientX,
+                y: e.clientY,
+                age: 0
             });
+        });
 
-            if (response.ok) {
-                form.innerHTML = "<p style='color: #527191; font-size: 18px; text-align: center;'>✅ Message sent successfully! I'll get back to you soon.</p>";
-            } else {
-                alert("There was a problem. Please try again.");
+        // Función de animación
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Actualizar y dibujar puntos
+            for(let i = points.length - 1; i >= 0; i--) {
+                const point = points[i];
+                point.age++;
+                
+                // Eliminar puntos viejos
+                if(point.age > 20) {
+                    points.splice(i, 1);
+                    continue;
+                }
+
+                // Dibujar punto
+                const opacity = 1 - (point.age / 20);
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 255, ${opacity})`;
+                ctx.fill();
+
+                // Efecto de brillo
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 255, ${opacity * 0.3})`;
+                ctx.fill();
             }
-        } catch (error) {
-            alert("There was an error. Please check your internet connection.");
+
+            // Continuar animación
+            animationFrameId = requestAnimationFrame(animate);
         }
+
+        // Iniciar animación
+        animate();
+
+        // Limpiar animación cuando se oculte la pantalla de bienvenida
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.style.display === 'none') {
+                    cancelAnimationFrame(animationFrameId);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            });
+        });
+
+        observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
+
+        // Formspree AJAX Form Submission
+        document.querySelector(".contact-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (response.ok) {
+                    form.innerHTML = "<p style='color: #527191; font-size: 18px; text-align: center;'>✅ Message sent successfully! I'll get back to you soon.</p>";
+                } else {
+                    alert("There was a problem. Please try again.");
+                }
+            } catch (error) {
+                alert("There was an error. Please check your internet connection.");
+            }
+        });
     });
 
-    // Initialize AOS
-    AOS.init({
-        duration: 1000,
-        offset: 200
-    });
-});
+
+   // Initialize AOS
+   document.addEventListener('DOMContentLoaded', function() {
+       AOS.init({
+           duration: 1000,
+           offset: 200
+       });
+   });
 
 
      
