@@ -748,8 +748,8 @@
            height: 4px;
            transform-origin: left center;
            background: #fff;
-           animation: laserFade 2s linear forwards, colorShift 8s infinite;
-           filter: blur(1.5px);
+           animation: laserFade 1.5s linear forwards, colorShift 8s infinite;
+           filter: blur(1px);
            opacity: 1.1;
        }
       
@@ -799,18 +799,9 @@
        }
       
        @keyframes laserFade {
-           0% {
-               opacity: 1;
-               transform: rotate(var(--angle)) scaleX(1);
-           }
-           85% {
-               opacity: 0.8;
-               transform: rotate(var(--angle)) scaleX(0.98);
-           }
-           100% {
-               opacity: 0;
-               transform: rotate(var(--angle)) scaleX(0.95);
-           }
+           0% { opacity: 1; }
+           50% { opacity: 0.8; }
+           100% { opacity: 0; }
        }
       
        /* Aseguramos que el contenido del portfolio ocupe todo el espacio disponible */
