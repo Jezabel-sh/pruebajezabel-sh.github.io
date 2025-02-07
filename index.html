@@ -1117,9 +1117,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Función para crear partículas con variaciones aleatorias
     function createParticle(x, y, baseHue) {
-        const speedX = (Math.random() - 0.5) * 3; // Velocidad horizontal aleatoria
-        const speedY = (Math.random() - 0.5) * 3 - 1; // Velocidad vertical aleatoria con tendencia hacia arriba
-        const size = Math.random() * 3 + 1; // Tamaño aleatorio entre 1 y 4
+        const speedX = (Math.random() - 0.5) * 1.5; // Velocidad horizontal aleatoria
+        const speedY = (Math.random() - 0.5) * 1.5 - 0.5; // Velocidad vertical aleatoria con tendencia hacia arriba
+        const size = Math.random() * 1.5 + 0.5; // Tamaño aleatorio entre 1 y 4
         
         return {
             x,
@@ -1149,7 +1149,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const y = lastY + (dy * (i / particleCount));
             
             // Crear múltiples partículas en cada posición
-            for (let j = 0; j < 3; j++) {
+            for (let j = 0; j < 2; j++) {
                 points.push(createParticle(x, y, globalHue));
             }
         }
@@ -1182,7 +1182,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Efecto de brillo principal
             ctx.beginPath();
             ctx.arc(point.x, point.y, point.size, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${point.hue}, 70%, 60%, ${opacity})`;
+            ctx.fillStyle = `hsla(${point.hue}, 70%, 80%, ${opacity})`;
             ctx.fill();
 
             // Añadir brillo extra para algunas partículas
