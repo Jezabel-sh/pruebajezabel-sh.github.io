@@ -971,60 +971,30 @@
    }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const canvas = document.getElementById('cursorCanvas');
-    const ctx = canvas.getContext('2d');
-    const points = [];
-    let cursorColor = "hsl(180, 50%, 50%)"; // Color inicial (azul claro)
+    // Inicialización del efecto láser
+    document.addEventListener("DOMContentLoaded", function() {
+        const canvas = document.getElementById('cursorCanvas');
+        const ctx = canvas.getContext('2d');
+        const points = [];
+        let animationFrameId;
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+        // Ajustar tamaño del canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-        points.push({
-            x: e.clientX,
-            y: e.clientY,
-            age: 0
+        // Manejar movimiento del mouse
+        document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+            points.push({
+                x: e.clientX,
+                y: e.clientY,
+                age: 0
+            });
         });
-    });
-
-       function animate() {
-           ctx.clearRect(0, 0, canvas.width, canvas.height);
-           
-           for (let i = points.length - 1; i >= 0; i--) {
-               const point = points[i];
-               point.age++;
-   
-               if (point.age > 20) {
-                   points.splice(i, 1);
-                   continue;
-               }
-   
-               let opacity = 1 - (point.age / 20);
-               
-               // Usamos `cursorColor` que ahora se actualiza dinámicamente con el fondo
-               ctx.beginPath();
-               ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
-               ctx.fillStyle = `${cursorColor}`;
-               ctx.fill();
-   
-               ctx.beginPath();
-               ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
-               ctx.fillStyle = `${cursorColor.replace("hsl", "hsla").replace(")", `, ${opacity * 0.3})`)}`;
-               ctx.fill();
-           }
-   
-           requestAnimationFrame(animate);
-       }
-   
-       animate();
-   });
-
 
         // Función de animación
         function animate() {
@@ -1109,23 +1079,16 @@ document.addEventListener("DOMContentLoaded", function() {
    });
 
 
-let animationFrameId; // Variable global para detener la animación si es necesario
-let hue = 0; // Comienza en 0 grados de tono
+let animationFrameId; // Declaramos la variable globalmente
 
 function animateBackground() {
+    let hue = 0; // Comienza en 0 grados de tono
+
     function update() {
-        hue = (hue + 0.1) % 360; // Cambio ultra gradual en el tono
-        let color1 = `hsl(${hue}, 60%, 30%)`;
-        let color2 = `hsl(${(hue + 30) % 360}, 50%, 35%)`;
-        let color3 = `hsl(${(hue + 60) % 360}, 40%, 40%)`;
-
-        // Actualizar el fondo de la pantalla de bienvenida
+        hue = (hue + 0.1) % 360; // Cambio ultra gradual
         document.getElementById("welcome-screen").style.background = 
-            `linear-gradient(135deg, ${color1}, ${color2}, ${color3})`;
-
-        // Actualizar el color del cursor
-        cursorColor = color2; // Usamos el color intermedio para el cursor
-
+            `linear-gradient(135deg, hsl(${hue}, 60%, 30%), hsl(${(hue + 30) % 360}, 50%, 35%), hsl(${(hue + 60) % 360}, 40%, 40%))`;
+        
         animationFrameId = requestAnimationFrame(update);
     }
     
