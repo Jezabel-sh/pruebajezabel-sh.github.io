@@ -1081,13 +1081,17 @@
 
 let animationFrameId; // Declaramos la variable globalmente
 
-function animateBackground() {
-    let hue = 0; // Comienza en 0 grados de tono
+// Declaramos la variable hue globalmente para compartirla entre efectos
+let globalHue = 0;
 
+function animateBackground() {
     function update() {
-        hue = (hue + 0.1) % 360; // Cambio ultra gradual
+        globalHue = (globalHue + 0.1) % 360; // Actualizamos el hue global
         document.getElementById("welcome-screen").style.background = 
-            `linear-gradient(135deg, hsl(${hue}, 60%, 30%), hsl(${(hue + 30) % 360}, 50%, 35%), hsl(${(hue + 60) % 360}, 40%, 40%))`;
+            `linear-gradient(135deg, 
+                hsl(${globalHue}, 60%, 30%), 
+                hsl(${(globalHue + 30) % 360}, 50%, 35%), 
+                hsl(${(globalHue + 60) % 360}, 40%, 40%))`;
         
         animationFrameId = requestAnimationFrame(update);
     }
@@ -1095,8 +1099,84 @@ function animateBackground() {
     animationFrameId = requestAnimationFrame(update);
 }
 
+// Inicialización del efecto láser
 document.addEventListener("DOMContentLoaded", function() {
+    const canvas = document.getElementById('cursorCanvas');
+    const ctx = canvas.getContext('2d');
+    const points = [];
+    let animationFrameId;
+
+    // Ajustar tamaño del canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Manejar movimiento del mouse
+    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+        points.push({
+            x: e.clientX,
+            y: e.clientY,
+            age: 0,
+            hue: globalHue // Guardamos el hue actual para este punto
+        });
+    });
+
+    // Función de animación
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Actualizar y dibujar puntos
+        for(let i = points.length - 1; i >= 0; i--) {
+            const point = points[i];
+            point.age++;
+            
+            // Eliminar puntos viejos
+            if(point.age > 20) {
+                points.splice(i, 1);
+                continue;
+            }
+
+            // Calcular opacidad
+            const opacity = 1 - (point.age / 20);
+            
+            // Usar el hue del punto para el color
+            // Ajustamos la saturación y luminosidad para que combine bien
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${point.hue}, 70%, 60%, ${opacity})`;
+            ctx.fill();
+
+            // Efecto de brillo
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${point.hue}, 70%, 60%, ${opacity * 0.3})`;
+            ctx.fill();
+        }
+
+        // Continuar animación
+        animationFrameId = requestAnimationFrame(animate);
+    }
+
+    // Iniciar animaciones
+    animate();
     animateBackground();
+
+    // Limpiar animación cuando se oculte la pantalla de bienvenida
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.target.style.display === 'none') {
+                cancelAnimationFrame(animationFrameId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+    });
+
+    observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
 });
 
 
