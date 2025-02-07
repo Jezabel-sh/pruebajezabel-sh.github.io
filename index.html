@@ -1086,7 +1086,7 @@ let globalHue = 0;
 
 function animateBackground() {
     function update() {
-        globalHue = (globalHue + 0.1) % 360; // Actualizamos el hue global
+        globalHue = (globalHue + 0.1) % 360;
         document.getElementById("welcome-screen").style.background = 
             `linear-gradient(135deg, 
                 hsl(${globalHue}, 60%, 30%), 
@@ -1099,14 +1099,14 @@ function animateBackground() {
     animationFrameId = requestAnimationFrame(update);
 }
 
-// Inicialización del efecto láser
 document.addEventListener("DOMContentLoaded", function() {
     const canvas = document.getElementById('cursorCanvas');
     const ctx = canvas.getContext('2d');
     const points = [];
     let animationFrameId;
+    let lastX = 0;
+    let lastY = 0;
 
-    // Ajustar tamaño del canvas
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -1115,57 +1115,104 @@ document.addEventListener("DOMContentLoaded", function() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Manejar movimiento del mouse
-    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-        points.push({
-            x: e.clientX,
-            y: e.clientY,
+    // Función para crear partículas con variaciones aleatorias
+    function createParticle(x, y, baseHue) {
+        const speedX = (Math.random() - 0.5) * 3; // Velocidad horizontal aleatoria
+        const speedY = (Math.random() - 0.5) * 3 - 1; // Velocidad vertical aleatoria con tendencia hacia arriba
+        const size = Math.random() * 3 + 1; // Tamaño aleatorio entre 1 y 4
+        
+        return {
+            x,
+            y,
             age: 0,
-            hue: globalHue // Guardamos el hue actual para este punto
-        });
+            hue: baseHue + (Math.random() * 20 - 10), // Variación en el tono
+            speedX,
+            speedY,
+            size,
+            opacity: Math.random() * 0.5 + 0.5, // Opacidad inicial aleatoria
+            sparkle: Math.random() > 0.5 // Algunas partículas brillarán más
+        };
+    }
+
+    document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
+        // Calcular la distancia movida
+        const dx = e.clientX - lastX;
+        const dy = e.clientY - lastY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Crear más partículas si el movimiento es más rápido
+        const particleCount = Math.min(Math.floor(distance), 5);
+        
+        for (let i = 0; i < particleCount; i++) {
+            // Interpolar posiciones entre el último punto y el actual
+            const x = lastX + (dx * (i / particleCount));
+            const y = lastY + (dy * (i / particleCount));
+            
+            // Crear múltiples partículas en cada posición
+            for (let j = 0; j < 3; j++) {
+                points.push(createParticle(x, y, globalHue));
+            }
+        }
+        
+        lastX = e.clientX;
+        lastY = e.clientY;
     });
 
-    // Función de animación
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Actualizar y dibujar puntos
         for(let i = points.length - 1; i >= 0; i--) {
             const point = points[i];
             point.age++;
             
-            // Eliminar puntos viejos
-            if(point.age > 20) {
+            // Duración más larga de las partículas
+            if(point.age > 50) {
                 points.splice(i, 1);
                 continue;
             }
 
-            // Calcular opacidad
-            const opacity = 1 - (point.age / 20);
+            // Actualizar posición con física
+            point.x += point.speedX;
+            point.y += point.speedY;
+            point.speedY += 0.02; // Gravedad suave
+
+            // Calcular opacidad con fade out más suave
+            const opacity = point.opacity * (1 - (point.age / 50));
             
-            // Usar el hue del punto para el color
-            // Ajustamos la saturación y luminosidad para que combine bien
+            // Efecto de brillo principal
             ctx.beginPath();
-            ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
+            ctx.arc(point.x, point.y, point.size, 0, Math.PI * 2);
             ctx.fillStyle = `hsla(${point.hue}, 70%, 60%, ${opacity})`;
             ctx.fill();
 
-            // Efecto de brillo
+            // Añadir brillo extra para algunas partículas
+            if (point.sparkle && point.age < 25) {
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, point.size * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${point.hue}, 70%, 80%, ${opacity * 0.3})`;
+                ctx.fill();
+            }
+
+            // Efecto de resplandor
+            const gradient = ctx.createRadialGradient(
+                point.x, point.y, 0,
+                point.x, point.y, point.size * 3
+            );
+            gradient.addColorStop(0, `hsla(${point.hue}, 70%, 60%, ${opacity * 0.2})`);
+            gradient.addColorStop(1, 'transparent');
+            
             ctx.beginPath();
-            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${point.hue}, 70%, 60%, ${opacity * 0.3})`;
+            ctx.arc(point.x, point.y, point.size * 3, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
             ctx.fill();
         }
 
-        // Continuar animación
         animationFrameId = requestAnimationFrame(animate);
     }
 
-    // Iniciar animaciones
     animate();
     animateBackground();
 
-    // Limpiar animación cuando se oculte la pantalla de bienvenida
     const welcomeScreen = document.getElementById('welcome-screen');
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
@@ -1178,7 +1225,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
 });
-
 
      
 </script>
