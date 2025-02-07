@@ -952,13 +952,23 @@
     }
 
     // Función para entrar al portfolio
-    function enterPortfolio() {
-        document.getElementById("welcome-screen").style.display = "none";
-        document.getElementById("portfolio-content").style.display = "block";
-       
-        // Detener la animación de fondo cuando entremos al portafolio
-        cancelAnimationFrame(animationFrameId);
-    }
+       function enterPortfolio() {
+       let welcomeScreen = document.getElementById("welcome-screen");
+       let portfolioContent = document.getElementById("portfolio-content");
+   
+       // Agregar efecto de desvanecimiento antes de ocultar la pantalla de bienvenida
+       welcomeScreen.style.transition = "opacity 1s ease-out";
+       welcomeScreen.style.opacity = "0";
+   
+       // Esperar a que termine la transición para ocultarlo
+       setTimeout(() => {
+           welcomeScreen.style.display = "none";
+           portfolioContent.style.display = "block";
+       }, 1000);
+   
+       // Detener la animación del fondo
+       cancelAnimationFrame(animationFrameId);
+   }
 
 
     // Inicialización del efecto láser
@@ -1085,7 +1095,10 @@ function animateBackground() {
     animationFrameId = requestAnimationFrame(update);
 }
 
-window.onload = animateBackground;
+document.addEventListener("DOMContentLoaded", function() {
+    animateBackground();
+});
+
 
      
 </script>
