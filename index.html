@@ -525,38 +525,36 @@
 
 
 
-       header p {
+       #portfolio-content header p {
            overflow: hidden;
            white-space: nowrap;
            width: 0;
            display: inline-block;
            border-right: 2px solid #ffffff;
            animation: 
-               typing 3s steps(42, end) forwards,
+               typing 3s steps(35, end) forwards,  /* Ajustado los steps al número de caracteres */
                blink-caret 0.75s step-end infinite;
-           margin: 0 auto;  /* Para centrar el texto */
-           max-width: fit-content; /* Para que no exceda el ancho del contenido */
-           opacity: 0; /* Asegura que empiece invisible */
-           animation-delay: 0.5s
+           animation-delay: 1.5s; /* Espera a que termine el fadeIn del título */
+           margin: 0 auto;
+           opacity: 1; /* Cambiado de 0 a 1 */
+           font-size: 1.1em; /* Añadido para mejor visibilidad */
        }
       
-       /* Efecto de escritura */
        @keyframes typing {
-           from { width: 0; }
-           to { width: 100%; }
+           from { width: 0 }
+           to { width: 100% }
        }
       
-       /* Efecto de parpadeo del cursor */
        @keyframes blink-caret {
-           from, to { border-right-color: transparent }
-           50% { border-right-color: #ffffff }
+           from, to { border-color: transparent }
+           50% { border-color: #ffffff }
        }
       
-       /* Detener el parpadeo cuando termine de escribir */
-       header p.finished {
-           border-right: transparent;
-           animation: typing 3s steps(42, end) forwards;
-       }
+        /* Detener el parpadeo cuando termine de escribir */
+        header p.finished {
+            border-right: transparent;
+            animation: typing 3s steps(42, end) forwards;
+        }
 
 
 
@@ -1127,13 +1125,18 @@ function enterPortfolio() {
     let headerTitle = document.querySelector("#portfolio-content header h1");
     let headerText = document.querySelector("#portfolio-content header p");
     
-    // Preparar el contenido del portfolio antes de mostrarlo
+    // Preparar el contenido del portfolio
     portfolioContent.style.opacity = "0";
     portfolioContent.style.display = "block";
     
     // Resetear las animaciones
     headerTitle.style.animation = "none";
     headerText.style.animation = "none";
+    headerText.style.width = "0";
+    
+    // Forzar un reflow
+    void headerTitle.offsetWidth;
+    void headerText.offsetWidth;
     
     // Asegurarse de que solo la sección about está visible
     const sections = document.querySelectorAll('.section');
@@ -1151,15 +1154,13 @@ function enterPortfolio() {
     
     setTimeout(() => {
         welcomeScreen.style.display = "none";
-        // Mostrar el contenido del portfolio con fade in
         portfolioContent.style.transition = "opacity 1s ease-in";
         portfolioContent.style.opacity = "1";
         
         // Reiniciar las animaciones
-        requestAnimationFrame(() => {
-            headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
-            headerText.style.animation = "typing 3s steps(42, end) forwards, blink-caret 0.75s step-end infinite";
-        });
+        headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
+        headerText.style.animation = "typing 3s steps(35, end) forwards, blink-caret 0.75s step-end infinite";
+        headerText.style.animationDelay = "1.5s";
     }, 1000);
     
     cancelAnimationFrame(animationFrameId);
