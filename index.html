@@ -1045,16 +1045,8 @@
            </div>
        </div>
    
-       <!-- Botones de navegación -->
-       <div class="swiper-button-next"></div>
-       <div class="swiper-button-prev"></div>
-       <div class="swiper-pagination"></div>
-   </div>
-
-                    </div>
-                </div>
-            </div>
-
+   
+ 
             <!-- Botones de navegación -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -1126,25 +1118,29 @@
         document.getElementById('loader').style.display = 'none';
     }
 
-    // Función para entrar al portfolio
-    function enterPortfolio() {
-        let welcomeScreen = document.getElementById("welcome-screen");
-        let portfolioContent = document.getElementById("portfolio-content");
+ // Función para entrar al portfolio
+   function enterPortfolio() {
+       let welcomeScreen = document.getElementById("welcome-screen");
+       let portfolioContent = document.getElementById("portfolio-content");
        
-        welcomeScreen.style.transition = "opacity 1s ease-out";
-        welcomeScreen.style.opacity = "0";
+       welcomeScreen.style.transition = "opacity 1s ease-out";
+       welcomeScreen.style.opacity = "0";
        
-        setTimeout(() => {
-            welcomeScreen.style.display = "none";
-            portfolioContent.style.display = "block";
+       setTimeout(() => {
+           welcomeScreen.style.display = "none";
+           portfolioContent.style.display = "block";
            
-            // Mostrar y hacer scroll a la sección About
-            showSection('about');
-        }, 1000);
+           // Asegurarse de que todas las secciones estén ocultas excepto 'about'
+           const sections = document.querySelectorAll('.section');
+           sections.forEach(section => {
+               section.classList.remove('active');
+           });
+           document.getElementById('about').classList.add('active');
+           
+       }, 1000);
        
-        cancelAnimationFrame(animationFrameId);
-    }
-
+       cancelAnimationFrame(animationFrameId);
+   }
 
     // Inicialización del efecto láser
     document.addEventListener("DOMContentLoaded", function() {
