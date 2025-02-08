@@ -879,11 +879,11 @@
            <p>Explore my work, experience, and projects.</p>
        </header>
 
-       <nav>
-          <a href="javascript:void(0)" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
-          <a href="javascript:void(0)" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
-          <a href="javascript:void(0)" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
-          <a href="javascript:void(0)" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
+      <nav>
+         <a href="#about" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
+         <a href="#experience" onclick="showSection('experience')"><i class="fas fa-briefcase"></i> Experience</a>
+         <a href="#projects" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+         <a href="#contact" onclick="showSection('contact')"><i class="fas fa-envelope"></i> Contact</a>
       </nav>
    
    <!-- Sections -->
@@ -1116,6 +1116,9 @@
         });
         const selectedSection = document.getElementById(sectionId);
         selectedSection.classList.add('active');
+       
+        // Añadir scroll suave a la sección
+        selectedSection.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Remove Loader
@@ -1124,23 +1127,23 @@
     }
 
     // Función para entrar al portfolio
-       function enterPortfolio() {
-       let welcomeScreen = document.getElementById("welcome-screen");
-       let portfolioContent = document.getElementById("portfolio-content");
-   
-       // Agregar efecto de desvanecimiento antes de ocultar la pantalla de bienvenida
-       welcomeScreen.style.transition = "opacity 1s ease-out";
-       welcomeScreen.style.opacity = "0";
-   
-       // Esperar a que termine la transición para ocultarlo
-       setTimeout(() => {
-           welcomeScreen.style.display = "none";
-           portfolioContent.style.display = "block";
-       }, 1000);
-   
-       // Detener la animación del fondo
-       cancelAnimationFrame(animationFrameId);
-   }
+    function enterPortfolio() {
+        let welcomeScreen = document.getElementById("welcome-screen");
+        let portfolioContent = document.getElementById("portfolio-content");
+       
+        welcomeScreen.style.transition = "opacity 1s ease-out";
+        welcomeScreen.style.opacity = "0";
+       
+        setTimeout(() => {
+            welcomeScreen.style.display = "none";
+            portfolioContent.style.display = "block";
+           
+            // Mostrar y hacer scroll a la sección About
+            showSection('about');
+        }, 1000);
+       
+        cancelAnimationFrame(animationFrameId);
+    }
 
 
     // Inicialización del efecto láser
