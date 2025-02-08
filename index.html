@@ -1489,55 +1489,70 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper(".swiper-container", {
+        // Configuración básica sin loop
         slidesPerView: 1,
         spaceBetween: 30,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        allowTouchMove: true,
-        watchOverflow: true,
+        speed: 500,
+        loop: false,
         
-        // Mejorar el rendimiento
-        preloadImages: false,
-        lazy: true,
-        
-        // Configuración de navegación
+        // Navegación
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-            hideOnClick: false,
-            disabledClass: 'swiper-button-disabled',
         },
         
         // Paginación
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
-            dynamicBullets: true,
         },
+
+        // Efecto
+        effect: 'slide',
         
-        // Breakpoints responsivos
+        // Breakpoints
         breakpoints: {
             768: {
                 slidesPerView: 2,
-                spaceBetween: 20,
             },
             1024: {
                 slidesPerView: 3,
-                spaceBetween: 20,
             }
         },
 
-        // Eventos
+        // Configuración adicional
+        grabCursor: true,
+        resistance: true,
+        resistanceRatio: 0.85,
+        watchSlidesProgress: true,
+        
+        // Permitir que vuelva al principio cuando llegue al final
         on: {
-            init: function () {
-                setTimeout(() => {
-                    this.update();
-                }, 100);
+            reachEnd: function() {
+                this.snapGrid = [...this.slidesGrid];
+            },
+            reachBeginning: function() {
+                this.snapGrid = [...this.slidesGrid];
             }
         }
     });
+
+    // Añadir botones de navegación personalizados si los originales no funcionan
+    document.querySelector('.swiper-button-next').addEventListener('click', () => {
+        swiper.slideNext();
+    });
+    
+    document.querySelector('.swiper-button-prev').addEventListener('click', () => {
+        swiper.slidePrev();
+    });
 });
 
+
+
+
+
+
+     
 function toggleDescription(button) {
     const shortText = button.previousElementSibling.previousElementSibling;
     const fullText = button.previousElementSibling;
