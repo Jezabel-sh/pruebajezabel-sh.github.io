@@ -43,6 +43,8 @@
        
        header h1 {
            animation: fadeIn 1.5s ease-in-out forwards;
+           margin: 0;
+           opacity: 0;
        }
 
        @keyframes fadeIn {
@@ -534,6 +536,8 @@
                blink-caret 0.75s step-end infinite;
            margin: 0 auto;  /* Para centrar el texto */
            max-width: fit-content; /* Para que no exceda el ancho del contenido */
+           opacity: 0; /* Asegura que empiece invisible */
+           animation-delay: 0.5s
        }
       
        /* Efecto de escritura */
@@ -1120,10 +1124,16 @@
 function enterPortfolio() {
     let welcomeScreen = document.getElementById("welcome-screen");
     let portfolioContent = document.getElementById("portfolio-content");
+    let headerTitle = document.querySelector("#portfolio-content header h1");
+    let headerText = document.querySelector("#portfolio-content header p");
     
     // Preparar el contenido del portfolio antes de mostrarlo
     portfolioContent.style.opacity = "0";
     portfolioContent.style.display = "block";
+    
+    // Resetear las animaciones
+    headerTitle.style.animation = "none";
+    headerText.style.animation = "none";
     
     // Asegurarse de que solo la sección about está visible
     const sections = document.querySelectorAll('.section');
@@ -1144,11 +1154,16 @@ function enterPortfolio() {
         // Mostrar el contenido del portfolio con fade in
         portfolioContent.style.transition = "opacity 1s ease-in";
         portfolioContent.style.opacity = "1";
+        
+        // Reiniciar las animaciones
+        requestAnimationFrame(() => {
+            headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
+            headerText.style.animation = "typing 3s steps(42, end) forwards, blink-caret 0.75s step-end infinite";
+        });
     }, 1000);
     
     cancelAnimationFrame(animationFrameId);
 }
-
     // Inicialización del efecto láser
     document.addEventListener("DOMContentLoaded", function() {
         const canvas = document.getElementById('cursorCanvas');
