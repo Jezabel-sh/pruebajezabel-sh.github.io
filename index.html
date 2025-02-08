@@ -1493,6 +1493,8 @@ document.addEventListener("DOMContentLoaded", function () {
         slidesPerView: 1,
         spaceBetween: 20,
         loop: true,
+        loopAdditionalSlides: 1,  // Añadimos slides adicionales para el loop
+        watchSlidesProgress: true, // Vigilamos el progreso de los slides
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
@@ -1502,9 +1504,13 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
         breakpoints: {
-            768: { slidesPerView: 2 }, // Muestra 2 proyectos en pantallas medianas
-            1024: { slidesPerView: 3 }, // Muestra 3 en pantallas grandes
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
         },
+        // Añadimos estas opciones para mejorar el rendimiento
+        observer: true,
+        observeParents: true,
+        updateOnWindowResize: true
     });
 });
 
