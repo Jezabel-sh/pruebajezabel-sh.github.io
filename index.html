@@ -838,18 +838,24 @@
        }
       
        /* Botón de GitHub / Kaggle */
-       .project-card .button {
+      .project-card .button {
            margin-top: 10px;
-           background: #527191;
+           background: linear-gradient(135deg, #d89b1d, #e6b800);
            color: white;
            padding: 10px 16px;
            font-size: 14px;
            border-radius: 20px;
-           transition: background 0.3s;
+           cursor: pointer;
+           transition: all 0.4s ease;
+           box-shadow: 0 0 10px rgba(245, 179, 29, 0.5);
+           text-decoration: none;
+           display: inline-block;
        }
       
        .project-card .button:hover {
-           background: #1b3652;
+           background: linear-gradient(135deg, #e6b800, #d89b1d);
+           transform: scale(1.1);
+           box-shadow: 0 0 20px rgba(245, 179, 29, 0.8);
        }
       
        /* Estilos de Swiper */
