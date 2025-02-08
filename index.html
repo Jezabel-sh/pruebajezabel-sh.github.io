@@ -869,7 +869,7 @@
            box-shadow: 0 0 20px rgba(245, 179, 29, 0.8);
        }
       
-            /* Estilos de Swiper */
+       /* Estilos de Swiper */
        .swiper-button-next,
        .swiper-button-prev {
            width: 50px;
@@ -879,7 +879,7 @@
            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
            transition: all 0.3s ease;
        }
-        
+      
        .swiper-button-next:after,
        .swiper-button-prev:after {
            font-size: 20px;
@@ -907,7 +907,7 @@
            opacity: 1;
            transform: scale(1.2);
        }
-      
+       
        /* Posicionamiento de los botones */
        .swiper-button-next {
            right: 10px;
@@ -917,15 +917,14 @@
            left: 10px;
        }
 
-
-            #portfolio-content {
-           min-height: 100vh;
-           width: 100%;
-           position: relative;
-           overflow-x: hidden;
-           opacity: 0; /* Inicialmente oculto */
-           transition: opacity 1s ease-in;
-       }
+             #portfolio-content {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow-x: hidden;
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 1s ease-in;
+        }
       
 
       
@@ -1490,56 +1489,54 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper(".swiper-container", {
-        // Configuración básica
         slidesPerView: 1,
         spaceBetween: 30,
-        centeredSlides: true,
         loop: true,
+        loopFillGroupWithBlank: true,
+        allowTouchMove: true,
+        watchOverflow: true,
         
-        // Velocidad y efecto de transición
-        speed: 800,
-        effect: 'slide',
+        // Mejorar el rendimiento
+        preloadImages: false,
+        lazy: true,
         
         // Configuración de navegación
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
+            hideOnClick: false,
+            disabledClass: 'swiper-button-disabled',
         },
         
-        // Configuración de paginación
+        // Paginación
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
             dynamicBullets: true,
         },
         
-        // Puntos de ruptura responsivos
+        // Breakpoints responsivos
         breakpoints: {
             768: {
                 slidesPerView: 2,
-                centeredSlides: false,
+                spaceBetween: 20,
             },
             1024: {
                 slidesPerView: 3,
-                centeredSlides: false,
+                spaceBetween: 20,
             }
         },
-        
-        // Opciones de autoplay (opcional, puedes quitarlo si no lo quieres)
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
+
+        // Eventos
+        on: {
+            init: function () {
+                setTimeout(() => {
+                    this.update();
+                }, 100);
+            }
         }
     });
-
-    // Reiniciar Swiper si hay algún problema
-    window.addEventListener('resize', () => {
-        swiper.update();
-    });
 });
-
-
 
 function toggleDescription(button) {
     const shortText = button.previousElementSibling.previousElementSibling;
