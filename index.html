@@ -197,7 +197,7 @@
           100% { opacity: 0.50; transform: scale(1.1); }
        }
 
-       /* Upcoming Projects Section */
+               /* Upcoming Projects Section */
        .upcoming-projects {
            margin-top: 20px;
            padding: 20px;
@@ -206,33 +206,41 @@
            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
            text-align: center;
        }
-
+       
+       .upcoming-projects h2 {
+           text-align: center;
+           width: 100%;
+           margin-bottom: 20px;
+           display: block;
+           color: #223140;
+       }
+      
+       .upcoming-content {
+           width: 100%;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
+      
        .upcoming-projects ul {
            list-style-type: none;
            padding: 0;
+           margin: 0;
            width: 100%;
            text-align: center;
-           margin: 0 auto;
        }
-
+      
        .upcoming-projects li {
            font-size: 1.1rem;
            color: #555;
            margin: 10px 0;
            text-align: center;
        }
-
-       .upcoming-projects h2 {
+      
+       .upcoming-projects p {
            text-align: center;
-           width: 100%;
-           margin: 0 auto 20px;
-           padding: 0;
+           margin-top: 15px;
        }
-
-        .upcoming-projects p {
-           text-align: center;
-       }
-
 
 
       
@@ -1085,19 +1093,19 @@
             🚧 Work in progress! New projects coming soon. 🚧
         </div>
 
-        <!-- Upcoming Projects Section -->
-        <div class="upcoming-projects">
-               <div class="upcoming-title">
-               <h2 class="highlight">Upcoming Projects</h2>
-               <ul>
-                   <li>Predictive Modeling for Financial Data</li>
-                   <li>AI-powered Marketing Optimization</li>
-                   <li>Advanced Image Recognition System</li>
-               </ul>
-               <p>Stay tuned for these exciting additions!</p>
-           </div>
-       </div>
-   </div>
+      
+      <!-- Upcoming Projects Section -->
+      <div class="upcoming-projects">
+          <h2 class="highlight">Upcoming Projects</h2>
+          <div class="upcoming-content">
+              <ul>
+                  <li>Predictive Modeling for Financial Data</li>
+                  <li>AI-powered Marketing Optimization</li>
+                  <li>Advanced Image Recognition System</li>
+              </ul>
+              <p>Stay tuned for these exciting additions!</p>
+          </div>
+      </div>
 
 <div id="contact" class="section">
     <div class="contact-container">
