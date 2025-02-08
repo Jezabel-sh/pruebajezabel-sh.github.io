@@ -524,38 +524,47 @@
        }
 
 
-
-       #portfolio-content header p {
+      
+             #portfolio-content header p {
            overflow: hidden;
            white-space: nowrap;
            width: 0;
            display: inline-block;
            border-right: 2px solid #ffffff;
            animation: 
-               typing 3s steps(35, end) forwards,  /* Ajustado los steps al número de caracteres */
+               typing 3s steps(35, end) forwards,
                blink-caret 0.75s step-end infinite;
-           animation-delay: 1.5s; /* Espera a que termine el fadeIn del título */
+           animation-delay: 1.5s;
            margin: 0 auto;
-           opacity: 1; /* Cambiado de 0 a 1 */
-           font-size: 1.1em; /* Añadido para mejor visibilidad */
+           opacity: 1;
+           font-size: 1.1em;
+           max-width: max-content; /* Cambiado de fit-content a max-content */
        }
       
        @keyframes typing {
-           from { width: 0 }
-           to { width: 100% }
+           from { 
+               width: 0 
+           }
+           to { 
+               width: calc(100% - 5px) /* Ajustado para que el cursor no se extienda */
+           }
        }
       
        @keyframes blink-caret {
-           from, to { border-color: transparent }
-           50% { border-color: #ffffff }
+           from, to { 
+               border-color: transparent 
+           }
+           50% { 
+               border-color: #ffffff;
+               border-right-width: 2px; /* Asegura un ancho consistente del cursor */
+           }
        }
       
-        /* Detener el parpadeo cuando termine de escribir */
-        header p.finished {
-            border-right: transparent;
-            animation: typing 3s steps(42, end) forwards;
-        }
-
+       /* Añadir esta clase para cuando termine la animación */
+       #portfolio-content header p.finished {
+           border-right: none;
+           animation: none;
+       }
 
 
 
@@ -1133,6 +1142,7 @@ function enterPortfolio() {
     headerTitle.style.animation = "none";
     headerText.style.animation = "none";
     headerText.style.width = "0";
+    headerText.classList.remove('finished');
     
     // Forzar un reflow
     void headerTitle.offsetWidth;
@@ -1161,6 +1171,11 @@ function enterPortfolio() {
         headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
         headerText.style.animation = "typing 3s steps(35, end) forwards, blink-caret 0.75s step-end infinite";
         headerText.style.animationDelay = "1.5s";
+        
+        // Detener el cursor después de que termine la animación
+        setTimeout(() => {
+            headerText.classList.add('finished');
+        }, 4500); // 1.5s delay + 3s animación
     }, 1000);
     
     cancelAnimationFrame(animationFrameId);
