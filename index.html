@@ -1489,42 +1489,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper(".swiper-container", {
+    const swiper = new Swiper(".swiper-container", {
+        // Configuración básica
         slidesPerView: 1,
-        spaceBetween: 20,
-        loop: false,  // Desactivamos el loop
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true,
+        
+        // Velocidad y efecto de transición
+        speed: 800,
+        effect: 'slide',
+        
+        // Configuración de navegación
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
+        
+        // Configuración de paginación
         pagination: {
-            el: ".swiper-pagination",
+            el: '.swiper-pagination',
             clickable: true,
+            dynamicBullets: true,
         },
+        
+        // Puntos de ruptura responsivos
         breakpoints: {
-            768: { 
+            768: {
                 slidesPerView: 2,
-                slidesPerGroup: 2 // Mover 2 slides a la vez en pantallas medianas
+                centeredSlides: false,
             },
-            1024: { 
+            1024: {
                 slidesPerView: 3,
-                slidesPerGroup: 3 // Mover 3 slides a la vez en pantallas grandes
+                centeredSlides: false,
             }
         },
-        // Configuración adicional para mejorar la navegación
-        speed: 400,
-        allowTouchMove: true,
-        grabCursor: true,
-        preventClicks: true,
-        preventClicksPropagation: true,
-        touchStartPreventDefault: false
+        
+        // Opciones de autoplay (opcional, puedes quitarlo si no lo quieres)
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        }
     });
 
-    // Añadimos un listener para reiniciar cuando llegue al final
-    swiper.on('reachEnd', function() {
-        setTimeout(() => {
-            swiper.slideTo(0, 0); // Volver al principio cuando llegue al final
-        }, 500);
+    // Reiniciar Swiper si hay algún problema
+    window.addEventListener('resize', () => {
+        swiper.update();
     });
 });
 
