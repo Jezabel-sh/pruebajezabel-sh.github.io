@@ -869,27 +869,52 @@
            box-shadow: 0 0 20px rgba(245, 179, 29, 0.8);
        }
       
-       /* Estilos de Swiper */
-       .swiper-button-next, 
+            /* Estilos de Swiper */
+       .swiper-button-next,
        .swiper-button-prev {
-           font-size: 20px;
-           color: #527191;
-           background: rgba(255, 255, 255, 0.8);
-           width: 40px;
-           height: 40px;
+           width: 50px;
+           height: 50px;
+           background: linear-gradient(135deg, #223140, #527191);
            border-radius: 50%;
-           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+           transition: all 0.3s ease;
+       }
+        
+       .swiper-button-next:after,
+       .swiper-button-prev:after {
+           font-size: 20px;
+           color: white;
+           font-weight: bold;
+       }
+      
+       .swiper-button-next:hover,
+       .swiper-button-prev:hover {
+           background: linear-gradient(135deg, #d89b1d, #e6b800);
+           transform: scale(1.1);
+           box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
        }
       
        .swiper-pagination-bullet {
+           width: 12px;
+           height: 12px;
            background: #527191;
            opacity: 0.6;
+           transition: all 0.3s ease;
        }
       
        .swiper-pagination-bullet-active {
-           background: #1b3652;
+           background: #223140;
            opacity: 1;
+           transform: scale(1.2);
+       }
+      
+       /* Posicionamiento de los botones */
+       .swiper-button-next {
+           right: 10px;
+       }
+      
+       .swiper-button-prev {
+           left: 10px;
        }
 
 
