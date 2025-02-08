@@ -744,29 +744,22 @@
           
              
             
-             /* Contenedor principal */
-       .projects-container {
-           max-width: 1000px;
-           margin: 0 auto;
-           padding: 40px 20px;
-           text-align: center;
-       }
-      
-       /* Swiper Container */
+          /* Contenedor principal del slider */
        .swiper-container {
            width: 100%;
            max-width: 900px;
-           padding-bottom: 40px; /* Espacio para la paginación */
+           margin: 0 auto;
+           padding-bottom: 40px;
        }
       
-       /* Slides */
+       /* Slides del Swiper */
        .swiper-slide {
            display: flex;
            justify-content: center;
            align-items: center;
        }
       
-       /* Project Card */
+       /* Diseño de la tarjeta del proyecto */
        .project-card {
            background-color: white;
            padding: 20px;
@@ -799,12 +792,15 @@
        .project-desc {
            font-size: 14px;
            color: #555;
-           max-height: 40px; /* Limita el texto visible */
-           overflow: hidden;
-           transition: max-height 0.3s ease-in-out;
+           text-align: center;
        }
       
-       /* Botón para expandir descripción */
+       /* La descripción completa está oculta por defecto */
+       .project-desc.full-text {
+           display: none;
+       }
+      
+       /* Botón para expandir la descripción */
        .read-more {
            background: none;
            border: none;
@@ -818,7 +814,7 @@
            text-decoration: underline;
        }
       
-       /* Botón GitHub */
+       /* Botón de GitHub / Kaggle */
        .project-card .button {
            margin-top: 10px;
            background: #527191;
@@ -833,7 +829,7 @@
            background: #1b3652;
        }
       
-       /* Swiper Buttons */
+       /* Estilos de Swiper */
        .swiper-button-next, .swiper-button-prev {
            color: #527191;
        }
@@ -978,57 +974,83 @@
    
    
         <div id="projects" class="section">
-    <div class="projects-container">
-        <h2 class="highlight">My Projects</h2>
-
-        <!-- Swiper Slider -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Proyecto 1 -->
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <h3>Waste Classification</h3>
-                        <p class="project-desc">
-                            A deep learning model for waste classification using EfficientNet...
-                        </p>
-                        <button class="read-more" onclick="toggleDescription(this)">Read More</button>
-                        <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">GitHub</a>
-                    </div>
+        <div class="projects-container">
+            <h2 class="highlight">My Projects</h2>
+   
+            <!-- Swiper Slider -->
+            <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Proyecto 1 -->
+            <div class="swiper-slide">
+                <div class="project-card">
+                    <h3>Waste Classification</h3>
+                    <p class="project-desc short-text">
+                        A deep learning model for classifying waste types using EfficientNet...
+                    </p>
+                    <p class="project-desc full-text" style="display: none;">
+                        A deep learning model that classifies waste types using EfficientNet, trained on a dataset of various materials 
+                        such as plastic, glass, and organic waste. The model optimizes recycling processes by providing accurate classification.
+                    </p>
+                    <button class="read-more" onclick="toggleDescription(this)">Read More</button>
+                    <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">GitHub</a>
                 </div>
-
-                <!-- Proyecto 2 -->
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <h3>Credit Risk Prediction</h3>
-                        <p class="project-desc">
-                            Machine learning model to analyze and predict credit risk in banking...
-                        </p>
-                        <button class="read-more" onclick="toggleDescription(this)">Read More</button>
-                        <a href="https://github.com/Jezabel-sh/credit-risk" class="button">GitHub</a>
-                    </div>
+            </div>
+   
+            <!-- Proyecto 2 -->
+            <div class="swiper-slide">
+                <div class="project-card">
+                    <h3>Credit Risk Prediction</h3>
+                    <p class="project-desc short-text">
+                        Developed a machine learning model in Python to analyze and predict credit risk...
+                    </p>
+                    <p class="project-desc full-text" style="display: none;">
+                        The model uses historical financial data to assess and predict the risk of loan default. It incorporates features 
+                        such as credit score, income level, and past loan history to make accurate predictions.
+                    </p>
+                    <button class="read-more" onclick="toggleDescription(this)">Read More</button>
+                    <a href="https://github.com/Jezabel-sh/credit-risk" class="button">GitHub</a>
                 </div>
-
-                <!-- Proyecto 3 -->
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <h3>Logistics Optimization</h3>
-                        <p class="project-desc">
-                            Optimizing truck order allocation using a genetic algorithm...
-                        </p>
-                        <button class="read-more" onclick="toggleDescription(this)">Read More</button>
-                        <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">GitHub</a>
-                    </div>
+            </div>
+   
+            <!-- Proyecto 3 -->
+            <div class="swiper-slide">
+                <div class="project-card">
+                    <h3>Logistics Optimization</h3>
+                    <p class="project-desc short-text">
+                        Developed a genetic algorithm to optimize the allocation of orders to trucks...
+                    </p>
+                    <p class="project-desc full-text" style="display: none;">
+                        The system optimizes logistics operations by assigning orders to trucks based on volume, weight, and delivery constraints. 
+                        It minimizes transportation costs while ensuring timely delivery.
+                    </p>
+                    <button class="read-more" onclick="toggleDescription(this)">Read More</button>
+                    <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">GitHub</a>
                 </div>
+            </div>
+   
+           <!-- Proyecto 4 -->
+           <div class="swiper-slide">
+               <div class="project-card">
+                   <h3>Cost of Living Index</h3>
+                   <p class="project-desc short-text">
+                       Cost of Living Index analysis by country, highlighting affordability trends...
+                   </p>
+                   <p class="project-desc full-text" style="display: none;">
+                       The project analyzes the global cost of living, comparing expenses for housing, groceries, transportation, and more. 
+                       It provides insights into affordability trends across different regions.
+                   </p>
+                   <button class="read-more" onclick="toggleDescription(this)">Read More</button>
+                   <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">Kaggle</a>
+               </div>
+           </div>
+       </div>
+   
+       <!-- Botones de navegación -->
+       <div class="swiper-button-next"></div>
+       <div class="swiper-button-prev"></div>
+       <div class="swiper-pagination"></div>
+   </div>
 
-                <!-- Proyecto 4 -->
-                <div class="swiper-slide">
-                    <div class="project-card">
-                        <h3>Cost of Living Index</h3>
-                        <p class="project-desc">
-                            Country-wise analysis of the global cost of living index...
-                        </p>
-                        <button class="read-more" onclick="toggleDescription(this)">Read More</button>
-                        <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">Kaggle</a>
                     </div>
                 </div>
             </div>
@@ -1401,12 +1423,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function toggleDescription(button) {
-    const desc = button.previousElementSibling;
-    if (desc.style.maxHeight === "40px") {
-        desc.style.maxHeight = "200px";
+    const shortText = button.previousElementSibling.previousElementSibling;
+    const fullText = button.previousElementSibling;
+    
+    if (fullText.style.display === "none") {
+        shortText.style.display = "none";
+        fullText.style.display = "block";
         button.textContent = "Read Less";
     } else {
-        desc.style.maxHeight = "40px";
+        shortText.style.display = "block";
+        fullText.style.display = "none";
         button.textContent = "Read More";
     }
 }
