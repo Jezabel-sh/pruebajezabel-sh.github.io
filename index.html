@@ -1492,9 +1492,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var swiper = new Swiper(".swiper-container", {
         slidesPerView: 1,
         spaceBetween: 20,
-        loop: true,
-        loopAdditionalSlides: 1,  // Añadimos slides adicionales para el loop
-        watchSlidesProgress: true, // Vigilamos el progreso de los slides
+        loop: false,  // Desactivamos el loop
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
@@ -1504,13 +1502,29 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
         breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            768: { 
+                slidesPerView: 2,
+                slidesPerGroup: 2 // Mover 2 slides a la vez en pantallas medianas
+            },
+            1024: { 
+                slidesPerView: 3,
+                slidesPerGroup: 3 // Mover 3 slides a la vez en pantallas grandes
+            }
         },
-        // Añadimos estas opciones para mejorar el rendimiento
-        observer: true,
-        observeParents: true,
-        updateOnWindowResize: true
+        // Configuración adicional para mejorar la navegación
+        speed: 400,
+        allowTouchMove: true,
+        grabCursor: true,
+        preventClicks: true,
+        preventClicksPropagation: true,
+        touchStartPreventDefault: false
+    });
+
+    // Añadimos un listener para reiniciar cuando llegue al final
+    swiper.on('reachEnd', function() {
+        setTimeout(() => {
+            swiper.slideTo(0, 0); // Volver al principio cuando llegue al final
+        }, 500);
     });
 });
 
