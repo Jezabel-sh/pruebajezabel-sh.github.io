@@ -9,6 +9,10 @@
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+   <!-- Swiper.js CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
    <style>
        /* Global Styles */
        body {
@@ -736,6 +740,69 @@
 
 
 
+
+             /* Contenedor del slider */
+       .swiper-container {
+           width: 100%;
+           max-width: 900px;
+           margin: 0 auto;
+           padding: 20px;
+       }
+      
+       /* Ajustar tamaño de cada slide */
+       .swiper-slide {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+       }
+      
+       /* Estilos para las tarjetas dentro del slider */
+       .project-card {
+           background-color: white;
+           padding: 20px;
+           border-radius: 8px;
+           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+           width: 80%;
+           max-width: 500px;
+       }
+      
+       /* Efecto hover en las tarjetas */
+       .project-card:hover {
+           transform: scale(1.05);
+           box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+       }
+      
+       /* Estilos de los botones de navegación */
+       .swiper-button-next,
+       .swiper-button-prev {
+           color: #527191;
+           transition: 0.3s;
+       }
+      
+       .swiper-button-next:hover,
+       .swiper-button-prev:hover {
+           color: #1b3652;
+       }
+      
+       /* Paginación (puntitos) */
+       .swiper-pagination {
+           position: relative;
+           margin-top: 10px;
+       }
+      
+       .swiper-pagination-bullet {
+           background-color: #527191;
+           opacity: 0.6;
+       }
+      
+       .swiper-pagination-bullet-active {
+           background-color: #1b3652;
+           opacity: 1;
+       }
+
+
       
 
       
@@ -866,32 +933,57 @@
    
    
          <div id="projects" class="section">
-             <div class="projects-container">
-                 <h2 class="highlight">My Projects</h2>
-         
-                 <div class="project-card" data-aos="fade-up">
-                     <h3>Waste Classification with Deep Learning</h3>
-                     <p>A deep learning model for classifying waste types using EfficientNet.</p>
-                     <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">View on GitHub</a>
-                 </div>
-         
-                 <div class="project-card" data-aos="fade-up">
-                     <h3>Credit Risk Prediction</h3>
-                     <p>Developed a machine learning model in Python to analyze and predict credit risk.</p>
-                     <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
-                 </div>
-         
-                 <div class="project-card" data-aos="fade-up">
-                     <h3>Logistics Optimization</h3>
-                     <p>Developed a genetic algorithm to optimize the allocation of orders to trucks.</p>
-                     <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
-                 </div>
-   
-                 <div class="project-card" data-aos="fade-up">
-                     <h3>Global Cost of Living Index: Country-Wise Analysis</h3>
-                     <p>Cost of Living Index analysis by country, highlighting affordability trends and disparities.</p>
-                     <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">View on Kaggle</a>
-                 </div>
+    <div class="projects-container">
+        <h2 class="highlight">My Projects</h2>
+
+        <!-- Swiper Slider -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- Proyecto 1 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <h3>Waste Classification with Deep Learning</h3>
+                        <p>A deep learning model for classifying waste types using EfficientNet.</p>
+                        <a href="https://github.com/Jezabel-sh/garbage_classification" class="button">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <h3>Credit Risk Prediction</h3>
+                        <p>Developed a machine learning model in Python to analyze and predict credit risk.</p>
+                        <a href="https://github.com/Jezabel-sh/credit-risk" class="button">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <h3>Logistics Optimization</h3>
+                        <p>Developed a genetic algorithm to optimize the allocation of orders to trucks.</p>
+                        <a href="https://github.com/Jezabel-sh/logistics-optimization" class="button">View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4 -->
+                <div class="swiper-slide">
+                    <div class="project-card">
+                        <h3>Global Cost of Living Index</h3>
+                        <p>Cost of Living Index analysis by country, highlighting affordability trends and disparities.</p>
+                        <a href="https://www.kaggle.com/code/jezabelsh/cost-of-living-index-by-country" class="button">View on Kaggle</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
+
          
                  <!-- Work in Progress Section -->
                  <div class="work-in-progress">
@@ -1226,9 +1318,34 @@ document.addEventListener("DOMContentLoaded", function() {
     observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
 });
 
+
+
+     document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        breakpoints: {
+            768: { slidesPerView: 2 }, // Muestra 2 tarjetas en pantallas medianas
+            1024: { slidesPerView: 3 }, // Muestra 3 tarjetas en pantallas grandes
+        },
+    });
+});
+
      
 </script>
 
+
+      <!-- Swiper.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 
 
