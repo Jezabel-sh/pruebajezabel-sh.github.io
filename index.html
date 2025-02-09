@@ -25,24 +25,21 @@
        }
 
 
-   /* 📱 Ajustes para móviles */
-   @media (max-width: 768px) {
-       /* Evita que el contenido se vea estirado */
-       body {
-           width: 100%;
-           overflow-x: hidden; /* Evita desplazamiento horizontal */
+    /* 📱 Ajustes para móviles */
+       @media (max-width: 768px) {
+           .about-container, .experience-container {
+               max-width: 100%; /* Hace que no se estiren demasiado */
+               padding: 15px; /* Agrega un poco de espacio */
+               overflow-x: auto; /* Permite desplazamiento con el dedo si es necesario */
+           }
+      
+           .about-text, .experience-text {
+               font-size: 0.95rem; /* Reduce el tamaño de fuente para mejor lectura */
+               text-align: left; /* Asegura alineación correcta */
+               word-wrap: break-word; /* Evita que las palabras largas desborden */
+           }
        }
-   
-       /* Ajusta el ancho del contenido en móviles */
-       .container, 
-       .about-container, 
-       .experience-container, 
-       .projects-container, 
-       .contact-container {
-           max-width: 95%; /* Evita que se vea demasiado ancho */
-           margin: 0 auto; /* Centra el contenido */
-           padding: 15px; /* Agrega espacio */
-       }
+
    
        /* Reducir el tamaño de los títulos en móvil */
        h1 {
@@ -79,10 +76,13 @@
    
        /* Evitar que el texto del header se corte */
        #portfolio-content header p {
-           animation: none; /* Desactiva el efecto de máquina de escribir en móviles */
-           border-right: none;
-           width: auto;
-           text-align: center;
+       animation: none;
+       border-right: none;
+       white-space: normal;
+       text-align: center;
+       font-size: 1rem;
+       width: auto;
+       padding: 0 10px;
        }
    }
 
