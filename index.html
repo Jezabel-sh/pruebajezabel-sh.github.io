@@ -24,6 +24,69 @@
            transition: background-color 0.3s ease;
        }
 
+
+   /* 📱 Ajustes para móviles */
+   @media (max-width: 768px) {
+       /* Evita que el contenido se vea estirado */
+       body {
+           width: 100%;
+           overflow-x: hidden; /* Evita desplazamiento horizontal */
+       }
+   
+       /* Ajusta el ancho del contenido en móviles */
+       .container, 
+       .about-container, 
+       .experience-container, 
+       .projects-container, 
+       .contact-container {
+           max-width: 95%; /* Evita que se vea demasiado ancho */
+           margin: 0 auto; /* Centra el contenido */
+           padding: 15px; /* Agrega espacio */
+       }
+   
+       /* Reducir el tamaño de los títulos en móvil */
+       h1 {
+           font-size: 1.8rem;
+       }
+   
+       h2 {
+           font-size: 1.1rem;
+           text-align: center; /* Asegura que los títulos estén bien alineados */
+           margin: 10px 0;
+       }
+   
+       /* Ajustar imágenes en móviles */
+       img {
+           max-width: 90%;
+           height: auto;
+           display: block;
+           margin: 0 auto; /* Centra la imagen */
+       }
+   
+       /* Ajustar el menú de navegación en móvil */
+       nav {
+           display: flex;
+           flex-direction: column; /* Hace que los elementos del menú estén en columna */
+           align-items: center;
+           padding: 10px 0;
+       }
+   
+       nav a {
+           display: block;
+           padding: 10px;
+           font-size: 1rem; /* Reduce el tamaño del texto */
+       }
+   
+       /* Evitar que el texto del header se corte */
+       #portfolio-content header p {
+           animation: none; /* Desactiva el efecto de máquina de escribir en móviles */
+           border-right: none;
+           width: auto;
+           text-align: center;
+       }
+   }
+
+      
        /* Header & Menu */
        header {
            background: linear-gradient(135deg, #223140, #527191, #75b6ca);
