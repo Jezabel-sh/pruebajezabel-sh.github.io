@@ -1185,67 +1185,43 @@
 
   <script>
 
-        // Objeto con las traducciones
-    const translations = {
-        en: {
-            welcomeTitle: "Welcome to My Portfolio",
-            welcomeDesc: "Discover my work, experience, and projects.",
-            exploreBtn: "Explore"
-        },
-        es: {
-            welcomeTitle: "Bienvenido a Mi Portafolio",
-            welcomeDesc: "Descubre mi trabajo, experiencia y proyectos.",
-            exploreBtn: "Explorar"
-        }
-    };
+   // Objeto con las traducciones
+   const translations = {
+       en: {
+           welcomeTitle: "Welcome to My Portfolio",
+           welcomeDesc: "Discover my work, experience, and projects.",
+           exploreBtn: "Explore"
+       },
+       es: {
+           welcomeTitle: "Bienvenido a Mi Portafolio",
+           welcomeDesc: "Descubre mi trabajo, experiencia y proyectos.",
+           exploreBtn: "Explorar"
+       }
+   };
    
-    // Variable para mantener el idioma actual
-    let currentLang = 'en';
+   // Variable para mantener el idioma actual
+   let currentLang = 'en';
    
-    // Función para cambiar el idioma
-    function toggleLanguage() {
-        currentLang = currentLang === 'en' ? 'es' : 'en';
-        updateWelcomeContent();
-        updateLanguageButton();
-    }
+   // Función para cambiar el idioma
+   function toggleLanguage() {
+       currentLang = currentLang === 'en' ? 'es' : 'en';
+       updateWelcomeContent();
+       updateLanguageButton();
+   }
    
-    // Función para actualizar el contenido
-    function updateWelcomeContent() {
-        const t = translations[currentLang];
-        document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
-        document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
-        document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
-    }
+   // Función para actualizar el contenido
+   function updateWelcomeContent() {
+       const t = translations[currentLang];
+       document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
+       document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
+       document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
+   }
    
-    // Función para actualizar el texto del botón de idioma
-    function updateLanguageButton() {
-        const langBtn = document.querySelector('.language-button');
-        langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
-    }
-   
-     // Variable para mantener el idioma actual
-     let currentLang = 'en';
-   
-     // Función para cambiar el idioma
-     function toggleLanguage() {
-         currentLang = currentLang === 'en' ? 'es' : 'en';
-         updateWelcomeContent();
-         updateLanguageButton();
-     }
-   
-     // Función para actualizar el contenido
-     function updateWelcomeContent() {
-         const t = translations[currentLang];
-         document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
-         document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
-         document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
-     }
-   
-     // Función para actualizar el texto del botón de idioma
-     function updateLanguageButton() {
-         const langBtn = document.querySelector('.language-button');
-        langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
-     }
+   // Función para actualizar el texto del botón de idioma
+   function updateLanguageButton() {
+       const langBtn = document.querySelector('.language-button');
+       langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+   }
 
 
      
