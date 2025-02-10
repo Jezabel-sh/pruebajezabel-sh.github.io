@@ -44,8 +44,7 @@
        header h1 {
            animation: fadeIn 1.5s ease-in-out forwards;
            font-size: 36px;
-           margin: 42;
-           margin-bottom: 33px;
+           margin: 42px 0 33px 0;
            opacity: 0;
        }
 
@@ -937,6 +936,29 @@
         }
       
 
+
+              .language-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+      
+        .lang-button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+      
+        .lang-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
       
    </style>
 </head>
@@ -959,6 +981,12 @@
            <div class="welcome-cta">
                <button onclick="enterPortfolio()" class="button">Explore</button>
            </div>
+          <!-- Botones de selección de idioma -->
+          <div class="language-buttons">
+              <button onclick="setLanguage('en')" class="lang-button">English</button>
+              <button onclick="setLanguage('es')" class="lang-button">Español</button>
+          </div>
+
        </div>
    </div>
 
@@ -1180,53 +1208,67 @@ function enterPortfolio() {
     let portfolioContent = document.getElementById("portfolio-content");
     let headerTitle = document.querySelector("#portfolio-content header h1");
     let headerText = document.querySelector("#portfolio-content header p");
-    
+
     // Preparar el contenido del portfolio
     portfolioContent.style.opacity = "0";
     portfolioContent.style.display = "block";
-    
+
     // Resetear las animaciones
     headerTitle.style.animation = "none";
     headerText.style.animation = "none";
     headerText.style.width = "0";
     headerText.classList.remove('finished');
-    
+
     // Forzar un reflow
     void headerTitle.offsetWidth;
     void headerText.offsetWidth;
-    
-    // Asegurarse de que solo la sección about está visible
+
+    // Asegurarse de que solo la sección "about" esté visible
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
         section.classList.remove('active');
     });
     document.getElementById('about').classList.add('active');
-    
+
     // Hacer scroll al inicio
     window.scrollTo(0, 0);
-    
+
     // Fade out de la pantalla de bienvenida
     welcomeScreen.style.transition = "opacity 1s ease-out";
     welcomeScreen.style.opacity = "0";
-    
+
     setTimeout(() => {
         welcomeScreen.style.display = "none";
         portfolioContent.style.transition = "opacity 1s ease-in";
         portfolioContent.style.opacity = "1";
-        
+
+        // Aplicar idioma seleccionado
+        applyLanguage();
+
         // Reiniciar las animaciones
         headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
         headerText.style.animation = "typing 3s steps(35, end) forwards, blink-caret 0.75s step-end infinite";
         headerText.style.animationDelay = "1.5s";
-        
+
         // Detener el cursor después de que termine la animación
         setTimeout(() => {
             headerText.classList.add('finished');
-        }, 4500); // 1.5s delay + 3s animación
+        }, 4500);
     }, 1000);
-    
+
     cancelAnimationFrame(animationFrameId);
 }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        applyLanguage(); // 🔹 AÑADE ESTO AQUÍ PARA APLICAR EL IDIOMA AL CARGAR LA PÁGINA
+   
+        AOS.init({
+            duration: 1000,
+            offset: 200
+        });
+
+     
     // Inicialización del efecto láser
     document.addEventListener("DOMContentLoaded", function() {
         const canvas = document.getElementById('cursorCanvas');
@@ -1563,6 +1605,58 @@ function toggleDescription(button) {
         fullText.style.display = "none";
         button.textContent = "Read More";
     }
+}
+
+
+// Función para cambiar el idioma
+function setLanguage(lang) {
+    localStorage.setItem("selectedLanguage", lang); // Guardar en localStorage
+    applyLanguage(); // Aplicar cambios
+}
+
+// Función para aplicar el idioma guardado o el predeterminado (inglés)
+function applyLanguage() {
+    const lang = localStorage.getItem("selectedLanguage") || "en"; // Cargar el idioma guardado o por defecto
+
+    // Definir los textos en inglés y español
+    const translations = {
+        "en": {
+            "welcome-title": "Welcome to My Portfolio",
+            "welcome-text": "Discover my work, experience, and projects.",
+            "explore-button": "Explore",
+            "about-me": "About Me",
+            "experience": "Experience",
+            "projects": "Projects",
+            "contact": "Contact",
+            "who-i-am": "Who I Am & What I Do",
+            "portfolio-header": "Financial Data Scientist | Data Analyst | Bridging Finance and AI",
+            "connect-with-me": "Connect with me:"
+        },
+        "es": {
+            "welcome-title": "Bienvenido a Mi Portafolio",
+            "welcome-text": "Descubre mi trabajo, experiencia y proyectos.",
+            "explore-button": "Explorar",
+            "about-me": "Sobre mí",
+            "experience": "Experiencia",
+            "projects": "Proyectos",
+            "contact": "Contacto",
+            "who-i-am": "Quién soy y qué hago",
+            "portfolio-header": "Científica de Datos Financieros | Analista de Datos | Conectando Finanzas e IA",
+            "connect-with-me": "Conéctate conmigo:"
+        }
+    };
+
+    // Aplicar traducciones
+    document.querySelector(".welcome-header h1").textContent = translations[lang]["welcome-title"];
+    document.querySelector(".welcome-header p").textContent = translations[lang]["welcome-text"];
+    document.querySelector(".welcome-cta .button").textContent = translations[lang]["explore-button"];
+    document.querySelector("nav a:nth-child(1)").innerHTML = `<i class="fas fa-user"></i> ${translations[lang]["about-me"]}`;
+    document.querySelector("nav a:nth-child(2)").innerHTML = `<i class="fas fa-briefcase"></i> ${translations[lang]["experience"]}`;
+    document.querySelector("nav a:nth-child(3)").innerHTML = `<i class="fas fa-project-diagram"></i> ${translations[lang]["projects"]}`;
+    document.querySelector("nav a:nth-child(4)").innerHTML = `<i class="fas fa-envelope"></i> ${translations[lang]["contact"]}`;
+    document.querySelector("#about .highlight").textContent = translations[lang]["who-i-am"];
+    document.querySelector("#portfolio-content header p").textContent = translations[lang]["portfolio-header"];
+    document.querySelector("footer p").textContent = translations[lang]["connect-with-me"];
 }
 
 
