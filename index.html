@@ -663,6 +663,7 @@
             z-index: 999;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            position: relative;
         }
 
 
@@ -935,12 +936,39 @@
             opacity: 0; /* Inicialmente oculto */
             transition: opacity 1s ease-in;
         }
+
+
+
+
+        #language-switcher-container {
+           position: absolute;
+           bottom: 20px;
+           right: 20px;
+       }
       
+       .language-button {
+           background: linear-gradient(135deg, #d89b1d, #e6b800);
+           color: white;
+           padding: 6px 12px; /* Más pequeño que el botón Explore */
+           font-size: 12px; /* Más pequeño que el botón Explore */
+           border-radius: 20px;
+           cursor: pointer;
+           transition: all 0.4s ease;
+           box-shadow: 0 0 6px rgba(216, 155, 29, 0.4);
+           border: none;
+       }
+      
+       .language-button:hover {
+           background: linear-gradient(135deg, #e6b800, #d89b1d);
+           transform: scale(1.1);
+           box-shadow: 0 0 12px rgba(216, 155, 29, 0.6);
+       }
 
       
    </style>
 </head>
 <body onload="removeLoader()">
+   <div id="language-switcher-container"></div>
    <!-- Loader Animation -->
    <div id="loader">
        <div class="loader"></div>
@@ -950,15 +978,14 @@
    <div id="welcome-screen">
        <canvas id="cursorCanvas"></canvas>
        <div class="welcome-content">
-           <!-- Primera sección -->
            <div class="welcome-header">
                <h1>Welcome to My Portfolio</h1>
                <p>Discover my work, experience, and projects.</p>
            </div>
-           <!-- Segunda sección -->
            <div class="welcome-cta">
                <button onclick="enterPortfolio()" class="button">Explore</button>
            </div>
+           <button class="language-button" onclick="toggleLanguage()">EN</button>
        </div>
    </div>
 
@@ -1157,6 +1184,71 @@
    </footer>
 
   <script>
+
+        // Objeto con las traducciones
+    const translations = {
+        en: {
+            welcomeTitle: "Welcome to My Portfolio",
+            welcomeDesc: "Discover my work, experience, and projects.",
+            exploreBtn: "Explore"
+        },
+        es: {
+            welcomeTitle: "Bienvenido a Mi Portafolio",
+            welcomeDesc: "Descubre mi trabajo, experiencia y proyectos.",
+            exploreBtn: "Explorar"
+        }
+    };
+   
+    // Variable para mantener el idioma actual
+    let currentLang = 'en';
+   
+    // Función para cambiar el idioma
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'es' : 'en';
+        updateWelcomeContent();
+        updateLanguageButton();
+    }
+   
+    // Función para actualizar el contenido
+    function updateWelcomeContent() {
+        const t = translations[currentLang];
+        document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
+        document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
+        document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
+    }
+   
+    // Función para actualizar el texto del botón de idioma
+    function updateLanguageButton() {
+        const langBtn = document.querySelector('.language-button');
+        langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+    }
+   
+     // Variable para mantener el idioma actual
+     let currentLang = 'en';
+   
+     // Función para cambiar el idioma
+     function toggleLanguage() {
+         currentLang = currentLang === 'en' ? 'es' : 'en';
+         updateWelcomeContent();
+         updateLanguageButton();
+     }
+   
+     // Función para actualizar el contenido
+     function updateWelcomeContent() {
+         const t = translations[currentLang];
+         document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
+         document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
+         document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
+     }
+   
+     // Función para actualizar el texto del botón de idioma
+     function updateLanguageButton() {
+         const langBtn = document.querySelector('.language-button');
+        langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+     }
+
+
+     
     // JavaScript to show and hide sections
     function showSection(sectionId) {
         const sections = document.querySelectorAll('.section');
