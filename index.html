@@ -967,8 +967,15 @@
        <!-- Header & Menu -->
        <header>
            <h1>Jezabel Sánchez Hernández</h1>
-           <p>Financial Data Scientist | Data Analyst | Bridging Finance and AI</p>
+           <p id="subtitle">Financial Data Scientist | Data Analyst | Bridging Finance and AI</p>
+          
+           <!-- Botón de cambio de idioma -->
+           <div id="language-selector">
+               <button onclick="setLanguage('es')">🇪🇸 ES</button>
+               <button onclick="setLanguage('en')">🇬🇧 EN</button>
+           </div>
        </header>
+
 
       <nav>
          <a href="#about" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
@@ -1566,16 +1573,56 @@ function toggleDescription(button) {
 }
 
 
-     
+<script>
+const translations = {
+    en: {
+        subtitle: "Financial Data Scientist | Data Analyst | Bridging Finance and AI",
+        welcome: "Welcome to My Portfolio",
+        explore: "Explore",
+        aboutTitle: "Who I Am & What I Do",
+        experienceTitle: "Relevant Experience",
+        projectsTitle: "My Projects",
+        contactTitle: "Contact Me",
+        sendMessage: "Send Message",
+        workInProgress: "🚧 Work in progress! New projects coming soon. 🚧",
+        upcomingProjects: "Upcoming Projects"
+    },
+    es: {
+        subtitle: "Científica de Datos Financieros | Analista de Datos | Conectando Finanzas e IA",
+        welcome: "Bienvenido a Mi Portafolio",
+        explore: "Explorar",
+        aboutTitle: "Quién Soy y Qué Hago",
+        experienceTitle: "Experiencia Relevante",
+        projectsTitle: "Mis Proyectos",
+        contactTitle: "Contáctame",
+        sendMessage: "Enviar Mensaje",
+        workInProgress: "🚧 ¡Trabajo en progreso! Nuevos proyectos próximamente. 🚧",
+        upcomingProjects: "Próximos Proyectos"
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem("language", lang);
+    document.getElementById("subtitle").textContent = translations[lang].subtitle;
+    document.getElementById("welcome-text").textContent = translations[lang].welcome;
+    document.getElementById("explore-button").textContent = translations[lang].explore;
+    document.querySelector(".about-section h2").textContent = translations[lang].aboutTitle;
+    document.querySelector(".experience-container h2").textContent = translations[lang].experienceTitle;
+    document.querySelector(".projects-container h2").textContent = translations[lang].projectsTitle;
+    document.querySelector(".contact-container h2").textContent = translations[lang].contactTitle;
+    document.querySelector(".contact-form button").textContent = translations[lang].sendMessage;
+    document.querySelector(".work-in-progress").textContent = translations[lang].workInProgress;
+    document.querySelector(".upcoming-projects h2").textContent = translations[lang].upcomingProjects;
+}
+
+// Cargar el idioma guardado en `localStorage`
+document.addEventListener("DOMContentLoaded", function() {
+    const savedLang = localStorage.getItem("language") || "en"; // Idioma por defecto: inglés
+    setLanguage(savedLang);
+});
 </script>
 
-
-      <!-- Swiper.js Script -->
+<!-- Swiper.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
-
-
-
-      
 </body>
 </html>
