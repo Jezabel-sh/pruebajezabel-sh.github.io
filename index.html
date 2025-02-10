@@ -1603,16 +1603,38 @@ const translations = {
 
 function setLanguage(lang) {
     localStorage.setItem("language", lang);
-    document.getElementById("subtitle").textContent = translations[lang].subtitle;
-    document.getElementById("welcome-text").textContent = translations[lang].welcome;
-    document.getElementById("explore-button").textContent = translations[lang].explore;
-    document.querySelector(".about-section h2").textContent = translations[lang].aboutTitle;
-    document.querySelector(".experience-container h2").textContent = translations[lang].experienceTitle;
-    document.querySelector(".projects-container h2").textContent = translations[lang].projectsTitle;
-    document.querySelector(".contact-container h2").textContent = translations[lang].contactTitle;
-    document.querySelector(".contact-form button").textContent = translations[lang].sendMessage;
-    document.querySelector(".work-in-progress").textContent = translations[lang].workInProgress;
-    document.querySelector(".upcoming-projects h2").textContent = translations[lang].upcomingProjects;
+    
+    // Verifica si los elementos existen antes de modificarlos
+    if (document.getElementById("subtitle")) {
+        document.getElementById("subtitle").textContent = translations[lang].subtitle;
+    }
+    if (document.getElementById("welcome-text")) {
+        document.getElementById("welcome-text").textContent = translations[lang].welcome;
+    }
+    if (document.getElementById("explore-button")) {
+        document.getElementById("explore-button").textContent = translations[lang].explore;
+    }
+    if (document.querySelector(".about-section h2")) {
+        document.querySelector(".about-section h2").textContent = translations[lang].aboutTitle;
+    }
+    if (document.querySelector(".experience-container h2")) {
+        document.querySelector(".experience-container h2").textContent = translations[lang].experienceTitle;
+    }
+    if (document.querySelector(".projects-container h2")) {
+        document.querySelector(".projects-container h2").textContent = translations[lang].projectsTitle;
+    }
+    if (document.querySelector(".contact-container h2")) {
+        document.querySelector(".contact-container h2").textContent = translations[lang].contactTitle;
+    }
+    if (document.querySelector(".contact-form button")) {
+        document.querySelector(".contact-form button").textContent = translations[lang].sendMessage;
+    }
+    if (document.querySelector(".work-in-progress")) {
+        document.querySelector(".work-in-progress").textContent = translations[lang].workInProgress;
+    }
+    if (document.querySelector(".upcoming-projects h2")) {
+        document.querySelector(".upcoming-projects h2").textContent = translations[lang].upcomingProjects;
+    }
 }
 
 // Cargar el idioma guardado en `localStorage`
@@ -1620,6 +1642,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const savedLang = localStorage.getItem("language") || "en"; // Idioma por defecto: inglés
     setLanguage(savedLang);
 });
+
 </script>
 
 <!-- Swiper.js Script -->
