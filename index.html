@@ -940,7 +940,7 @@
 
 
 
-        #language-switcher-container {
+       #language-switcher-container {
            position: absolute;
            bottom: 20px;
            right: 20px;
@@ -949,13 +949,16 @@
        .language-button {
            background: linear-gradient(135deg, #d89b1d, #e6b800);
            color: white;
-           padding: 6px 12px; /* Más pequeño que el botón Explore */
-           font-size: 12px; /* Más pequeño que el botón Explore */
+           padding: 6px 12px;
+           font-size: 12px;
            border-radius: 20px;
            cursor: pointer;
            transition: all 0.4s ease;
            box-shadow: 0 0 6px rgba(216, 155, 29, 0.4);
            border: none;
+           display: flex;
+           align-items: center;
+           gap: 5px; /* Espacio entre la bandera y el texto */
        }
       
        .language-button:hover {
@@ -1220,7 +1223,11 @@
    // Función para actualizar el texto del botón de idioma
    function updateLanguageButton() {
        const langBtn = document.querySelector('.language-button');
-       langBtn.textContent = currentLang === 'en' ? 'ES' : 'EN';
+       if (currentLang === 'en') {
+           langBtn.innerHTML = '🇪🇸 ESP';
+       } else {
+           langBtn.innerHTML = '🇬🇧 ENG';
+       }
    }
 
 
