@@ -935,28 +935,7 @@
             opacity: 0; /* Inicialmente oculto */
             transition: opacity 1s ease-in;
         }
-
-
-
-           #language-selector {
-            margin-top: 10px;
-        }
       
-        #language-selector button {
-            background: transparent;
-            border: 2px solid #fff;
-            color: white;
-            padding: 5px 10px;
-            margin: 0 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-      
-        #language-selector button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
 
       
    </style>
@@ -988,15 +967,8 @@
        <!-- Header & Menu -->
        <header>
            <h1>Jezabel Sánchez Hernández</h1>
-           <p id="subtitle">Financial Data Scientist | Data Analyst | Bridging Finance and AI</p>
-          
-           <!-- Botón de cambio de idioma -->
-           <div id="language-selector">
-               <button onclick="setLanguage('es')">🇪🇸 ES</button>
-               <button onclick="setLanguage('en')">🇬🇧 EN</button>
-           </div>
+           <p>Financial Data Scientist | Data Analyst | Bridging Finance and AI</p>
        </header>
-
 
       <nav>
          <a href="#about" onclick="showSection('about')"><i class="fas fa-user"></i> About Me</a>
@@ -1594,225 +1566,16 @@ function toggleDescription(button) {
 }
 
 
-<script>
-    // JavaScript to show and hide sections
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
-        const selectedSection = document.getElementById(sectionId);
-        selectedSection.classList.add('active');
-       
-        // Añadir scroll suave a la sección
-        selectedSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Remove Loader
-    function removeLoader() {
-        document.getElementById('loader').style.display = 'none';
-    }
-
-    function enterPortfolio() {
-        let welcomeScreen = document.getElementById("welcome-screen");
-        let portfolioContent = document.getElementById("portfolio-content");
-        let headerTitle = document.querySelector("#portfolio-content header h1");
-        let headerText = document.querySelector("#portfolio-content header p");
-        
-        // Preparar el contenido del portfolio
-        portfolioContent.style.opacity = "0";
-        portfolioContent.style.display = "block";
-        
-        // Resetear las animaciones
-        headerTitle.style.animation = "none";
-        headerText.style.animation = "none";
-        headerText.style.width = "0";
-        headerText.classList.remove('finished');
-        
-        // Forzar un reflow
-        void headerTitle.offsetWidth;
-        void headerText.offsetWidth;
-        
-        // Asegurarse de que solo la sección about está visible
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById('about').classList.add('active');
-        
-        // Hacer scroll al inicio
-        window.scrollTo(0, 0);
-        
-        // Fade out de la pantalla de bienvenida
-        welcomeScreen.style.transition = "opacity 1s ease-out";
-        welcomeScreen.style.opacity = "0";
-        
-        setTimeout(() => {
-            welcomeScreen.style.display = "none";
-            portfolioContent.style.transition = "opacity 1s ease-in";
-            portfolioContent.style.opacity = "1";
-            
-            // Reiniciar las animaciones
-            headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
-            headerText.style.animation = "typing 3s steps(35, end) forwards, blink-caret 0.75s step-end infinite";
-            headerText.style.animationDelay = "1.5s";
-            
-            // Detener el cursor después de que termine la animación
-            setTimeout(() => {
-                headerText.classList.add('finished');
-            }, 4500); // 1.5s delay + 3s animación
-        }, 1000);
-        
-        cancelAnimationFrame(animationFrameId);
-    }
-
-    // Inicialización del efecto láser y todo el código relacionado con el canvas
-    document.addEventListener("DOMContentLoaded", function() {
-        // Todo el código del canvas y animaciones...
-    });
-
-    // Initialize AOS
-    document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-            duration: 1000,
-            offset: 200
-        });
-    });
-
-    // Variables globales y funciones de animación
-    let animationFrameId;
-    let globalHue = 0;
-
-    function animateBackground() {
-        // Código de animación del fondo...
-    }
-
-    // Configuración del Swiper
-    document.addEventListener("DOMContentLoaded", function () {
-        const swiper = new Swiper(".swiper-container", {
-            // Configuración del Swiper...
-        });
-    });
-
-    function toggleDescription(button) {
-        const shortText = button.previousElementSibling.previousElementSibling;
-        const fullText = button.previousElementSibling;
-        
-        if (fullText.style.display === "none") {
-            shortText.style.display = "none";
-            fullText.style.display = "block";
-            button.textContent = "Read Less";
-        } else {
-            shortText.style.display = "block";
-            fullText.style.display = "none";
-            button.textContent = "Read More";
-        }
-    }
-
-    // Código de traducciones (sin las etiquetas script extra)
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedLang = localStorage.getItem('language') || 'en';
-        setLanguage(savedLang);
-    });
-
-    const translations = {
-        en: {
-            subtitle: "Financial Data Scientist | Data Analyst | Bridging Finance and AI",
-            welcome: "Welcome to My Portfolio",
-            explore: "Explore",
-            aboutTitle: "Who I Am & What I Do",
-            experienceTitle: "Relevant Experience",
-            projectsTitle: "My Projects",
-            contactTitle: "Contact Me",
-            sendMessage: "Send Message",
-            workInProgress: "🚧 Work in progress! New projects coming soon. 🚧",
-            upcomingProjects: "Upcoming Projects",
-            namePlaceholder: "Your Name",
-            emailPlaceholder: "Your Email",
-            messagePlaceholder: "Your Message",
-            connect: "Connect with me:"
-        },
-        es: {
-            subtitle: "Científica de Datos Financieros | Analista de Datos | Conectando Finanzas e IA",
-            welcome: "Bienvenido a Mi Portafolio",
-            explore: "Explorar",
-            aboutTitle: "Quién Soy y Qué Hago",
-            experienceTitle: "Experiencia Relevante",
-            projectsTitle: "Mis Proyectos",
-            contactTitle: "Contáctame",
-            sendMessage: "Enviar Mensaje",
-            workInProgress: "🚧 ¡Trabajo en progreso! Nuevos proyectos próximamente. 🚧",
-            upcomingProjects: "Próximos Proyectos",
-            namePlaceholder: "Tu Nombre",
-            emailPlaceholder: "Tu Email",
-            messagePlaceholder: "Tu Mensaje",
-            connect: "Conéctate conmigo:"
-        }
-    };
-
-    function setLanguage(lang) {
-        localStorage.setItem("language", lang);
-        
-        const elementsToTranslate = {
-            "subtitle": "#subtitle",
-            "welcome": ".welcome-content h1",
-            "explore": ".welcome-content .button",
-            "aboutTitle": ".about-section h2",
-            "experienceTitle": ".experience-container h2",
-            "projectsTitle": ".projects-container h2",
-            "contactTitle": ".contact-container h2",
-            "sendMessage": ".contact-form button",
-            "workInProgress": ".work-in-progress",
-            "upcomingProjects": ".upcoming-projects h2",
-            "connect": "footer p:first-of-type"
-        };
-
-        // Traducir elementos
-        Object.entries(elementsToTranslate).forEach(([key, selector]) => {
-            const element = document.querySelector(selector);
-            if (element && translations[lang][key]) {
-                element.textContent = translations[lang][key];
-            }
-        });
-
-        // Traducir placeholders del formulario
-        const nameInput = document.querySelector('.contact-form input[name="name"]');
-        const emailInput = document.querySelector('.contact-form input[name="email"]');
-        const messageInput = document.querySelector('.contact-form textarea');
-        
-        if (nameInput) nameInput.placeholder = translations[lang].namePlaceholder;
-        if (emailInput) emailInput.placeholder = translations[lang].emailPlaceholder;
-        if (messageInput) messageInput.placeholder = translations[lang].messagePlaceholder;
-
-        // Actualizar los textos de navegación
-        const navTexts = {
-            "about": "About Me",
-            "experience": "Experience",
-            "projects": "Projects",
-            "contact": "Contact"
-        };
-
-        const navTextsEs = {
-            "about": "Sobre Mí",
-            "experience": "Experiencia",
-            "projects": "Proyectos",
-            "contact": "Contacto"
-        };
-
-        // Actualizar los textos de navegación
-        document.querySelectorAll('nav a').forEach(link => {
-            const key = link.getAttribute('href').replace('#', '');
-            const icon = link.querySelector('i').outerHTML;
-            if (lang === 'es') {
-                link.innerHTML = `${icon} ${navTextsEs[key] || key}`;
-            } else {
-                link.innerHTML = `${icon} ${navTexts[key] || key}`;
-            }
-        });
-    }
+     
 </script>
 
-<!-- Swiper.js Script -->
+
+      <!-- Swiper.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+
+
+
+      
 </body>
 </html>
