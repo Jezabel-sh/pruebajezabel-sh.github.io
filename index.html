@@ -1353,11 +1353,7 @@
    });
 
 
-let animationFrameId; // Declaramos la variable globalmente
-
-// Declaramos la variable hue globalmente para compartirla entre efectos
-let globalHue = 0;
-
+// Función para animar el fondo
 function animateBackground() {
     function update() {
         globalHue = (globalHue + 0.1) % 360;
@@ -1373,11 +1369,11 @@ function animateBackground() {
     animationFrameId = requestAnimationFrame(update);
 }
 
+// Inicialización de efectos especiales
 document.addEventListener("DOMContentLoaded", function() {
     const canvas = document.getElementById('cursorCanvas');
     const ctx = canvas.getContext('2d');
     const points = [];
-    let animationFrameId;
     let lastX = 0;
     let lastY = 0;
 
@@ -1389,40 +1385,35 @@ document.addEventListener("DOMContentLoaded", function() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Función para crear partículas con variaciones aleatorias
     function createParticle(x, y, baseHue) {
-        const speedX = (Math.random() - 0.5) * 1.5; // Velocidad horizontal aleatoria
-        const speedY = (Math.random() - 0.5) * 1.5 - 0.5; // Velocidad vertical aleatoria con tendencia hacia arriba
-        const size = Math.random() * 1.5 + 0.5; // Tamaño aleatorio entre 1 y 4
+        const speedX = (Math.random() - 0.5) * 1.5;
+        const speedY = (Math.random() - 0.5) * 1.5 - 0.5;
+        const size = Math.random() * 1.5 + 0.5;
         
         return {
             x,
             y,
             age: 0,
-            hue: baseHue + (Math.random() * 20 - 10), // Variación en el tono
+            hue: baseHue + (Math.random() * 20 - 10),
             speedX,
             speedY,
             size,
-            opacity: Math.random() * 0.5 + 0.5, // Opacidad inicial aleatoria
-            sparkle: Math.random() > 0.5 // Algunas partículas brillarán más
+            opacity: Math.random() * 0.5 + 0.5,
+            sparkle: Math.random() > 0.5
         };
     }
 
     document.getElementById("welcome-screen").addEventListener("mousemove", function(e) {
-        // Calcular la distancia movida
         const dx = e.clientX - lastX;
         const dy = e.clientY - lastY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        // Crear más partículas si el movimiento es más rápido
         const particleCount = Math.min(Math.floor(distance), 5);
         
         for (let i = 0; i < particleCount; i++) {
-            // Interpolar posiciones entre el último punto y el actual
             const x = lastX + (dx * (i / particleCount));
             const y = lastY + (dy * (i / particleCount));
             
-            // Crear múltiples partículas en cada posición
             for (let j = 0; j < 2; j++) {
                 points.push(createParticle(x, y, globalHue));
             }
@@ -1439,27 +1430,22 @@ document.addEventListener("DOMContentLoaded", function() {
             const point = points[i];
             point.age++;
             
-            // Duración más larga de las partículas
             if(point.age > 50) {
                 points.splice(i, 1);
                 continue;
             }
 
-            // Actualizar posición con física
             point.x += point.speedX;
             point.y += point.speedY;
-            point.speedY += 0.02; // Gravedad suave
+            point.speedY += 0.02;
 
-            // Calcular opacidad con fade out más suave
             const opacity = point.opacity * (1 - (point.age / 50));
             
-            // Efecto de brillo principal
             ctx.beginPath();
             ctx.arc(point.x, point.y, point.size, 0, Math.PI * 2);
             ctx.fillStyle = `hsla(${point.hue}, 70%, 80%, ${opacity})`;
             ctx.fill();
 
-            // Añadir brillo extra para algunas partículas
             if (point.sparkle && point.age < 25) {
                 ctx.beginPath();
                 ctx.arc(point.x, point.y, point.size * 2, 0, Math.PI * 2);
@@ -1467,7 +1453,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 ctx.fill();
             }
 
-            // Efecto de resplandor
             const gradient = ctx.createRadialGradient(
                 point.x, point.y, 0,
                 point.x, point.y, point.size * 3
@@ -1499,7 +1484,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['style'] });
 });
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
