@@ -1,2 +1,2 @@
-# pruebajezabel-sh.github.io
+# jezabel-sh.github.io
 Jezabel Sánchez H. | Financial Data Scientist | Data Analyst | Bridging Finance and AI Portfolio
