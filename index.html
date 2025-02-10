@@ -940,10 +940,12 @@
 
 
 
-       #language-switcher-container {
+       .language-buttons {
            position: absolute;
            bottom: 20px;
            right: 20px;
+           display: flex;
+           gap: 10px; /* Espacio entre los botones */
        }
       
        .language-button {
@@ -956,15 +958,16 @@
            transition: all 0.4s ease;
            box-shadow: 0 0 6px rgba(216, 155, 29, 0.4);
            border: none;
-           display: flex;
-           align-items: center;
-           gap: 5px; /* Espacio entre la bandera y el texto */
        }
       
        .language-button:hover {
            background: linear-gradient(135deg, #e6b800, #d89b1d);
            transform: scale(1.1);
            box-shadow: 0 0 12px rgba(216, 155, 29, 0.6);
+       }
+      
+       .language-button.active {
+           background: linear-gradient(135deg, #527191, #223140);
        }
 
       
@@ -987,9 +990,10 @@
            </div>
            <div class="welcome-cta">
                <button onclick="enterPortfolio()" class="button">Explore</button>
+           <div class="language-buttons">
+               <button class="language-button" onclick="changeLanguage('es')">🇪🇸 ESP</button>
+               <button class="language-button" onclick="changeLanguage('en')">🇬🇧 ENG</button>
            </div>
-           <button class="language-button" onclick="toggleLanguage()">EN</button>
-       </div>
    </div>
 
    <!-- Contenido del Portafolio (Oculto al Inicio) -->
@@ -1188,28 +1192,50 @@
 
   <script>
 
-   // Objeto con las traducciones
-   const translations = {
-       en: {
-           welcomeTitle: "Welcome to My Portfolio",
-           welcomeDesc: "Discover my work, experience, and projects.",
-           exploreBtn: "Explore"
-       },
-       es: {
-           welcomeTitle: "Bienvenido a Mi Portafolio",
-           welcomeDesc: "Descubre mi trabajo, experiencia y proyectos.",
-           exploreBtn: "Explorar"
-       }
-   };
-   
+// Objeto con las traducciones
+const translations = {
+    en: {
+        welcomeTitle: "Welcome to My Portfolio",
+        welcomeDesc: "Discover my work, experience, and projects.",
+        exploreBtn: "Explore"
+    },
+    es: {
+        welcomeTitle: "Bienvenido a Mi Portafolio",
+        welcomeDesc: "Descubre mi trabajo, experiencia y proyectos.",
+        exploreBtn: "Explorar"
+    }
+};
+
    // Variable para mantener el idioma actual
    let currentLang = 'en';
    
    // Función para cambiar el idioma
-   function toggleLanguage() {
-       currentLang = currentLang === 'en' ? 'es' : 'en';
+   function changeLanguage(lang) {
+       currentLang = lang;
        updateWelcomeContent();
-       updateLanguageButton();
+       updateActiveButton();
+   }
+   
+   // Función para actualizar el contenido
+   function updateWelcomeContent() {
+       const t = translations[currentLang];
+       document.querySelector('.welcome-header h1').textContent = t.welcomeTitle;
+       document.querySelector('.welcome-header p').textContent = t.welcomeDesc;
+       document.querySelector('.welcome-cta .button').textContent = t.exploreBtn;
+   }
+   
+   // Función para actualizar el estilo del botón activo
+   function updateActiveButton() {
+       const buttons = document.querySelectorAll('.language-button');
+       buttons.forEach(button => {
+           button.classList.remove('active');
+           if (
+               (button.textContent.includes('ESP') && currentLang === 'es') ||
+               (button.textContent.includes('ENG') && currentLang === 'en')
+           ) {
+               button.classList.add('active');
+           }
+       });
    }
    
    // Función para actualizar el contenido
