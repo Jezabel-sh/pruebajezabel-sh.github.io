@@ -926,15 +926,16 @@
            left: 10px;
        }
 
-             #portfolio-content {
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
-            overflow-x: hidden;
-            opacity: 0; /* Inicialmente oculto */
-            transition: opacity 1s ease-in;
-        }
+       #portfolio-content {
+           opacity: 0;  /* Start hidden */
+           transition: opacity 1s ease-in;  /* Smooth transition */
+           display: none;  /* Initially hidden */
+       }
       
+       #loader {
+           opacity: 1;
+           transition: opacity 0.5s ease-out;
+       }
 
 
               .language-buttons {
@@ -1199,15 +1200,8 @@
     }
 
     // Remove Loader
-    function removeLoader() {
-        document.getElementById('loader').style.display = 'none';
-    }
 
-function enterPortfolio() {
-    let welcomeScreen = document.getElementById("welcome-screen");
-    let portfolioContent = document.getElementById("portfolio-content");
-    let headerTitle = document.querySelector("#portfolio-content header h1");
-    let headerText = document.querySelector("#portfolio-content header p");
+
 
     // Preparar el contenido del portfolio
     portfolioContent.style.opacity = "0";
@@ -1260,27 +1254,9 @@ function enterPortfolio() {
 }
 
 
-    document.addEventListener("DOMContentLoaded", function () {
-        applyLanguage(); // 🔹 AÑADE ESTO AQUÍ PARA APLICAR EL IDIOMA AL CARGAR LA PÁGINA
-   
-        AOS.init({
-            duration: 1000,
-            offset: 200
-        });
-
      
     // Inicialización del efecto láser
-    document.addEventListener("DOMContentLoaded", function() {
-        const canvas = document.getElementById('cursorCanvas');
-        const ctx = canvas.getContext('2d');
-        const points = [];
-        let animationFrameId;
 
-        // Ajustar tamaño del canvas
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
         
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
@@ -1660,6 +1636,97 @@ function applyLanguage() {
 }
 
 
+     document.addEventListener("DOMContentLoaded", function() {
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        offset: 200
+    });
+    
+    // Apply language on load
+    applyLanguage();
+});
+
+function enterPortfolio() {
+    const welcomeScreen = document.getElementById("welcome-screen");
+    const portfolioContent = document.getElementById("portfolio-content");
+    const headerTitle = document.querySelector("#portfolio-content header h1");
+    const headerText = document.querySelector("#portfolio-content header p");
+
+    // Cancel any existing animation frame before starting new ones
+    if (typeof animationFrameId !== 'undefined') {
+        cancelAnimationFrame(animationFrameId);
+    }
+
+    // Show portfolio content first
+    portfolioContent.style.display = "block";
+    
+    // Force reflow
+    void portfolioContent.offsetWidth;
+    
+    // Fade out welcome screen
+    welcomeScreen.style.transition = "opacity 1s ease-out";
+    welcomeScreen.style.opacity = "0";
+
+    // Reset and prepare animations
+    headerTitle.style.animation = "none";
+    headerText.style.animation = "none";
+    headerText.style.width = "0";
+    headerText.classList.remove('finished');
+    
+    // Force reflow for animations
+    void headerTitle.offsetWidth;
+    void headerText.offsetWidth;
+
+    setTimeout(() => {
+        // Hide welcome screen
+        welcomeScreen.style.display = "none";
+        
+        // Show portfolio with fade in
+        portfolioContent.style.transition = "opacity 1s ease-in";
+        portfolioContent.style.opacity = "1";
+
+        // Apply language
+        applyLanguage();
+
+        // Start animations
+        headerTitle.style.animation = "fadeIn 1.5s ease-in-out forwards";
+        headerText.style.animation = "typing 3s steps(35, end) forwards, blink-caret 0.75s step-end infinite";
+        headerText.style.animationDelay = "1.5s";
+
+        // Add finished class after animation
+        setTimeout(() => {
+            headerText.classList.add('finished');
+        }, 4500);
+    }, 1000);
+
+    // Ensure about section is visible
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById('about').classList.add('active');
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+function removeLoader() {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+    }
+}
+
+window.addEventListener('unload', () => {
+    if (typeof animationFrameId !== 'undefined') {
+        cancelAnimationFrame(animationFrameId);
+    }
+});
+
      
 </script>
 
@@ -1667,6 +1734,8 @@ function applyLanguage() {
       <!-- Swiper.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
+<script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 
 
