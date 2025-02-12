@@ -281,7 +281,8 @@
            font-size: 14px;
            width: 100%;
            margin-top: auto;
-           min-height: 100px;
+           position: relative;
+           bottom: 0;
        }
 
        /* Asegurar que el contenido empuje el footer al final */
@@ -289,6 +290,7 @@
            min-height: 100vh;
            display: 1;
            flex-direction: 50px;
+           position: relative;
        }
       
 
@@ -1102,6 +1104,14 @@
         /* Footer */
         footer {
             padding-bottom: 70px; /* Espacio para la navegación fija */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+       
+        .contact-container {
+            margin-bottom: 0;
         }
    
         /* Welcome screen */
@@ -1126,14 +1136,14 @@
    
         /* Márgenes y padding consistentes */
         .section {
-            display: relative;
-            top: 0;
+            position: relative;
             padding-top: 20px;
-            padding-bottom: 80px; /* Espacio para la navegación inferior */
+            padding-bottom: 60px;
             height: auto;
             min-height: auto;
             overflow-y: visible;
             background: transparent;
+            flex-grow: 1;
         }
     }
 
