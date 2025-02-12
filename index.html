@@ -279,23 +279,18 @@
            background-color: #223140;
            color: white;
            font-size: 14px;
-           position: relative;
-           bottom: 0;
            width: 100%;
            margin-top: auto;
-           min-height: 100px; 
+           min-height: 100px;
        }
 
        /* Asegurar que el contenido empuje el footer al final */
        #portfolio-content {
            min-height: 100vh;
-           display: flex;
-           flex-direction: column;
+           display: 1;
+           flex-direction: 50px;
        }
       
-       .section {
-           flex: 1 0 auto;
-       }
 
        footer a {
            color: white;
@@ -1009,13 +1004,16 @@
         .experience-container, 
         .projects-container, 
         .contact-container {
-            margin: 10px;
-            padding: 15px;
-            border-radius: 15px;
-            background: white;
-            height: auto;
-            position: relative;
-            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto 50px;
         }
    
         /* About section */
@@ -1103,7 +1101,7 @@
    
         /* Footer */
         footer {
-            padding-bottom: 70px; /* Espacio para la navegación fija */
+            padding-bottom: 90px; /* Espacio para la navegación fija */
         }
    
         /* Welcome screen */
