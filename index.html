@@ -1010,8 +1010,9 @@
    
         .profile-pic {
             width: 150px;
-            height: 150px;
+            height: auto;
             margin: 0 auto 20px;
+            object-fit: contain;
         }
    
         .about-text p {
@@ -1053,7 +1054,24 @@
    
         .swiper-button-next,
         .swiper-button-prev {
-            display: none;
+            display: flex;
+            width: 30px; /* Hacer las flechas más pequeñas en móvil */
+            height: 30px;
+            background: #223140;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 15px; /* Tamaño más pequeño para el icono */
+            color: white;
+        }
+      
+        .swiper-button-next {
+            right: 5px; /* Ajustar posición */
+        }
+      
+        .swiper-button-prev {
+            left: 5px; /* Ajustar posición */
         }
    
         /* Contact form */
