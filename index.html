@@ -965,6 +965,7 @@
             padding: 10px 0;
             display: flex;
             justify-content: space-around;
+            height: 60px;
         }
    
         nav a {
@@ -976,6 +977,8 @@
             align-items: center;
             width: 25%;
             text-align: center;
+            background: transparent; /* Eliminar cualquier fondo */
+            height: auto;
         }
    
         nav a i {
@@ -994,10 +997,9 @@
             padding: 15px;
             border-radius: 15px;
             background: white;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
             height: auto;
-            min-height: calc(100vh - 250px);
+            position: relative;
+            z-index: 1;
         }
    
         /* About section */
@@ -1092,16 +1094,23 @@
    
         /* Márgenes y padding consistentes */
         .section {
-            display: block !important; /* Espacio para la navegación inferior */
-            margin-bottom: 70px; /* Espacio para la navegación inferior */
-            min-height: calc(100vh - 200px); /* Altura mínima ajustada */
-            overflow-y: auto; 
+            display: relative;
+            top: 0;
+            padding-top: 20px;
+            padding-bottom: 80px; /* Espacio para la navegación inferior */
+            height: auto;
+            min-height: auto;
+            overflow-y: visible;
+            background: transparent;
         }
     }
 
 
           #portfolio-content {
-            padding-bottom: 60px; /* Espacio para la navegación fija */
+            min-height: 100vh;
+            padding-bottom: 70px;
+            position: relative;
+            background: #f4f4f4;
     }
       
    /* Ajustes para pantallas muy pequeñas */
@@ -1341,8 +1350,27 @@
    </footer>
 
   <script>
+    function isMobile() {
+    return window.innerWidth <= 768;
+}
     // JavaScript to show and hide sections
-    function showSection(sectionId) {
+function showSection(sectionId) {
+    if (window.innerWidth <= 768) {
+        // Comportamiento para móvil
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.style.display = 'block';
+        
+        // Hacer scroll al inicio en móvil
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    } else {
+        // Comportamiento original para PC
         const sections = document.querySelectorAll('.section');
         sections.forEach(section => {
             section.classList.remove('active');
@@ -1350,10 +1378,9 @@
         const selectedSection = document.getElementById(sectionId);
         selectedSection.classList.add('active');
        
-        // Añadir scroll suave a la sección
         selectedSection.scrollIntoView({ behavior: 'smooth' });
     }
-
+}
     // Remove Loader
     function removeLoader() {
         document.getElementById('loader').style.display = 'none';
