@@ -281,16 +281,20 @@
            font-size: 14px;
            width: 100%;
            margin-top: auto;
-           position: relative;
-           bottom: 0;
+           transition: padding 0.3s ease; 
        }
 
        /* Asegurar que el contenido empuje el footer al final */
        #portfolio-content {
            min-height: 100vh;
-           display: 1;
-           flex-direction: 50px;
+           width: 100%;
+           display: flex;
+           flex-direction: column;
            position: relative;
+           overflow-x: hidden;
+           opacity: 0;
+           transition: opacity 1s ease-in;
+           background: #f4f4f4;
        }
       
 
@@ -744,12 +748,7 @@
 
       
        /* Aseguramos que el contenido del portfolio ocupe todo el espacio disponible */
-       #portfolio-content {
-           min-height: 100vh;
-           width: 100%;
-           position: relative;
-           overflow-x: hidden;
-       }
+
       
        /* Ajustamos el contenedor de bienvenida */
        .welcome-content {
@@ -940,14 +939,7 @@
            left: 10px;
        }
 
-             #portfolio-content {
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
-            overflow-x: hidden;
-            opacity: 0; /* Inicialmente oculto */
-            transition: opacity 1s ease-in;
-        }
+
 
 
             /* Estilos específicos para móvil */
@@ -1100,14 +1092,7 @@
             padding: 8px;
             font-size: 14px;
         }
-   
-        /* Footer */
-        footer {
-            padding-bottom: 70px; /* Espacio para la navegación fija */
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
+
 
        
         .contact-container {
@@ -1147,13 +1132,14 @@
         }
     }
 
+        #portfolio-content {
+            padding-bottom: 0; /* Eliminamos el padding extra */
+        }
+   
+        footer {
+            padding-bottom: 70px; /* Espacio para la navegación móvil */
+        }
 
-          #portfolio-content {
-            min-height: 100vh;
-            padding-bottom: 70px;
-            position: relative;
-            background: #f4f4f4;
-    }
       
    /* Ajustes para pantallas muy pequeñas */
    @media screen and (max-width: 320px) {
